@@ -35,3 +35,21 @@ The wrapper function takes two arguments
   * `attributes`: An array of attributes that the wrapper should relay to the element. Some element attributes are assigned/removed instead of set value to (as in the case of the "disabled" attribute).
   
 All properties that have not been explicitly configured to be handled by the wrapper, including "ref" will be transferred to the element natively by React.
+
+## Extended Configuration
+
+```javascript
+import "@material/mwc-textarea";
+import wrapper from "./wrapper";
+import { attributeSetterValue, attributeSetterToggle } from "./wrapper";
+
+const MwcTextarea = wrapper('mwc-textarea',  {
+    events: [
+        { name: "change", transform: (e)=> e.target.value }
+    ],
+    attributes: [
+        { name: "disabled", setter: attributeSetterToggle },
+        { name: "placeholder", setter: attributeSetterValue }
+    ]
+});
+```
