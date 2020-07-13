@@ -1,6 +1,6 @@
 {
   "name": "@vonage/vivid-react-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component generation utility for wrapping custom elements",
   "main": "./src/wrapper.js",
   "scripts": {
