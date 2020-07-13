@@ -1,5 +1,5 @@
 {
-  "name": "@vonage/react-wrapper",
+  "name": "@vonage/vivid-react-wrapper",
   "version": "1.0.0",
   "description": "A React component generation utility for wrapping custom elements",
   "main": "./src/wrapper.js",
@@ -20,7 +20,7 @@
   "author": "Tal Weinfeld",
   "license": "ISC",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/Vonage"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
