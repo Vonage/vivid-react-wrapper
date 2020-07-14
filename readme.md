@@ -5,7 +5,11 @@ This utility library creates a React component that serves as a wrap around a cu
 
 ## **Getting Started**
 
-In order to use React wrapper in your project, you need to import the wrapper function into your project, then call it with the settings that you'd like to pass
+To install react wrapper in your project, run:
+
+```npm i @vonage/vivid-react-wrapper```
+
+In order to use it in your code, just import the wrapper function into your project, then invoke it with the configuration that's relevant to the element you're wrapping.
 
 ```javascript
 import React from "react";
