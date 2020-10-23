@@ -2,22 +2,42 @@
   "name": "@vonage/vivid-react-wrapper",
   "version": "1.0.1",
   "description": "A React component generation utility for wrapping custom elements",
+  "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "main": "./src/wrapper.js",
   "scripts": {
+    "generator": "node bin/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "es-dev-server"
   },
+  "bin": {
+    "vwg": "./bin/cli.js",
+    "vivid-wrapper-generator": "./bin/cli.js"
+  },
   "keywords": [
+    "Vivid",
     "React",
     "Custom Element",
     "Wrapper",
-    "Utility"
+    "Utility",
+    "Generator",
+    "CLI"
   ],
   "files": [
     "/src/wrapper.js",
     "package.json"
   ],
   "author": "Tal Weinfeld",
+  "contributors": [
+    {
+      "name": "Alexander Mazuruk",
+      "email": "oleksandr.mazuruk@vonage.com",
+      "url": "https://github.com/k-paxian"
+    },
+    {
+      "name": "Jakub Karwatka",
+      "email": "jakub.karwatka@vonage.com"
+    }  
+  ],
   "license": "ISC",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/Vonage"
@@ -32,7 +52,13 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@vonage/vwc-icon": "0.13.0",
+    "@vonage/vwc-button": "0.13.0",
     "lodash": "^4.17.15",
+    "web-component-analyzer": "^1.1.6",
     "react": "^16.13.1"
+  },
+  "engines": {
+    "node": ">=12.18.4"
   }
 }
