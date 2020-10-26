@@ -9,13 +9,14 @@ const isVividElementPackage = package => /@vonage\/vwc-*/.test(package)
 
 const getVividPackages = (packageJson = packageJsonFile) => {
     const pkgContent = JSON.parse(readFileSync(packageJson, { encoding: 'utf8' }))
-    return Object.keys([
+    const packages = [
         ...Object.keys(pkgContent.devDependencies),
         ...Object.keys(pkgContent.dependencies)
     ].filter(isVividElementPackage).reduce((acc, pkg) => {
         acc[pkg] = pkg
         return acc
-    }, {}))
+    }, {});
+    return Object.keys(packages)
 }
 
 const getCustomElementTagsDefinitionsList = async () => new Promise((resolve, reject) => {
