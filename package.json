@@ -5,7 +5,7 @@
   "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "main": "./src/wrapper.js",
   "scripts": {
-    "generator": "node bin/cli.js",
+    "generator": "node bin/cli.js --output=./src/generated",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "es-dev-server"
   },
@@ -55,6 +55,7 @@
     "@vonage/vwc-icon": "0.13.0",
     "@vonage/vwc-button": "0.13.0",
     "lodash": "^4.17.15",
+    "mkdirp": "1.0.4",
     "web-component-analyzer": "^1.1.6",
     "react": "^16.13.1"
   },
