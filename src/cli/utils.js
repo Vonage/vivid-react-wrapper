@@ -2,29 +2,39 @@ const { join } = require('path'),
     { access, F_OK, readFileSync } = require('fs'),
     { spawn } = require('child_process')
 
-const packageJsonFile = join(process.cwd(), 'package.json')
-const isFileExists = async fileName => new Promise((resolve, reject) => access(fileName, F_OK, error => error ? reject(false) : resolve(true)))
-const isPackageJsonExists = async () => await isFileExists(packageJsonFile)
-const isVividElementPackage = package => /@vonage\/vwc-*/.test(package)
 
-const getVividPackages = (packageJson = packageJsonFile) => {
-    const pkgContent = JSON.parse(readFileSync(packageJson, { encoding: 'utf8' }))
-    const packages = [
-        ...Object.keys(pkgContent.devDependencies),
-        ...Object.keys(pkgContent.dependencies)
-    ].filter(isVividElementPackage).reduce((acc, pkg) => {
-        acc[pkg] = pkg
-        return acc
-    }, {});
-    return Object.keys(packages)
+const isExistingFile = (fileName) => new Promise(
+  (resolve, reject) => access(
+    fileName,
+    F_OK,
+    error => error
+      ? reject(false)
+      : resolve(fileName)
+  ))
+
+const isPackageJsonExists = () => {
+    const filePath = join(process.cwd(), 'package.json')
+    return isExistingFile(filePath);
 }
 
-const getCustomElementTagsDefinitionsList = async () => new Promise((resolve, reject) => {
+const getParsedPackageJson = (packageJsonFilePath) => JSON.parse(readFileSync(packageJsonFilePath, { encoding: 'utf8' }))
+
+const getVividPackageNames = ({ dependencies, devDependencies }) => {
+    const isVividPackageName = (packageName) => /@vonage\/vwc-*/.test(packageName)
+    const unique = (stringArray) => Array.from(new Set(stringArray))
+    const packages = [
+        ...Object.keys(dependencies),
+        ...Object.keys(devDependencies)
+    ]
+    return unique(packages).filter(isVividPackageName)
+}
+
+const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((resolve, reject) => {
     const child = spawn('node',
         [
             './node_modules/web-component-analyzer/cli.js',
             'analyze',
-            `node_modules/{${getVividPackages().join(',')}}/{src/,}*.?s`,
+            `node_modules/{${vividPackageNames.join(',')}}/{src/,}*.?s`,
             '--discoverNodeModules',
             '--format', 'json',
         ], { cwd: process.cwd() })
@@ -50,8 +60,8 @@ const getCustomElementTagsDefinitionsList = async () => new Promise((resolve, re
 })
 
 module.exports = {
-    getCustomElementTagsDefinitionsList,
-    getVividPackages,
     isPackageJsonExists,
-    packageJsonFile
+    getParsedPackageJson,
+    getVividPackageNames,
+    getCustomElementTagsDefinitionsList,
 }

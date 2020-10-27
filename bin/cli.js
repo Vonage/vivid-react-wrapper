@@ -1,12 +1,12 @@
 
-const { isPackageJsonExists,
-    packageJsonFile,
-    getCustomElementTagsDefinitionsList } = require('../src/cli/utils')
+const {
+  isPackageJsonExists,
+  getParsedPackageJson,
+  getVividPackageNames,
+  getCustomElementTagsDefinitionsList } = require('../src/cli/utils')
 
-isPackageJsonExists().then(
-    () => {
-        getCustomElementTagsDefinitionsList().then(
-            tags => console.log(tags)
-        )
-    }
-)
+isPackageJsonExists()
+  .then(getParsedPackageJson)
+  .then(getVividPackageNames)
+  .then(getCustomElementTagsDefinitionsList)
+  .then(console.log)
