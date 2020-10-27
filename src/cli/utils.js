@@ -1,7 +1,7 @@
 const { join } = require('path'),
     { access, F_OK, readFileSync, readdirSync, unlink } = require('fs'),
     mkdirp = require('mkdirp'),
-    { spawn } = require('child_process')
+    { spawnSync } = require('child_process')
 
 const toCommaSeparatedList = collection => (collection || []).map(x => `"${x.name}"`).join(',')    
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
@@ -11,22 +11,26 @@ const cleanupDir = p => {
     mkdirp.sync(p)
     readdirSync(p).map(f => unlink(join(p, f), () => {}))
 }
+const WEB_ANALYZER_CONFIG = (packageNames, analyzerOutputFile) => [
+  './node_modules/web-component-analyzer/cli.js',
+  'analyze',
+  `node_modules/{${packageNames.join(',')}}/{src/,}*.?s`,
+  '--discoverNodeModules',
+  '--format', 'json',
+  '--outFile', analyzerOutputFile
+]
 
 const isExistingFile = (fileName) => new Promise(
   (resolve, reject) => access(
-    fileName,
+    filePath(fileName),
     F_OK,
     error => error
       ? reject(false)
       : resolve(fileName)
   ))
+const filePath = (fileName) => join(process.cwd(), fileName)
 
-const isPackageJsonExists = () => {
-    const filePath = join(process.cwd(), 'package.json')
-    return isExistingFile(filePath);
-}
-
-const getParsedPackageJson = (packageJsonFilePath) => JSON.parse(readFileSync(packageJsonFilePath, { encoding: 'utf8' }))
+const getParsedJson = (jsonFilePath) => JSON.parse(readFileSync(jsonFilePath, { encoding: 'utf8' }))
 
 const getVividPackageNames = ({ dependencies, devDependencies }) => {
     const isVividPackageName = (packageName) => /@vonage\/vwc-*/.test(packageName)
@@ -38,34 +42,15 @@ const getVividPackageNames = ({ dependencies, devDependencies }) => {
     return unique(packages).filter(isVividPackageName)
 }
 
-const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((resolve, reject) => {
-    const child = spawn('node',
-        [
-            './node_modules/web-component-analyzer/cli.js',
-            'analyze',
-            `node_modules/{${vividPackageNames.join(',')}}/{src/,}*.?s`,
-            '--discoverNodeModules',
-            '--format', 'json',
-        ], { cwd: process.cwd() })
-    const result = [];
-    child.on('error', error => reject(error))
-    child.stdout.on('data', data => {
-        const stringOutput = data.toString()
-        let jsonObject
-        if (stringOutput.indexOf('{') >= 0) {
-            try {
-                jsonObject = JSON.parse(stringOutput)
-            } catch (error) {
-                return
-            }
-            result.push(jsonObject)
-        } else if (stringOutput.indexOf('!!!') < 0) {
-            console.info(stringOutput)
-        }
+const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((resolve) => {
+    const getCustomElementsInfo = (analyzerOutput) => analyzerOutput
+      .reduce((acc, x) => ([...acc, ...x.tags]), [])
+    const analyzerOutput = filePath('/temp/analyzerOutput.json')
+    const child = spawnSync('node', WEB_ANALYZER_CONFIG(vividPackageNames, analyzerOutput), { cwd: process.cwd() })
+    if (child.status === 0) {
+        const output = getParsedJson(analyzerOutput)
+        return resolve(getCustomElementsInfo(output))
     }
-    )
-    child.on('exit', () => resolve(result.reduce((acc, x) => ([...acc, ...x.tags]), []))
-    )
 })
 
 const getInputArgument = (argumentName, defaultValue = null) => {
@@ -85,8 +70,8 @@ module.exports = {
     capitalize,
     kebab2Camel,
     getInputArgument,
-    isPackageJsonExists,
-    getParsedPackageJson,
+    isExistingFile,
+    getParsedJson,
     getVividPackageNames,
     getCustomElementTagsDefinitionsList
 }
