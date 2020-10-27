@@ -43,13 +43,11 @@ const getVividPackageNames = ({ dependencies, devDependencies }) => {
 }
 
 const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((resolve) => {
-    const getCustomElementsInfo = (analyzerOutput) => analyzerOutput
-      .reduce((acc, x) => ([...acc, ...x.tags]), [])
     const analyzerOutput = filePath('/temp/analyzerOutput.json')
     const child = spawnSync('node', WEB_ANALYZER_CONFIG(vividPackageNames, analyzerOutput), { cwd: process.cwd() })
     if (child.status === 0) {
         const output = getParsedJson(analyzerOutput)
-        return resolve(getCustomElementsInfo(output))
+        return resolve(output.tags)
     }
 })
 
