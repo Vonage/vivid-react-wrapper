@@ -10,4 +10,6 @@ isExistingFile('package.json')
   .then(getParsedJson)
   .then(getVividPackageNames)
   .then(getCustomElementTagsDefinitionsList)
-  .then(tags => generateWrappers(tags, getInputArgument('output', './src/generated')))
+  .then(generateWrappers(
+      getInputArgument('output', './src/generated')
+  ))

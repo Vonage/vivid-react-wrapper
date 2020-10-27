@@ -8,7 +8,7 @@ const OutputLanguage = {
     TypeScript: 'ts'
 }
 
-const generateWrappers = (tags, outputDir, language = OutputLanguage.JavaScript) => {
+const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (tags) => {
     cleanupDir(outputDir)
     const imports = []
     const exports = []
@@ -27,7 +27,6 @@ const generateWrappers = (tags, outputDir, language = OutputLanguage.JavaScript)
                 .replace(new RegExp(TemplateToken.COMPONENT_CLASS_NAME, 'g'), componentName)
                 .replace(new RegExp(TemplateToken.TAG, 'g'), tag.name)
         )
-        
     }
 
     const indexOutputFileName = join(process.cwd(), outputDir, `index.${language}`)
