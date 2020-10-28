@@ -3,7 +3,7 @@ const { join } = require('path'),
     mkdirp = require('mkdirp'),
     { spawnSync } = require('child_process')
 
-const toCommaSeparatedList = collection => (collection || []).map(x => `"${x.name}"`).join(',')    
+const toCommaSeparatedList = collection => (collection || []).map(x => `'${x.name}'`).join(',')    
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
 const deCapitalize = input => input.replace(/(^|\s)[A-Z]/g, s => s.toLowerCase())
 const kebab2Camel = input => deCapitalize(input.split('-').map(x => capitalize(x)).join(''))
@@ -20,7 +20,7 @@ const WEB_ANALYZER_CONFIG = (packageNames, analyzerOutputFile) => [
   '--outFile', analyzerOutputFile
 ]
 
-const isExistingFile = (fileName) => new Promise(
+const isFileExists = (fileName) => new Promise(
   (resolve, reject) => access(
     filePath(fileName),
     F_OK,
@@ -68,7 +68,7 @@ module.exports = {
     capitalize,
     kebab2Camel,
     getInputArgument,
-    isExistingFile,
+    isFileExists,
     getParsedJson,
     getVividPackageNames,
     getCustomElementTagsDefinitionsList

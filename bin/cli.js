@@ -1,15 +1,17 @@
+const { OutputLanguage, CLIArgument } = require('../src/cli/consts')
 const { generateWrappers } = require('../src/cli/generator')
 const {
-  isExistingFile,
+  isFileExists,
   getParsedJson,
   getVividPackageNames,
   getInputArgument,
   getCustomElementTagsDefinitionsList } = require('../src/cli/utils')
 
-isExistingFile('package.json')
+isFileExists('package.json')
   .then(getParsedJson)
   .then(getVividPackageNames)
   .then(getCustomElementTagsDefinitionsList)
   .then(generateWrappers(
-      getInputArgument('output', './src/generated')
+      getInputArgument(CLIArgument.Output, './src/generated'),
+      getInputArgument(CLIArgument.Language, OutputLanguage.JavaScript)
   ))

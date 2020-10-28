@@ -2,11 +2,7 @@ const { cleanupDir, kebab2Camel, capitalize, toCommaSeparatedList } = require('.
 const { getTemplate, TemplateToken } = require('./templates')
 const { writeFileSync } = require('fs')
 const { join } = require('path')
-
-const OutputLanguage = {
-    JavaScript: 'js',
-    TypeScript: 'ts'
-}
+const { OutputLanguage } = require('./consts')
 
 const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (tags) => {
     cleanupDir(outputDir)
@@ -16,7 +12,11 @@ const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (t
     for (const tag of tags) {
         const camelizedName = kebab2Camel(tag.name)
         const componentName = capitalize(camelizedName)
-        const componentOutputFileName = join(process.cwd(), outputDir, `${camelizedName}.g.${language}`)
+        const componentFileExt = `.${language}`
+        const componentFileName = `${camelizedName}.g`
+        const componentOutputFileName = join(process.cwd(), outputDir, `${componentFileName}${componentFileExt}`)
+        imports.push(`import { ${componentName} } from './${componentFileName}'`)
+        exports.push(`  ${componentName}`)
 
         writeFileSync(
             componentOutputFileName,
@@ -39,6 +39,5 @@ const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (t
 }
 
 module.exports = {
-    generateWrappers,
-    OutputLanguage
+    generateWrappers
 }
