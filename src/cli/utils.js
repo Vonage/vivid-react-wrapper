@@ -1,5 +1,5 @@
 const { join } = require('path'),
-    { access, F_OK, readFileSync, readdirSync, unlink } = require('fs'),
+    { access, F_OK, readFileSync, readdirSync, unlink, rmdirSync } = require('fs'),
     mkdirp = require('mkdirp'),
     { spawnSync } = require('child_process')
 
@@ -47,6 +47,7 @@ const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((
     const child = spawnSync('node', WEB_ANALYZER_CONFIG(vividPackageNames, analyzerOutput), { cwd: process.cwd() })
     if (child.status === 0) {
         const output = getParsedJson(analyzerOutput)
+        rmdirSync(filePath('/temp'), { recursive: true })
         return resolve(output.tags)
     }
 })
