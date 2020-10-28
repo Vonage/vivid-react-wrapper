@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from "react";
 import {capitalize, flow, identity, isString, isUndefined, noop} from "lodash";
 
-const
-    attributeSetterValue = (el, name, value)=> el.setAttribute(name, value),
-    attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+
+const attributeSetterValue = (el, name, value)=> el.setAttribute(name, value)
+const attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
 
 /**
 * Generates a React component that wraps around a custom element
@@ -24,31 +24,20 @@ const wrapper = function(
         const currentEl = useRef(null);
 
         events.forEach((event)=> {
-            const
-                { name: eventName, transform = identity } = isString(event) ? { name: event, transform: identity } : event,
-                propName = ["on", capitalize(eventName)].join('');
 
-            useEffect(()=> {
-                if(!isUndefined(props[propName])){
-                    const
-                        el = currentEl.current,
-                        handler = flow(transform, props[propName] || noop);
+            const eventName = isString(event) ? event : event.name 
+            const transform = identity
 
-                    el.addEventListener(eventName, handler);
-                    return ()=> el.removeEventListener(eventName, handler);
-                }
+            const propName = propNameFromEvent(event);
 
-            }, [props[propName]]);
+
+            useEffect(setDOMListeners(props, propName, currentEl, transform, eventName), [props[propName]]);
         });
 
         attributes.forEach((attribute)=> {
-            const { name: attributeName, setter = attributeSetterToggle } = isString(attribute) ? { name: attribute, setter: attributeSetterToggle } : attribute;
-            useEffect(()=> {
-                const el = currentEl.current;
-                if(!isUndefined(props[attributeName])){
-                    setter(el, attributeName, props[attributeName]);
-                }
-            }, [props[attributeName]]);
+            const attributeName = isString(attribute) ? attribute : attribute.name
+
+            useEffect(setDOMAttributes(props, attributeName, currentEl), [props[attributeName]]);
         });
 
         return React.createElement(componentName, {
@@ -56,17 +45,52 @@ const wrapper = function(
                 (setRef || noop)(el);
                 currentEl.current = el;
             },
-            ...Object.keys(props)
-                    .filter((
-                        (fields)=> (name)=> !fields.includes(name)
-                    )([
-                        ...events.map((event)=> ["on", capitalize(event.name || event)].join('')),
-                        ...attributes.map((attrib)=> attrib.name || attrib),
-                    ]))
-                    .reduce((ac, name)=> Object.assign(ac, { [name]: props[name] }), {})
+            ...generateProps(props,events,attributes)
         }, [], ...children);
     });
 };
+const setDOMAttributes = (props, attributeName, currentEl) => () => {
+    const el = currentEl.current;
+    if(propExists(props,attributeName)){
+        attributeSetterToggle(el, attributeName, props[attributeName]);
+    }
+}
+
+const propExists = (props, name) => !isUndefined(props[name])
+
+const setDOMListeners = (props, propName, currentEl, transform, eventName) => () => {
+    if(propExists(props,propName)){
+        const el = currentEl.current
+        const handler = flow(transform, props[propName] || noop);
+
+        el.addEventListener(eventName, handler);
+        return ()=> el.removeEventListener(eventName, handler);
+    }
+
+}
+
+
+const propNameFromEvent = (event)=> ["on", capitalize(event.name || event)].join('')
+
+const propNameFromAttribute = (attrib)=> attrib.name || attrib
+
+
+const generateProps = (props, events, attributes) =>{
+    const propNames = [...Object.keys(props)]
+
+
+    const attributesAndEvents = [
+        ...events.map(propNameFromEvent),
+        ...attributes.map(propNameFromAttribute),
+    ]
+
+    
+    return propNames
+            .filter((propName) => !attributesAndEvents.includes(propName))
+            .reduce(toObjectOf(props), {})
+}
+
+const toObjectOf = (props) => (ac, name) => ({...ac, [name]: props[name] })
 
 export default wrapper;
 export { attributeSetterValue, attributeSetterToggle };
