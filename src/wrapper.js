@@ -30,7 +30,6 @@ const wrapper = function(
 
             const propName = propNameFromEvent(event)
 
-
             React.useEffect(setDOMListeners(props, propName, currentEl, eventName), [props[propName]])
         })
 
@@ -64,7 +63,6 @@ const propNameFromAttribute = (attrib)=> attrib.name || attrib
 
 const generateProps = (props, events, attributes) =>{
     const propNames = [...Object.keys(props)]
-
 
     const attributesAndEvents = [
         ...events.map(propNameFromEvent),

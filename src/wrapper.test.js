@@ -46,7 +46,7 @@ describe('wrapper', () => {
 
     it('should call only configured events', () => {
       const VividButton = prepareVividWrapper('mwc-button',{
-        events: ['customEvent', 'change'],
+        events: ['customEvent'],
       })
       const onChange = jest.fn()
       const onCustomEvent = jest.fn()
@@ -55,8 +55,10 @@ describe('wrapper', () => {
           onCustomEvent={onCustomEvent}
       />)
       const event = new Event('customEvent')
+      const notConfiguredEvent = new Event('change')
 
       container.getDOMNode().dispatchEvent(event)
+      container.getDOMNode().dispatchEvent(notConfiguredEvent)
 
       expect(onCustomEvent).toHaveBeenCalledWith(event)
       expect(onChange).not.toHaveBeenCalled()
@@ -66,7 +68,7 @@ describe('wrapper', () => {
   describe('setDOMListeners', () => {
     it('should add listener for given prop', () =>{
       const props = {
-        'onChange': jest.fn()
+        onChange: jest.fn()
       }
       const propName = 'onChange'
       const addListenerMock = jest.fn()
@@ -79,11 +81,11 @@ describe('wrapper', () => {
       }
       const eventName = 'change'
 
-      const result = setDOMListeners(props, propName, currentEl, eventName)()
+      const remove = setDOMListeners(props, propName, currentEl, eventName)()
 
       expect(addListenerMock).toHaveBeenCalledTimes(1)
       expect(removeListenerMock).toHaveBeenCalledTimes(0)
-      result()
+      remove()
 
       expect(removeListenerMock).toHaveBeenCalledTimes(1)
     })
@@ -160,7 +162,6 @@ describe('wrapper', () => {
 
       expect(propNameFromEvent(eventName)).toBe(expectedPropName)
     })
-
   })
 })
 
