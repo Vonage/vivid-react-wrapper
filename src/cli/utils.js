@@ -1,33 +1,26 @@
 const { join } = require('path'),
     { access, F_OK, readFileSync, readdirSync, unlink, rmdirSync } = require('fs'),
     mkdirp = require('mkdirp'),
-    { spawnSync } = require('child_process')
+    { spawnSync } = require('child_process'),
+    { WCAConfig } = require('./consts')
 
-const toCommaSeparatedList = collection => (collection || []).map(x => `'${x.name}'`).join(',')    
+const toCommaSeparatedList = collection => (collection || []).map(x => `'${x.name}'`).join(',')
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
 const deCapitalize = input => input.replace(/(^|\s)[A-Z]/g, s => s.toLowerCase())
 const kebab2Camel = input => deCapitalize(input.split('-').map(x => capitalize(x)).join(''))
 const cleanupDir = p => {
     mkdirp.sync(p)
-    readdirSync(p).map(f => unlink(join(p, f), () => {}))
+    readdirSync(p).map(f => unlink(join(p, f), () => { }))
 }
-const WEB_ANALYZER_CONFIG = (packageNames, analyzerOutputFile) => [
-  './node_modules/web-component-analyzer/cli.js',
-  'analyze',
-  `node_modules/{${packageNames.join(',')}}/{src/,}*.?s`,
-  '--discoverNodeModules',
-  '--format', 'json',
-  '--outFile', analyzerOutputFile
-]
 
 const isFileExists = (fileName) => new Promise(
-  (resolve, reject) => access(
-    filePath(fileName),
-    F_OK,
-    error => error
-      ? reject(false)
-      : resolve(fileName)
-  ))
+    (resolve, reject) => access(
+        filePath(fileName),
+        F_OK,
+        error => error
+            ? reject(false)
+            : resolve(fileName)
+    ))
 const filePath = (fileName) => join(process.cwd(), fileName)
 
 const getParsedJson = (jsonFilePath) => JSON.parse(readFileSync(jsonFilePath, { encoding: 'utf8' }))
@@ -39,15 +32,21 @@ const getVividPackageNames = ({ dependencies, devDependencies }) => {
         ...Object.keys(dependencies),
         ...Object.keys(devDependencies)
     ]
-    return unique(packages).filter(isVividPackageName)
+    const result = unique(packages).filter(isVividPackageName)
+    console.log(`Vivid packages detected from package.json: \n${result.map(x => `  - ${x}`).join('\n')}`)
+    return result
 }
 
-const getCustomElementTagsDefinitionsList = (vividPackageNames) => new Promise((resolve) => {
-    const analyzerOutput = filePath('/temp/analyzerOutput.json')
-    const child = spawnSync('node', WEB_ANALYZER_CONFIG(vividPackageNames, analyzerOutput), { cwd: process.cwd() })
+const getCustomElementTagsDefinitionsList = (config = WCAConfig) => (vividPackageNames) => new Promise((resolve) => {
+    const analyzerOutput = filePath(join(config.tempFolder, config.tempFileName))
+    const child = spawnSync(
+        'node', 
+        config.nodeArgumentsFactory(vividPackageNames, analyzerOutput), 
+        { cwd: process.cwd() }
+    )
     if (child.status === 0) {
         const output = getParsedJson(analyzerOutput)
-        rmdirSync(filePath('/temp'), { recursive: true })
+        rmdirSync(filePath(config.tempFolder), { recursive: true })
         return resolve(output.tags)
     }
 })
