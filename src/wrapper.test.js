@@ -1,121 +1,168 @@
 import './matchMediaMock'
-import regeneratorRuntime from "regenerator-runtime";
 
 import React from 'react';
-import { mount, shallow, debug } from 'enzyme'
-import wrapper from './wrapper'
-import "@vonage/vwc-button"
-import { before, remove } from 'lodash';
+import {mount} from 'enzyme'
+import prepareVividWrapper, {propExists, propNameFromEvent, setDOMAttributes} from './wrapper'
 import {setDOMListeners} from './utils'
-import { setDOMAttributes, propExists} from './wrapper'
 
+describe('wrapper', () => {
+  describe('event handling', () => {
+    it('should pass event handler to web-component', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        events: ['change'],
+      })
+      const onChange = jest.fn()
+      const container = mount(<VividButton onChange={onChange}/>)
 
-describe('wrapper', () =>{
-  afterEach(() => {    
-    jest.clearAllMocks();
-  });
-  it('should call useEffect for each event and atribute defined in configuration', () =>{
-    const componentName= 'mwc-button'
-    const configuration= {
-      events: [ 'change','click','submit'],
-      attributes: ['disabled', 'label']
-    }
-    const useEffect = jest.spyOn(React, "useEffect");
-    const VividButton = wrapper(componentName,configuration)
+      container.getDOMNode().dispatchEvent(new Event('change'))
 
-    const container = shallow(<VividButton />);
+      expect(onChange).toHaveBeenCalled()
+    })
 
-    expect(useEffect).toHaveBeenCalledTimes(5)
+    it('should pass custom event handler to web-component', () =>{
+      const VividButton = prepareVividWrapper('mwc-button',{
+        events: ['customEvent'],
+      })
+      const onCustomEvent = jest.fn()
+      const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
+
+      container.getDOMNode().dispatchEvent(new Event('customEvent'))
+
+      expect(onCustomEvent).toHaveBeenCalled()
+    })
+
+    it('should call custom event with event object', () => {
+      const VividButton = prepareVividWrapper('mwc-button',{
+        events: ['customEvent'],
+      })
+      const onCustomEvent = jest.fn()
+      const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
+      const event = new Event('customEvent')
+
+      container.getDOMNode().dispatchEvent(event)
+
+      expect(onCustomEvent).toHaveBeenCalledWith(event)
+    })
+
+    it('should call only configured events', () => {
+      const VividButton = prepareVividWrapper('mwc-button',{
+        events: ['customEvent', 'change'],
+      })
+      const onChange = jest.fn()
+      const onCustomEvent = jest.fn()
+      const container = mount(<VividButton
+          onChange={onChange}
+          onCustomEvent={onCustomEvent}
+      />)
+      const event = new Event('customEvent')
+
+      container.getDOMNode().dispatchEvent(event)
+
+      expect(onCustomEvent).toHaveBeenCalledWith(event)
+      expect(onChange).not.toHaveBeenCalled()
+    })
   })
-})
 
-describe('setDOMListeners', () => {
-  it('should add listener for given prop', () =>{
-    const props = {
-      'onChange': jest.fn()
-    }
-    const propName = 'onChange'
-    const addListenerMock = jest.fn()
-    const removeListenerMock = jest.fn()
-    const currentEl = {
-      current: {
-        addEventListener: addListenerMock,
-        removeEventListener: removeListenerMock
+  describe('setDOMListeners', () => {
+    it('should add listener for given prop', () =>{
+      const props = {
+        'onChange': jest.fn()
       }
-    }
-    const eventName = 'change'
-
-    const result = setDOMListeners(props, propName, currentEl, eventName)()
-
-    expect(addListenerMock).toHaveBeenCalledTimes(1)
-    expect(removeListenerMock).toHaveBeenCalledTimes(0)
-    result()
-
-    expect(removeListenerMock).toHaveBeenCalledTimes(1)
-  })
-})
-
-describe('setDOMAttributes', () => {
-  it('should set attribute when it is provided in props', () =>{
-    const props = {
-      'disabled': "true"
-    }
-    const attributeName = 'disabled'
-    const setMock = jest.fn()
-    const removeMock = jest.fn()
-    const currentEl = {
-      current: {
-        setAttribute: setMock,
-        removeAttribute: removeMock
+      const propName = 'onChange'
+      const addListenerMock = jest.fn()
+      const removeListenerMock = jest.fn()
+      const currentEl = {
+        current: {
+          addEventListener: addListenerMock,
+          removeEventListener: removeListenerMock
+        }
       }
-    }
-    const eventName = 'change'
+      const eventName = 'change'
 
-    const result = setDOMAttributes(props, attributeName, currentEl)()
+      const result = setDOMListeners(props, propName, currentEl, eventName)()
 
-    expect(setMock).toHaveBeenCalledTimes(1)
+      expect(addListenerMock).toHaveBeenCalledTimes(1)
+      expect(removeListenerMock).toHaveBeenCalledTimes(0)
+      result()
+
+      expect(removeListenerMock).toHaveBeenCalledTimes(1)
+    })
   })
-  it('should remove attribute when it is provided in props with false value', () =>{
-    const props = {
-      'disabled': false
-    }
-    const attributeName = 'disabled'
-    const setMock = jest.fn()
-    const removeMock = jest.fn()
-    const currentEl = {
-      current: {
-        setAttribute: setMock,
-        removeAttribute: removeMock
+
+  describe('setDOMAttributes', () => {
+    it('should set attribute when it is provided in props', () =>{
+      const props = {
+        'disabled': "true"
       }
-    }
-    const eventName = 'change'
+      const attributeName = 'disabled'
+      const setMock = jest.fn()
+      const removeMock = jest.fn()
+      const currentEl = {
+        current: {
+          setAttribute: setMock,
+          removeAttribute: removeMock
+        }
+      }
 
-    const result = setDOMAttributes(props, attributeName, currentEl)()
+      setDOMAttributes(props, attributeName, currentEl)()
 
-    expect(removeMock).toHaveBeenCalledTimes(1)
+      expect(setMock).toHaveBeenCalledTimes(1)
+    })
+
+    it('should remove attribute when it is provided in props with false value', () =>{
+      const props = {
+        'disabled': false
+      }
+      const attributeName = 'disabled'
+      const setMock = jest.fn()
+      const removeMock = jest.fn()
+      const currentEl = {
+        current: {
+          setAttribute: setMock,
+          removeAttribute: removeMock
+        }
+      }
+
+      setDOMAttributes(props, attributeName, currentEl)()
+
+      expect(removeMock).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('propExists', () => {
+    it('should return true when prop exists', () =>{
+      const props= {
+        'test': true
+      }
+      const propName= 'test'
+
+      const result = propExists(props,propName)
+
+      expect(result).toBeTruthy()
+    })
+
+    it('should return false when prop does not exists', () =>{
+      const props= {
+        'test': true
+      }
+      const propName= 'invalidName'
+
+      const result = propExists(props,propName)
+
+      expect(result).toBeFalsy()
+    })
+  })
+
+  describe('propNameFromEvent', () => {
+    it('capitalizes only first letter and add "on" in the front', () => {
+      const eventName = 'customEvent'
+      const expectedPropName = 'onCustomEvent'
+
+      expect(propNameFromEvent(eventName)).toBe(expectedPropName)
+    })
+
   })
 })
 
-describe('propExists', () => {
-  it('should return true when prop exists', () =>{
-    const props= {
-      'test': true
-    }
-    const propName= 'test'
 
-    const result = propExists(props,propName)
 
-    expect(result).toBeTruthy()
-  })
-
-  it('should return false when prop does not exists', () =>{
-    const props= {
-      'test': true
-    }
-    const propName= 'invalidName'
-
-    const result = propExists(props,propName)
-
-    expect(result).toBeFalsy()
-  })
-})

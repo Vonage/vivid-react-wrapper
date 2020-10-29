@@ -1,5 +1,5 @@
-import React, { useRef} from "react";
-import {capitalize, flow, identity, isString, isUndefined, noop} from "lodash";
+import React, { useEffect, useRef } from "react";
+import {upperFirst, isString, isUndefined, noop} from "lodash";
 import { setDOMListeners } from "./utils";
 
 
@@ -22,48 +22,43 @@ const wrapper = function(
 ){
     return React.forwardRef(({ children = [], ...props }, setRef)=> {
 
-        const currentEl = useRef(null);
+        const currentEl = useRef(null)
 
         events.forEach((event)=> {
 
             const eventName = isString(event) ? event : event.name 
 
-            const propName = propNameFromEvent(event);
+            const propName = propNameFromEvent(event)
 
 
-            React.useEffect(setDOMListeners(props, propName, currentEl, eventName), [props[propName]]);
-        });
+            React.useEffect(setDOMListeners(props, propName, currentEl, eventName), [props[propName]])
+        })
 
         attributes.forEach((attribute)=> {
             const attributeName = isString(attribute) ? attribute : attribute.name
 
-            React.useEffect(setDOMAttributes(props, attributeName, currentEl), [props[attributeName]]);
-        });
+            useEffect(setDOMAttributes(props, attributeName, currentEl), [props[attributeName]])
+        })
 
         return React.createElement(componentName, {
-            ref: (el)=> {
-                (setRef || noop)(el);
-                currentEl.current = el;
+            ref: (el) => {
+                (setRef || noop)(el)
+                currentEl.current = el
             },
             ...generateProps(props,events,attributes)
-        }, [], ...children);
-    });
-};
+        }, [], ...children)
+    })
+}
 
 export const setDOMAttributes = (props, attributeName, currentEl) => () => {
-    const el = currentEl.current;
+    const el = currentEl.current
     if(propExists(props,attributeName)){
-        attributeSetterToggle(el, attributeName, props[attributeName]);
+        attributeSetterToggle(el, attributeName, props[attributeName])
     }
 }
 
 export const propExists = (props, name) => !isUndefined(props[name])
-
-
-
-
-const propNameFromEvent = (event)=> ["on", capitalize(event.name || event)].join('')
-
+export const propNameFromEvent = (event)=> ["on", upperFirst(event.name || event)].join('')
 const propNameFromAttribute = (attrib)=> attrib.name || attrib
 
 
@@ -84,4 +79,4 @@ const generateProps = (props, events, attributes) =>{
 
 const toObjectOf = (props) => (ac, name) => ({...ac, [name]: props[name] })
 
-export default wrapper;
+export default wrapper
