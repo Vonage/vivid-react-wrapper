@@ -5,7 +5,8 @@
   "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "main": "./src/wrapper.js",
   "scripts": {
-    "generator": "node bin/cli.js --output=./src/generated",
+    "generator": "node bin/cli.js",
+    "generator:ts": "node bin/cli.js --language=ts",
     "test": "jest",
     "start": "es-dev-server"
   },
