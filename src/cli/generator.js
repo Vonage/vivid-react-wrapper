@@ -17,6 +17,7 @@ const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (t
         const componentOutputFileName = join(process.cwd(), outputDir, `${componentFileName}${componentFileExt}`)
         imports.push(`import { ${componentName} } from './${componentFileName}'`)
         exports.push(`  ${componentName}`)
+        console.info(`Processing ${componentName}...`)
 
         writeFileSync(
             componentOutputFileName,
@@ -36,6 +37,7 @@ const generateWrappers = (outputDir, language = OutputLanguage.JavaScript) => (t
             .replace(TemplateToken.EXPORTS, exports.join(',\n'))
             .replace(TemplateToken.IMPORTS, imports.join('\n'))
     )
+    console.info(`${imports.length} wrappers generated at ${outputDir}`)
 }
 
 module.exports = {

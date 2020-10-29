@@ -7,6 +7,7 @@
   "scripts": {
     "generator": "node bin/cli.js",
     "generator:ts": "node bin/cli.js --language=ts",
+    "generator:all:ts": "node bin/cli.js --all=true --language=ts",
     "test": "jest",
     "start": "es-dev-server"
   },
@@ -58,10 +59,12 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@octokit/core": "^3.1.2",
     "@vonage/vwc-button": "0.13.0",
     "@vonage/vwc-icon": "0.13.0",
     "lodash": "^4.17.15",
     "mkdirp": "1.0.4",
+    "extract-zip": "2.0.1",
     "react": "^16.13.1",
     "web-component-analyzer": "^1.1.6"
   },
