@@ -9,6 +9,7 @@ const TemplateToken = {
     EXPORTS: '<% exports %>',
     TAG: '<% tag %>',
     COMPONENT_CLASS_NAME: '<% component-class-name %>',
+    PROP_TYPES: '<% prop-types %>',
     PROPERTIES: '<% properties %>',
     ATTRIBUTES: '<% attributes %>',
     EVENTS: '<% events %>'

@@ -1,4 +1,5 @@
 <% banner %>
+import PropTypes from 'prop-types'
 import wrapper from '@vonage/vivid-react-wrapper';
 
 export const <% component-class-name %> = wrapper('<% tag %>',  {
@@ -6,3 +7,7 @@ export const <% component-class-name %> = wrapper('<% tag %>',  {
     attributes: [<% attributes %>],
     properties: [<% properties %>]
 });
+
+<% component-class-name %>.propTypes = {
+<% prop-types %>
+}
