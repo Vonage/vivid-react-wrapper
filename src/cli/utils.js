@@ -6,6 +6,7 @@ const { join } = require('path'),
     { Octokit } = require('@octokit/core'),
     extract = require('extract-zip')
 
+const getGithubToken = () => process.env.GITHUB_ACCESS_TOKEN || process.env.GITHUB_TOKEN
 const toCommaSeparatedList = collection => (collection || []).map(x => `'${x.name}'`).join(',')
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
 const deCapitalize = input => input.replace(/(^|\s)[A-Z]/g, s => s.toLowerCase())
@@ -68,11 +69,11 @@ const getInputArgument = (argumentName, defaultValue = null) => {
 const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid.zip' }) => {
     cleanupDir(filePath(tempFolder))
     console.log(`Fetching latest Vivid release artifact...`)
-    if (!process.env.GITHUB_TOKEN) {
-        console.warn(`It seems GITHUB_TOKEN environment variable is not defined.`)
+    if (!getGithubToken()) {
+        console.warn(`It seems GITHUB_ACCESS_TOKEN or GITHUB_TOKEN environment variable is not defined.`)
         return
     }
-    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+    const octokit = new Octokit({ auth: getGithubToken() })
     const result = await octokit.request('GET /repos/Vonage/vivid/zipball')
     if (result.status === 200) {
         const filename = getFileNameFromDispositionHeader(result.headers['content-disposition'])
