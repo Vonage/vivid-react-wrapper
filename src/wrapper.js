@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {upperFirst, isString, isUndefined, noop} from "lodash";
+import {upperFirst, isString, isUndefined, noop, identity} from "lodash";
 import { setDOMListeners } from "./utils";
 
 
@@ -20,23 +20,29 @@ const wrapper = function(
         attributes = []
     } = {}
 ){
-    return React.forwardRef(({ children = [], ...props }, setRef)=> {
+    return React.forwardRef(({ children = [], ...props }, setRef) => {
 
         const currentEl = useRef(null)
 
-        events.forEach((event)=> {
+        events.forEach((event) => {
 
-            const eventName = isString(event) ? event : event.name 
+            const eventName = isString(event) ? event : event.name
+            const transform = isString(event)
+                ? identity
+                : (event.transform || identity)
 
             const propName = propNameFromEvent(event)
 
-            React.useEffect(setDOMListeners(props, propName, currentEl, eventName), [props[propName]])
+            useEffect(setDOMListeners(props, propName, currentEl, eventName, transform), [props[propName]])
         })
 
-        attributes.forEach((attribute)=> {
+        attributes.forEach((attribute) => {
             const attributeName = isString(attribute) ? attribute : attribute.name
+            const setter = isString(attribute)
+                ? attributeSetterToggle
+                : (attribute.setter || attributeSetterToggle)
 
-            useEffect(setDOMAttributes(props, attributeName, currentEl), [props[attributeName]])
+                useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
         })
 
         return React.createElement(componentName, {
@@ -49,10 +55,10 @@ const wrapper = function(
     })
 }
 
-export const setDOMAttributes = (props, attributeName, currentEl) => () => {
+export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
     const el = currentEl.current
     if(propExists(props,attributeName)){
-        attributeSetterToggle(el, attributeName, props[attributeName])
+        setter(el, attributeName, props[attributeName])
     }
 }
 

@@ -2,8 +2,15 @@ import './matchMediaMock'
 
 import React from 'react';
 import {mount} from 'enzyme'
-import prepareVividWrapper, {propExists, propNameFromEvent, setDOMAttributes} from './wrapper'
+import prepareVividWrapper, {
+  attributeSetterToggle,
+  attributeSetterValue,
+  propExists,
+  propNameFromEvent,
+  setDOMAttributes,
+} from './wrapper'
 import {setDOMListeners} from './utils'
+import {identity} from "lodash";
 
 describe('wrapper', () => {
   describe('event handling', () => {
@@ -63,6 +70,44 @@ describe('wrapper', () => {
       expect(onCustomEvent).toHaveBeenCalledWith(event)
       expect(onChange).not.toHaveBeenCalled()
     })
+
+    describe('transform', () => {
+      it('should pass custom transform function', () => {
+        const transformMock = jest.fn()
+        const VividButton = prepareVividWrapper('mwc-button', {
+          events: [{ name: 'change', transform: transformMock } ],
+        })
+        const onChange = jest.fn()
+        const container = mount(<VividButton onChange={onChange}/>)
+
+        const event = new Event('change');
+        container.getDOMNode().dispatchEvent(event)
+
+        expect(transformMock).toHaveBeenCalledWith(event)
+      })
+    })
+  })
+
+  describe('attribute reading', () => {
+    it('could read configured boolean attribute', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        attributes: ['bool'],
+      })
+      const container = mount(<VividButton bool='true' />)
+
+      expect(container.find('mwc-button').getDOMNode().getAttribute('bool'))
+          .toBe('true')
+    })
+
+    it('could read configured string attribute', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        attributes: [{ name: 'string', setter: attributeSetterValue }],
+      })
+      const container = mount(<VividButton string='name' />)
+
+      expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
+          .toBe('name')
+    })
   })
 
   describe('setDOMListeners', () => {
@@ -81,7 +126,7 @@ describe('wrapper', () => {
       }
       const eventName = 'change'
 
-      const remove = setDOMListeners(props, propName, currentEl, eventName)()
+      const remove = setDOMListeners(props, propName, currentEl, eventName, identity)()
 
       expect(addListenerMock).toHaveBeenCalledTimes(1)
       expect(removeListenerMock).toHaveBeenCalledTimes(0)
@@ -92,42 +137,82 @@ describe('wrapper', () => {
   })
 
   describe('setDOMAttributes', () => {
-    it('should set attribute when it is provided in props', () =>{
-      const props = {
-        'disabled': "true"
-      }
-      const attributeName = 'disabled'
-      const setMock = jest.fn()
-      const removeMock = jest.fn()
-      const currentEl = {
-        current: {
-          setAttribute: setMock,
-          removeAttribute: removeMock
+    describe('bool attributes', () => {
+      it('should set attribute when it is provided in props', () => {
+        const props = {
+          'disabled': "true"
         }
-      }
+        const attributeName = 'disabled'
+        const setMock = jest.fn()
+        const removeMock = jest.fn()
+        const currentEl = {
+          current: {
+            setAttribute: setMock,
+            removeAttribute: removeMock
+          }
+        }
 
-      setDOMAttributes(props, attributeName, currentEl)()
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
 
-      expect(setMock).toHaveBeenCalledTimes(1)
+        expect(setMock).toHaveBeenCalledTimes(1)
+      })
+
+      it('should remove attribute when it is provided in props with false value', () => {
+        const props = {
+          'disabled': false
+        }
+        const attributeName = 'disabled'
+        const setMock = jest.fn()
+        const removeMock = jest.fn()
+        const currentEl = {
+          current: {
+            setAttribute: setMock,
+            removeAttribute: removeMock
+          }
+        }
+
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
+
+        expect(removeMock).toHaveBeenCalledTimes(1)
+      })
     })
-
-    it('should remove attribute when it is provided in props with false value', () =>{
-      const props = {
-        'disabled': false
-      }
-      const attributeName = 'disabled'
-      const setMock = jest.fn()
-      const removeMock = jest.fn()
-      const currentEl = {
-        current: {
-          setAttribute: setMock,
-          removeAttribute: removeMock
+    describe('string attributes', () => {
+      it('should set string attribute when it is provided in props', () => {
+        const props = {
+          'string': "name"
         }
-      }
+        const attributeName = 'string'
+        const setMock = jest.fn()
+        const currentEl = {
+          current: {
+            setAttribute: setMock,
+          }
+        }
 
-      setDOMAttributes(props, attributeName, currentEl)()
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
 
-      expect(removeMock).toHaveBeenCalledTimes(1)
+        expect(setMock).toHaveBeenCalledTimes(1)
+      })
+
+      it('should not fire removeAttribute (miss with attributeSetterToggle)', () => {
+        const props = {
+          'string': false
+        }
+        const attributeName = 'string'
+        const setMock = jest.fn()
+        const removeMock = jest.fn()
+        const currentEl = {
+          current: {
+            setAttribute: setMock,
+            removeAttribute: removeMock
+          }
+        }
+
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
+
+        expect(setMock).toHaveBeenCalledTimes(1)
+        expect(removeMock).toHaveBeenCalledTimes(0)
+      })
     })
   })
 
