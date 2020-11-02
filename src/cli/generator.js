@@ -1,10 +1,13 @@
-const { cleanupDir, kebab2Camel, capitalize, toCommaSeparatedList } = require('./utils')
+const { cleanupDir, kebab2Camel, capitalize, toCommaSeparatedList, toJsonObjectsList, event2PropName, event2EventDescriptor } = require('./utils')
 const { getTemplate, TemplateToken } = require('./templates')
 const { writeFileSync } = require('fs')
 const { join } = require('path')
 const { OutputLanguage } = require('./consts')
 
 const getPropTypes = tag => {
+    const events = (tag.events || [])
+    const eventsPropTypes = events.map(x => `  ${event2PropName(x.name)}: PropTypes.func`)
+
     const properties = (tag.properties || [])
         .filter(prop => prop.type) // only props having certain type
         .filter(prop => /\'.*?\'/.test(prop.name) || /^([a-zA-Z_$][a-zA-Z\\d_$]*)$/.test(prop.name)) // only props having valid names
@@ -16,14 +19,19 @@ const getPropTypes = tag => {
     const mapTypeToPropType = type => ['boolean', 'string', 'number', 'array'].indexOf(type) >= 0
         ? (type === 'boolean' ? 'bool' : type)
         : isTypeSet(type) ? `oneOf([${getSetTypeOptions(type).join(',')}])`
-            : isString(type) ? 'string' : isNumber(type) ? 'number' : isBoolean(type) ? 'bool' : `any /* ${type} */`
-    const result = properties.map(x => `  ${x.name}: PropTypes.${mapTypeToPropType(x.type.toLowerCase())}`)
-    return result
+            : isString(type) ? 'string' : isNumber(type) ? 'number' : isBoolean(type) ? 'bool' : `any /* ${type} */`    
+    const propertiesPropTypes = properties.map(x => `  ${x.name}: PropTypes.${mapTypeToPropType(x.type.toLowerCase())}`)
+    
+    return [
+        ...eventsPropTypes,
+        ...propertiesPropTypes
+    ]
 }
 
 const renderComponent = tag => language => componentName => {
+    const flatEventsList = (tag.events || []).map(x => (typeof x === 'string' ? x : x.name ))
     const result = getTemplate('react-component', language)
-        .replace(TemplateToken.EVENTS, toCommaSeparatedList(tag.events))
+        .replace(TemplateToken.EVENTS, toJsonObjectsList(flatEventsList.map(event2EventDescriptor)))
         .replace(TemplateToken.PROPERTIES, toCommaSeparatedList(tag.properties))
         .replace(TemplateToken.ATTRIBUTES, toCommaSeparatedList(tag.attributes))
         .replace(TemplateToken.PROP_TYPES, getPropTypes(tag).join(',\n'))

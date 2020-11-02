@@ -1,4 +1,4 @@
-const { getVividPackageNames } = require('./utils')
+const { getVividPackageNames, event2PropName } = require('./utils')
 
 it('getVividPackageNames', () => {
   const packageJson = {
@@ -21,4 +21,12 @@ it('getVividPackageNames', () => {
     '@vonage/vwc-dropdown'
   ]
   expect(getVividPackageNames(packageJson)).toStrictEqual(expectedList);
+});
+
+it.each([
+  ['digit-added', 'onDigitAdded'],
+  ['userScrubRequest', 'onUserScrubRequest'],
+  ['vvd_scheme_select', 'onVvdSchemeSelect']
+])(`event2PropName should convert "%s" to "%s"`, (input, expected) => {
+  expect(event2PropName(input)).toStrictEqual(expected);
 });

@@ -8,10 +8,14 @@ const { join } = require('path'),
 
 const stripQuotes = input => input.replace(/\'/g, '')
 const getGithubToken = () => process.env.GITHUB_ACCESS_TOKEN || process.env.GITHUB_TOKEN
+const toJsonObjectsList = collection => (collection || []).map(JSON.stringify).join(',')
 const toCommaSeparatedList = collection => (collection || []).map(x => `'${stripQuotes(x.name)}'`).join(',')
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
 const deCapitalize = input => input.replace(/(^|\s)[A-Z]/g, s => s.toLowerCase())
 const kebab2Camel = input => deCapitalize(input.split('-').map(x => capitalize(x)).join(''))
+const snake2Camel = input => deCapitalize(input.split('_').map(x => capitalize(x)).join(''))
+const event2PropName = eventName => `on${capitalize(kebab2Camel(snake2Camel(eventName)))}`
+const event2EventDescriptor = eventName => ({ name: eventName, propName: event2PropName(eventName) })
 const getFileNameFromDispositionHeader = input => /filename=(.*$)/.exec(input)[1]
 const cleanupDir = p => {
     mkdirp.sync(p)
@@ -94,9 +98,12 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
 
 module.exports = {
     toCommaSeparatedList,
+    toJsonObjectsList,
     cleanupDir,
     capitalize,
     kebab2Camel,
+    event2PropName,
+    event2EventDescriptor,
     getInputArgument,
     isFileExists,
     getParsedJson,
