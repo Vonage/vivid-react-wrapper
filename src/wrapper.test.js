@@ -7,9 +7,8 @@ import prepareVividWrapper, {
   attributeSetterValue,
   propExists,
   propNameFromEvent,
-  setDOMAttributes,
+  setDOMAttributes, setDOMListeners,
 } from './wrapper'
-import {setDOMListeners} from './utils'
 import {identity} from "lodash";
 
 describe('wrapper', () => {
@@ -107,6 +106,38 @@ describe('wrapper', () => {
 
       expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
           .toBe('name')
+    })
+  })
+
+  describe('passing reactive properties', () => {
+    it('pass function property', () => {
+      const transitionMock = jest.fn()
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: [ 'transition' ],
+      })
+      const container = mount(<VividButton transition={transitionMock} />)
+
+      container.find('mwc-button').getDOMNode().transition('arg')
+
+      expect(transitionMock).toHaveBeenCalledWith('arg')
+    })
+
+    it('changing function property', () => {
+      const transitionMock = jest.fn()
+      const newTransitionMock = jest.fn()
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: [ 'transition' ],
+      })
+      const container = mount(<VividButton transition={transitionMock} />)
+      container.setProps({
+        transition: newTransitionMock
+      })
+      // container.update()
+
+      container.find('mwc-button').getDOMNode().transition('arg1')
+
+      expect(transitionMock).not.toHaveBeenCalled()
+      expect(newTransitionMock).toHaveBeenCalledWith('arg1')
     })
   })
 

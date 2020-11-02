@@ -1,10 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import {upperFirst, isString, isUndefined, noop, identity} from "lodash";
-import { setDOMListeners } from "./utils";
-
-
-export const attributeSetterValue = (el, name, value)=> el.setAttribute(name, value)
-export const attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+import React, {useCallback, useEffect, useRef} from "react";
+import {flow, identity, isString, isUndefined, noop, upperFirst} from "lodash";
 
 /**
 * Generates a React component that wraps around a custom element
@@ -17,7 +12,8 @@ const wrapper = function(
     componentName,
     {
         events = [],
-        attributes = []
+        attributes = [],
+        properties = []
     } = {}
 ){
     return React.forwardRef(({ children = [], ...props }, setRef) => {
@@ -45,6 +41,12 @@ const wrapper = function(
                 useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
         })
 
+        properties.forEach((property) => {
+            useEffect(() => {
+                currentEl.current[property] = props[property]
+            }, [props[property]])
+        })
+
         return React.createElement(componentName, {
             ref: (el) => {
                 (setRef || noop)(el)
@@ -53,6 +55,19 @@ const wrapper = function(
             ...generateProps(props,events,attributes)
         }, [], ...children)
     })
+}
+
+export const attributeSetterValue = (el, name, value)=> el.setAttribute(name, value)
+export const attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+
+export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
+    if (propExists(props, propName)) {
+        const el = currentEl.current
+        const handler = flow(transform, props[propName] || noop);
+
+        el.addEventListener(eventName, handler);
+        return () => el.removeEventListener(eventName, handler);
+    }
 }
 
 export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
