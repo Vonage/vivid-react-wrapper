@@ -17,8 +17,8 @@ const getPropTypes = tag => {
         .filter(prop => prop.type) // only props having certain type
         .filter(prop => /\'.*?\'/.test(prop.name) || /^([a-zA-Z_$][a-zA-Z\\d_$]*)$/.test(prop.name)) // only props having valid names
     const isBoolean = type => /(true|false)/.test(type)
-    const isNumber = type => /(integer)/.test(type)
-    const isString = type => type === 'string | undefined'
+    const isNumber = type => /(integer)/.test(type) || type === 'number | null'
+    const isString = type => type === 'string | undefined' || type === 'string | null'
     const isTypeSet = type => /(\".*?\" \|)/.test(type)
     const getSetTypeOptions = setType => setType.split('|').map(x => x.trim())
     const mapTypeToPropType = type => ['boolean', 'string', 'number', 'array'].indexOf(type) >= 0

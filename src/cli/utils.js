@@ -1,6 +1,7 @@
 const { join } = require('path'),
-    { access, F_OK, readFileSync, readdirSync, unlink, rmdirSync, createWriteStream } = require('fs'),
+    { access, F_OK, readFileSync, readdirSync, rmdirSync, createWriteStream } = require('fs'),
     mkdirp = require('mkdirp'),
+    os = require('os'),
     { spawnSync } = require('child_process'),
     { WCAConfig, tempFolder } = require('./consts'),
     { Octokit } = require('@octokit/core'),
@@ -17,10 +18,13 @@ const snake2Camel = input => deCapitalize(input.split('_').map(x => capitalize(x
 const event2PropName = eventName => `on${capitalize(kebab2Camel(snake2Camel(eventName)))}`
 const event2EventDescriptor = eventName => ({ name: eventName, propName: event2PropName(eventName) })
 const getFileNameFromDispositionHeader = input => /filename=(.*$)/.exec(input)[1]
+const getYarnCommand = () => os.platform() === 'win32' ? 'yarn.cmd' : 'yarn'
 const cleanupDir = p => {
+    console.info(`Clearing folder: ${p}`)
+    rmdirSync(p, { recursive: true })
     mkdirp.sync(p)
-    readdirSync(p).map(f => unlink(join(p, f), () => { }))
 }
+const getFirstFolderNameFromPath = path => readdirSync(path, {withFileTypes: true}).find(x => x.isDirectory()).name
 
 const isFileExists = (fileName) => new Promise(
     (resolve, reject) => access(
@@ -55,7 +59,7 @@ const getCustomElementTagsDefinitionsList = (config = WCAConfig) => (vividPackag
     )
     if (child.status === 0) {
         const output = getParsedJson(analyzerOutput)
-        rmdirSync(filePath(config.tempFolder), { recursive: true })
+        cleanupDir(filePath(config.tempFolder))
         return resolve(output.tags)
     }
 })
@@ -92,7 +96,14 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
         } catch (err) {
             console.error(err)
         }
-        return `${outFolder}/**/components/**`
+        const vividFolder = join(outFolder, getFirstFolderNameFromPath(outFolder))
+        console.log(`Installing Vivid packages at: ${vividFolder}...`)
+        const child = spawnSync(getYarnCommand(), [], { cwd: vividFolder, stdio: 'ignore' })
+        if (child.status === 0) {
+            console.log('Analyzing Vivid elements...')
+            return `${outFolder}/**/components/**`
+        }
+        return
     }
 }
 
