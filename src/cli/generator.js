@@ -4,6 +4,11 @@ const { writeFileSync } = require('fs')
 const { join } = require('path')
 const { OutputLanguage } = require('./consts')
 
+const getDefaultProps = tag => {
+  const defaultProperties = (tag.properties || []).filter(x => x.default)
+  return defaultProperties.map(x => `  ${x.name}: ${x.default}`)
+}
+
 const getPropTypes = tag => {
     const events = (tag.events || [])
     const eventsPropTypes = events.map(x => `  ${event2PropName(x.name)}: PropTypes.func`)
@@ -20,8 +25,9 @@ const getPropTypes = tag => {
         ? (type === 'boolean' ? 'bool' : type)
         : isTypeSet(type) ? `oneOf([${getSetTypeOptions(type).join(',')}])`
             : isString(type) ? 'string' : isNumber(type) ? 'number' : isBoolean(type) ? 'bool' : `any /* ${type} */`    
-    const propertiesPropTypes = properties.map(x => `  ${x.name}: PropTypes.${mapTypeToPropType(x.type.toLowerCase())}`)
-    
+    const propertiesPropTypes = properties.map(x => 
+        `  ${x.name}: PropTypes.${mapTypeToPropType(x.type.toLowerCase())}${x.default ? `/* default: ${x.default} */` : ''}`)
+
     return [
         ...eventsPropTypes,
         ...propertiesPropTypes
@@ -35,6 +41,8 @@ const renderComponent = tag => language => componentName => {
         .replace(TemplateToken.PROPERTIES, toCommaSeparatedList(tag.properties))
         .replace(TemplateToken.ATTRIBUTES, toCommaSeparatedList(tag.attributes))
         .replace(TemplateToken.PROP_TYPES, getPropTypes(tag).join(',\n'))
+        .replace(TemplateToken.DEFAULT_PROPS, getDefaultProps(tag).join(',\n'))        
+        .replace(TemplateToken.TAG_DESCRIPTOR_JSON, JSON.stringify(tag, null, ' '))
         .replace(new RegExp(TemplateToken.COMPONENT_CLASS_NAME, 'g'), componentName)
         .replace(new RegExp(TemplateToken.TAG, 'g'), tag.name)
 
