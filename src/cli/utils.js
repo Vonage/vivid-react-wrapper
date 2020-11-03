@@ -101,7 +101,7 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
         const child = spawnSync(getYarnCommand(), [], { cwd: vividFolder, stdio: 'ignore' })
         if (child.status === 0) {
             console.log('Analyzing Vivid elements...')
-            return `${outFolder}/**/components/**`
+            return `${vividFolder}/**/components/**`
         }
         return
     }
