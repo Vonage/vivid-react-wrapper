@@ -1,12 +1,13 @@
-import React, {useCallback, useEffect, useRef} from "react";
-import {flow, identity, isString, isUndefined, noop, upperFirst} from "lodash";
+import React, {useEffect, useRef} from "react";
+import {flow, identity, isString, isUndefined, noop} from "lodash";
 
 /**
 * Generates a React component that wraps around a custom element
 * @param {string} componentName - The name of the registered custom element
 * @param {Object} configuration - A configuration specification for the React wrapper
-* @param {Object} configuration.events - A List of events that the element supports
-* @param {Object} configuration.attributes - A List of attributes that the element supports
+* @param {Array} configuration.events - A List of events that the element supports
+* @param {Array} configuration.attributes - A List of attributes that the element supports
+* @param {Array} configuration.properties - A List of properties that the element supports
 */
 const wrapper = function(
     componentName,
@@ -21,7 +22,7 @@ const wrapper = function(
         const currentEl = useRef(null)
 
         const eventProps = events.map((event) => {
-            const eventName = propNameFromEvent(isString(event) ? event : event.name);
+            const eventName = propNameFromEvent(event);
             return props[eventName]
         })
         useEffect(setDOMListeners(props, events, currentEl), eventProps)
@@ -94,7 +95,7 @@ export const setDOMAttribute = (props, attributeName, currentEl, setter) => {
 }
 
 export const propExists = (props, name) => !isUndefined(props[name])
-export const propNameFromEvent = (event) => ["on", upperFirst(event.name || event)].join('')
+export const propNameFromEvent = (event) => event.propName
 const propNameFromAttribute = (attrib) => attrib.name || attrib
 
 const generateProps = (actualPropsPassed, events, attributes, properties) =>{

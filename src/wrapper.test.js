@@ -6,7 +6,6 @@ import prepareVividWrapper, {
   attributeSetterToggle,
   attributeSetterValue,
   propExists,
-  propNameFromEvent,
   setDOMAttribute, setDOMListener,
 } from './wrapper'
 import {identity} from "lodash";
@@ -15,7 +14,7 @@ describe('wrapper', () => {
   describe('event handling', () => {
     it('should pass event handler to web-component', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        events: ['change'],
+        events: [{ name: 'change', propName:'onChange'}],
       })
       const onChange = jest.fn()
       const container = mount(<VividButton onChange={onChange}/>)
@@ -27,7 +26,7 @@ describe('wrapper', () => {
 
     it('should pass proper event handler to web-component after handler change', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        events: ['change'],
+        events: [{ name: 'change', propName:'onChange'}],
       })
       const onChange = jest.fn()
       const newOnChange = jest.fn()
@@ -43,7 +42,7 @@ describe('wrapper', () => {
 
     it('should pass custom event handler to web-component', () =>{
       const VividButton = prepareVividWrapper('mwc-button',{
-        events: ['customEvent'],
+        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
       })
       const onCustomEvent = jest.fn()
       const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
@@ -55,7 +54,7 @@ describe('wrapper', () => {
 
     it('should call custom event with event object', () => {
       const VividButton = prepareVividWrapper('mwc-button',{
-        events: ['customEvent'],
+        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
       })
       const onCustomEvent = jest.fn()
       const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
@@ -68,7 +67,7 @@ describe('wrapper', () => {
 
     it('should call only configured events', () => {
       const VividButton = prepareVividWrapper('mwc-button',{
-        events: ['customEvent'],
+        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
       })
       const onChange = jest.fn()
       const onCustomEvent = jest.fn()
@@ -90,7 +89,7 @@ describe('wrapper', () => {
       it('should pass custom transform function', () => {
         const transformMock = jest.fn()
         const VividButton = prepareVividWrapper('mwc-button', {
-          events: [{ name: 'change', transform: transformMock } ],
+          events: [{ name: 'change', propName:'onChange', transform: transformMock }],
         })
         const onChange = jest.fn()
         const container = mount(<VividButton onChange={onChange}/>)
@@ -298,15 +297,6 @@ describe('wrapper', () => {
       const result = propExists(props,propName)
 
       expect(result).toBeFalsy()
-    })
-  })
-
-  describe('propNameFromEvent', () => {
-    it('capitalizes only first letter and add "on" in the front', () => {
-      const eventName = 'customEvent'
-      const expectedPropName = 'onCustomEvent'
-
-      expect(propNameFromEvent(eventName)).toBe(expectedPropName)
     })
   })
 })
