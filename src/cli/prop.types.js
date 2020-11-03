@@ -8,11 +8,13 @@ const getProperties = tag =>
         .filter(prop => /\'.*?\'/.test(prop.name)
             || /^([a-zA-Z_$][a-zA-Z\\d_$]*)$/.test(prop.name)) // only props having valid names
 
+const getEvents = tag => (tag.events || []).map(x => event2PropName(x.name))
+
 // TypeScript
 
 const getProps = tag => {
-    const events = (tag.events || [])
-    const eventsProps = events.map(x => `  ${event2PropName(x.name)}: (event: Event) => void`)
+    const eventsProps = getEvents(tag).map(x => `  ${x}?: (event: Event) => void`)
+    
     const properties = getProperties(tag)
     const props = properties.map(x => `  ${x.name}?: ${x.type}`)
     return [
@@ -29,8 +31,7 @@ const getDefaultProps = tag => {
 }
 
 const getPropTypes = tag => {
-    const events = (tag.events || [])
-    const eventsPropTypes = events.map(x => `  ${event2PropName(x.name)}: PropTypes.func`)
+    const eventsPropTypes = getEvents(tag).map(x => `  ${x}: PropTypes.func`)
 
     const properties = getProperties(tag)
     const isBoolean = type => /(true|false)/.test(type)
