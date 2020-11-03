@@ -49,7 +49,7 @@ import { attributeSetterValue, attributeSetterToggle } from "./wrapper";
 
 const MwcTextarea = wrapper('mwc-textarea',  {
     events: [
-        { name: "change", transform: (e)=> e.target.value }
+        { name: "change", transform: (e) => e.target.value }
     ],
     attributes: [
         { name: "disabled", setter: attributeSetterToggle },

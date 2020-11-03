@@ -7,7 +7,7 @@ import prepareVividWrapper, {
   attributeSetterValue,
   propExists,
   propNameFromEvent,
-  setDOMAttributes, setDOMListeners,
+  setDOMAttribute, setDOMListener,
 } from './wrapper'
 import {identity} from "lodash";
 
@@ -23,6 +23,22 @@ describe('wrapper', () => {
       container.getDOMNode().dispatchEvent(new Event('change'))
 
       expect(onChange).toHaveBeenCalled()
+    })
+
+    it('should pass proper event handler to web-component after handler change', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        events: ['change'],
+      })
+      const onChange = jest.fn()
+      const newOnChange = jest.fn()
+      const event = new Event('change')
+      const container = mount(<VividButton onChange={onChange}/>)
+
+      container.setProps({ onChange: newOnChange })
+      container.getDOMNode().dispatchEvent(event)
+
+      expect(newOnChange).toHaveBeenCalledWith(event)
+      expect(onChange).not.toHaveBeenCalled()
     })
 
     it('should pass custom event handler to web-component', () =>{
@@ -107,6 +123,20 @@ describe('wrapper', () => {
       expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
           .toBe('name')
     })
+
+    it('pass updated attribute', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        attributes: [{ name: 'string', setter: attributeSetterValue }],
+      })
+      const container = mount(<VividButton string='name' />)
+
+      container.setProps({
+        string: 'newName'
+      })
+
+      expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
+          .toBe('newName')
+    })
   })
 
   describe('passing reactive properties', () => {
@@ -132,7 +162,7 @@ describe('wrapper', () => {
       container.setProps({
         transition: newTransitionMock
       })
-      // container.update()
+
 
       container.find('mwc-button').getDOMNode().transition('arg1')
 
@@ -157,7 +187,7 @@ describe('wrapper', () => {
       }
       const eventName = 'change'
 
-      const remove = setDOMListeners(props, propName, currentEl, eventName, identity)()
+      const remove = setDOMListener(props, propName, currentEl, eventName, identity)
 
       expect(addListenerMock).toHaveBeenCalledTimes(1)
       expect(removeListenerMock).toHaveBeenCalledTimes(0)
@@ -183,7 +213,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
+        setDOMAttribute(props, attributeName, currentEl, attributeSetterToggle)
 
         expect(setMock).toHaveBeenCalledTimes(1)
       })
@@ -202,7 +232,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
+        setDOMAttribute(props, attributeName, currentEl, attributeSetterToggle)
 
         expect(removeMock).toHaveBeenCalledTimes(1)
       })
@@ -220,7 +250,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
+        setDOMAttribute(props, attributeName, currentEl, attributeSetterValue)
 
         expect(setMock).toHaveBeenCalledTimes(1)
       })
@@ -239,7 +269,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
+        setDOMAttribute(props, attributeName, currentEl, attributeSetterValue)
 
         expect(setMock).toHaveBeenCalledTimes(1)
         expect(removeMock).toHaveBeenCalledTimes(0)

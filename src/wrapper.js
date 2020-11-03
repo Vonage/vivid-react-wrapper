@@ -20,49 +20,65 @@ const wrapper = function(
 
         const currentEl = useRef(null)
 
-        events.forEach((event) => {
-
-            const eventName = isString(event) ? event : event.name
-            const transform = isString(event)
-                ? identity
-                : (event.transform || identity)
-
-            const propName = propNameFromEvent(event)
-
-            useEffect(setDOMListeners(props, propName, currentEl, eventName, transform), [props[propName]])
+        const eventProps = events.map((event) => {
+            const eventName = propNameFromEvent(isString(event) ? event : event.name);
+            return props[eventName]
         })
+        useEffect(setDOMListeners(props, events, currentEl), eventProps)
 
-        attributes.forEach((attribute) => {
+        const attributeProps = attributes.map((attribute) => {
             const attributeName = isString(attribute) ? attribute : attribute.name
-            const setter = isString(attribute)
-                ? attributeSetterToggle
-                : (attribute.setter || attributeSetterToggle)
-
-                useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
+            return props[attributeName];
         })
+        useEffect(setDOMAttributes(props, attributes, currentEl), attributeProps)
 
-        properties.forEach((property) => {
-            useEffect(() => {
+        const propertiesProps = properties.map((property) => props[property])
+        useEffect(() => {
+            properties.forEach((property) => {
                 currentEl.current[property] = props[property]
-            }, [props[property]])
-        })
+            })
+        }, propertiesProps)
 
         return React.createElement(componentName, {
             ref: (el) => {
                 (setRef || noop)(el)
                 currentEl.current = el
             },
-            ...generateProps(props,events,attributes)
+            ...generateProps(props,events,attributes, properties)
         }, [], ...children)
     })
 }
 
-export const attributeSetterValue = (el, name, value)=> el.setAttribute(name, value)
-export const attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
+export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
 
-export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
-    if (propExists(props, propName)) {
-        const el = currentEl.current
+const setDOMListeners = (props, events, currentEl) => () => {
+    const cleaningFns = events.map((event) => {
+        const eventName = isString(event) ? event : event.name
+        const transform = isString(event)
+            ? identity
+            : (event.transform || identity)
+
+        const propName = propNameFromEvent(event)
+
+        return setDOMListener(props, propName, currentEl, eventName, transform)
+    })
+    return () => cleaningFns.forEach((fn) => fn())
+}
+
+const setDOMAttributes = (props, attributes, currentEl) => () => {
+    attributes.forEach((attribute) => {
+        const attributeName = isString(attribute) ? attribute : attribute.name
+        const setter = isString(attribute)
+            ? attributeSetterToggle
+            : (attribute.setter || attributeSetterToggle)
+        setDOMAttribute(props, attributeName, currentEl, setter)
+    })
+}
+
+export const setDOMListener = (props, propName, currentEl, eventName, transform) => {
+    const el = currentEl.current
+    if (el && propExists(props, propName)) {
         const handler = flow(transform, props[propName] || noop);
 
         el.addEventListener(eventName, handler);
@@ -70,7 +86,7 @@ export const setDOMListeners = (props, propName, currentEl, eventName, transform
     }
 }
 
-export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
+export const setDOMAttribute = (props, attributeName, currentEl, setter) => {
     const el = currentEl.current
     if(propExists(props,attributeName)){
         setter(el, attributeName, props[attributeName])
@@ -78,22 +94,22 @@ export const setDOMAttributes = (props, attributeName, currentEl, setter) => () 
 }
 
 export const propExists = (props, name) => !isUndefined(props[name])
-export const propNameFromEvent = (event)=> ["on", upperFirst(event.name || event)].join('')
-const propNameFromAttribute = (attrib)=> attrib.name || attrib
+export const propNameFromEvent = (event) => ["on", upperFirst(event.name || event)].join('')
+const propNameFromAttribute = (attrib) => attrib.name || attrib
 
-
-const generateProps = (props, events, attributes) =>{
-    const propNames = [...Object.keys(props)]
+const generateProps = (actualPropsPassed, events, attributes, properties) =>{
+    const propNames = [...Object.keys(actualPropsPassed)]
 
     const attributesAndEvents = [
         ...events.map(propNameFromEvent),
         ...attributes.map(propNameFromAttribute),
+        ...properties // overrides
     ]
 
     
     return propNames
             .filter((propName) => !attributesAndEvents.includes(propName))
-            .reduce(toObjectOf(props), {})
+            .reduce(toObjectOf(actualPropsPassed), {})
 }
 
 const toObjectOf = (props) => (ac, name) => ({...ac, [name]: props[name] })
