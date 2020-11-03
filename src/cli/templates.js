@@ -9,9 +9,12 @@ const TemplateToken = {
     EXPORTS: '<% exports %>',
     TAG: '<% tag %>',
     COMPONENT_CLASS_NAME: '<% component-class-name %>',
+    PROP_TYPES: '<% prop-types %>',
+    DEFAULT_PROPS: '<% default-props %>',    
     PROPERTIES: '<% properties %>',
     ATTRIBUTES: '<% attributes %>',
-    EVENTS: '<% events %>'
+    EVENTS: '<% events %>',
+    TAG_DESCRIPTOR_JSON: '<% descriptor-json %>'
 }
 
 const GENERATED_CODE_BANNER = `/*

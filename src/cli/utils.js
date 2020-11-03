@@ -1,21 +1,30 @@
 const { join } = require('path'),
-    { access, F_OK, readFileSync, readdirSync, unlink, rmdirSync, createWriteStream } = require('fs'),
+    { access, F_OK, readFileSync, readdirSync, rmdirSync, createWriteStream } = require('fs'),
     mkdirp = require('mkdirp'),
+    os = require('os'),
     { spawnSync } = require('child_process'),
     { WCAConfig, tempFolder } = require('./consts'),
     { Octokit } = require('@octokit/core'),
     extract = require('extract-zip')
 
+const stripQuotes = input => input.replace(/\'/g, '')
 const getGithubToken = () => process.env.GITHUB_ACCESS_TOKEN || process.env.GITHUB_TOKEN
-const toCommaSeparatedList = collection => (collection || []).map(x => `'${x.name}'`).join(',')
+const toJsonObjectsList = collection => (collection || []).map(JSON.stringify).join(',')
+const toCommaSeparatedList = collection => (collection || []).map(x => `'${stripQuotes(x.name)}'`).join(',')
 const capitalize = input => input.replace(/(^|\s)[a-z]/g, s => s.toUpperCase())
 const deCapitalize = input => input.replace(/(^|\s)[A-Z]/g, s => s.toLowerCase())
 const kebab2Camel = input => deCapitalize(input.split('-').map(x => capitalize(x)).join(''))
+const snake2Camel = input => deCapitalize(input.split('_').map(x => capitalize(x)).join(''))
+const event2PropName = eventName => `on${capitalize(kebab2Camel(snake2Camel(eventName)))}`
+const event2EventDescriptor = eventName => ({ name: eventName, propName: event2PropName(eventName) })
 const getFileNameFromDispositionHeader = input => /filename=(.*$)/.exec(input)[1]
+const getYarnCommand = () => os.platform() === 'win32' ? 'yarn.cmd' : 'yarn'
 const cleanupDir = p => {
+    console.info(`Clearing folder: ${p}`)
+    rmdirSync(p, { recursive: true })
     mkdirp.sync(p)
-    readdirSync(p).map(f => unlink(join(p, f), () => { }))
 }
+const getFirstFolderNameFromPath = path => readdirSync(path, {withFileTypes: true}).find(x => x.isDirectory()).name
 
 const isFileExists = (fileName) => new Promise(
     (resolve, reject) => access(
@@ -50,7 +59,7 @@ const getCustomElementTagsDefinitionsList = (config = WCAConfig) => (vividPackag
     )
     if (child.status === 0) {
         const output = getParsedJson(analyzerOutput)
-        rmdirSync(filePath(config.tempFolder), { recursive: true })
+        cleanupDir(filePath(config.tempFolder))
         return resolve(output.tags)
     }
 })
@@ -67,7 +76,8 @@ const getInputArgument = (argumentName, defaultValue = null) => {
 }
 
 const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid.zip' }) => {
-    cleanupDir(filePath(tempFolder))
+    const outFolder = filePath(config.tempFolder)
+    cleanupDir(outFolder)
     console.log(`Fetching latest Vivid release artifact...`)
     if (!getGithubToken()) {
         console.warn(`It seems GITHUB_ACCESS_TOKEN or GITHUB_TOKEN environment variable is not defined.`)
@@ -77,8 +87,7 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
     const result = await octokit.request('GET /repos/Vonage/vivid/zipball')
     if (result.status === 200) {
         const filename = getFileNameFromDispositionHeader(result.headers['content-disposition'])
-        console.info(`Got zipball ${filename}`)
-        const outFolder = filePath(config.tempFolder)
+        console.info(`Got zipball ${filename}`)        
         const vividZipFileName = join(outFolder, config.tempFileName)
         const vividZipStream = createWriteStream(vividZipFileName)
         vividZipStream.write(Buffer.from(result.data))
@@ -87,15 +96,25 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
         } catch (err) {
             console.error(err)
         }
-        return `${outFolder}/**/components/**`
+        const vividFolder = join(outFolder, getFirstFolderNameFromPath(outFolder))
+        console.log(`Installing Vivid packages at: ${vividFolder}...`)
+        const child = spawnSync(getYarnCommand(), [], { cwd: vividFolder, stdio: 'ignore' })
+        if (child.status === 0) {
+            console.log('Analyzing Vivid elements...')
+            return `${outFolder}/**/components/**`
+        }
+        return
     }
 }
 
 module.exports = {
     toCommaSeparatedList,
+    toJsonObjectsList,
     cleanupDir,
     capitalize,
     kebab2Camel,
+    event2PropName,
+    event2EventDescriptor,
     getInputArgument,
     isFileExists,
     getParsedJson,
