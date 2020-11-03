@@ -17,6 +17,4 @@ const WrappedComponent = wrapper('<% tag %>',  {
     properties: [<% properties %>]
 });
 
-const <% component-class-name %> = (props: Props): JSX.Element => <WrappedComponent {...props}>{props.children}</WrappedComponent>
-
-export default <% component-class-name %>
+export const <% component-class-name %> = (props: Props): JSX.Element => <WrappedComponent {...props}>{props.children}</WrappedComponent>
