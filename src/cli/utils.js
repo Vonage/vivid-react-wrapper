@@ -87,23 +87,27 @@ const getVividLatestRelease = async (config = { tempFolder, tempFileName: 'vivid
     const result = await octokit.request('GET /repos/Vonage/vivid/zipball')
     if (result.status === 200) {
         const filename = getFileNameFromDispositionHeader(result.headers['content-disposition'])
-        console.info(`Got zipball ${filename}`)        
-        const vividZipFileName = join(outFolder, config.tempFileName)
-        const vividZipStream = createWriteStream(vividZipFileName)
-        vividZipStream.write(Buffer.from(result.data))
-        try {
-            await extract(vividZipFileName, { dir: outFolder })
-        } catch (err) {
-            console.error(err)
-        }
-        const vividFolder = join(outFolder, getFirstFolderNameFromPath(outFolder))
-        console.log(`Installing Vivid packages at: ${vividFolder}...`)
-        const child = spawnSync(getYarnCommand(), [], { cwd: vividFolder, stdio: 'ignore' })
-        if (child.status === 0) {
-            console.log('Analyzing Vivid elements...')
-            return `${vividFolder}/**/components/**`
-        }
-        return
+        console.info(`Got zipball ${filename}`)
+        return new Promise((resolve, reject) => {
+            const vividZipFileName = join(outFolder, config.tempFileName)
+            const vividZipStream = createWriteStream(vividZipFileName)
+            vividZipStream.write(Buffer.from(result.data), async () => {
+                try {
+                    await extract(vividZipFileName, { dir: outFolder })
+                } catch (err) {
+                    console.error(err)
+                    reject(err)
+                }
+                const vividFolder = join(outFolder, getFirstFolderNameFromPath(outFolder))
+                console.log(`Installing Vivid packages at: ${vividFolder}...`)
+                const child = spawnSync(getYarnCommand(), [], { cwd: vividFolder, stdio: 'ignore' })
+                if (child.status === 0) {
+                    console.log('Analyzing Vivid elements...')
+                    resolve(`${vividFolder}/**/components/**`)
+                }
+                resolve()
+            })
+        })
     }
 }
 
