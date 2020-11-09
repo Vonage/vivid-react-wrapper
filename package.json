@@ -5,26 +5,15 @@
   "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "main": "./src/wrapper.js",
   "scripts": {
-    "generator": "node bin/cli.js",
-    "generator:ts": "node bin/cli.js --language=ts",
-    "generator:all:js": "node bin/cli.js --all=true",
-    "generator:all:ts": "node bin/cli.js --all=true --language=ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "start": "es-dev-server"
-  },
-  "bin": {
-    "vwg": "./bin/cli.js",
-    "vivid-wrapper-generator": "./bin/cli.js"
   },
   "keywords": [
     "Vivid",
     "React",
     "Custom Element",
-    "Wrapper",
-    "Utility",
-    "Generator",
-    "CLI"
+    "Wrapper"
   ],
   "files": [
     "/src/wrapper.js",
@@ -64,18 +53,12 @@
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.12.1",
-    "@octokit/core": "^3.1.2",
-    "@vonage/vwc-button": "0.13.0",
-    "@vonage/vwc-icon": "0.13.0",
-    "@webcomponents/webcomponentsjs": "^2.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "extract-zip": "2.0.1",
     "lodash": "^4.17.15",
-    "mkdirp": "1.0.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "web-component-analyzer": "^1.1.6"
+    "react": "^16.13.1",
+    "react-dom": "^16.14.0"
   },
   "engines": {
     "node": ">=12.18.4"

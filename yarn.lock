@@ -45,6 +45,15 @@
     jsesc "^2.5.1"
     source-map "^0.5.0"
 
+"@babel/generator@^7.12.5":
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/generator/-/generator-7.12.5.tgz#a2c50de5c8b6d708ab95be5e6053936c1884a4de"
+  integrity sha1-osUN5ci21wirlb5eYFOTbBiEpN4=
+  dependencies:
+    "@babel/types" "^7.12.5"
+    jsesc "^2.5.1"
+    source-map "^0.5.0"
+
 "@babel/helper-annotate-as-pure@^7.10.4":
   version "7.10.4"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/helper-annotate-as-pure/-/helper-annotate-as-pure-7.10.4.tgz#5bf0d495a3f757ac3bda48b5bf3b3ba309c72ba3"
@@ -277,6 +286,11 @@
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/parser/-/parser-7.12.3.tgz#a305415ebe7a6c7023b40b5122a0662d928334cd"
   integrity sha1-owVBXr56bHAjtAtRIqBmLZKDNM0=
 
+"@babel/parser@^7.12.5":
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/parser/-/parser-7.12.5.tgz#b4af32ddd473c0bfa643bd7ff0728b8e71b81ea0"
+  integrity sha1-tK8y3dRzwL+mQ71/8HKLjnG4HqA=
+
 "@babel/plugin-proposal-async-generator-functions@^7.12.1":
   version "7.12.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.12.1.tgz#dc6c1170e27d8aca99ff65f4925bd06b1c90550e"
@@ -482,7 +496,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/plugin-syntax-top-level-await@^7.12.1":
+"@babel/plugin-syntax-top-level-await@^7.12.1", "@babel/plugin-syntax-top-level-await@^7.8.3":
   version "7.12.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-syntax-top-level-await/-/plugin-syntax-top-level-await-7.12.1.tgz#dd6c0b357ac1bb142d98537450a319625d13d2a0"
   integrity sha1-3WwLNXrBuxQtmFN0UKMZYl0T0qA=
@@ -680,10 +694,10 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/plugin-transform-react-jsx-development@^7.12.1":
-  version "7.12.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.12.1.tgz#0b8f8cd531dcf7991f1e5f2c10a2a4f1cfc78e36"
-  integrity sha1-C4+M1THc95kfHl8sEKKk8c/HjjY=
+"@babel/plugin-transform-react-jsx-development@^7.12.5":
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.12.5.tgz#677de5b96da310430d6cfb7fee16a1603afa3d56"
+  integrity sha1-Z33luW2jEEMNbPt/7hahYDr6PVY=
   dependencies:
     "@babel/helper-builder-react-jsx-experimental" "^7.12.1"
     "@babel/helper-plugin-utils" "^7.10.4"
@@ -703,10 +717,10 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
 
-"@babel/plugin-transform-react-jsx@^7.12.1":
-  version "7.12.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.12.1.tgz#c2d96c77c2b0e4362cc4e77a43ce7c2539d478cb"
-  integrity sha1-wtlsd8Kw5DYsxOd6Q858JTnUeMs=
+"@babel/plugin-transform-react-jsx@^7.12.5":
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.12.5.tgz#39ede0e30159770561b6963be143e40af3bde00c"
+  integrity sha1-Oe3g4wFZdwVhtpY74UPkCvO94Aw=
   dependencies:
     "@babel/helper-builder-react-jsx" "^7.10.4"
     "@babel/helper-builder-react-jsx-experimental" "^7.12.1"
@@ -881,14 +895,14 @@
     esutils "^2.0.2"
 
 "@babel/preset-react@^7.12.1":
-  version "7.12.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/preset-react/-/preset-react-7.12.1.tgz#7f022b13f55b6dd82f00f16d1c599ae62985358c"
-  integrity sha1-fwIrE/VbbdgvAPFtHFma5imFNYw=
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/preset-react/-/preset-react-7.12.5.tgz#d45625f65d53612078a43867c5c6750e78772c56"
+  integrity sha1-1FYl9l1TYSB4pDhnxcZ1Dnh3LFY=
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-transform-react-display-name" "^7.12.1"
-    "@babel/plugin-transform-react-jsx" "^7.12.1"
-    "@babel/plugin-transform-react-jsx-development" "^7.12.1"
+    "@babel/plugin-transform-react-jsx" "^7.12.5"
+    "@babel/plugin-transform-react-jsx-development" "^7.12.5"
     "@babel/plugin-transform-react-jsx-self" "^7.12.1"
     "@babel/plugin-transform-react-jsx-source" "^7.12.1"
     "@babel/plugin-transform-react-pure-annotations" "^7.12.1"
@@ -909,7 +923,22 @@
     "@babel/parser" "^7.10.4"
     "@babel/types" "^7.10.4"
 
-"@babel/traverse@^7.1.0", "@babel/traverse@^7.10.4", "@babel/traverse@^7.12.1":
+"@babel/traverse@^7.1.0":
+  version "7.12.5"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/traverse/-/traverse-7.12.5.tgz#78a0c68c8e8a35e4cacfd31db8bb303d5606f095"
+  integrity sha1-eKDGjI6KNeTKz9MduLswPVYG8JU=
+  dependencies:
+    "@babel/code-frame" "^7.10.4"
+    "@babel/generator" "^7.12.5"
+    "@babel/helper-function-name" "^7.10.4"
+    "@babel/helper-split-export-declaration" "^7.11.0"
+    "@babel/parser" "^7.12.5"
+    "@babel/types" "^7.12.5"
+    debug "^4.1.0"
+    globals "^11.1.0"
+    lodash "^4.17.19"
+
+"@babel/traverse@^7.10.4", "@babel/traverse@^7.12.1":
   version "7.12.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/traverse/-/traverse-7.12.1.tgz#941395e0c5cc86d5d3e75caa095d3924526f0c1e"
   integrity sha1-lBOV4MXMhtXT51yqCV05JFJvDB4=
@@ -924,10 +953,19 @@
     globals "^11.1.0"
     lodash "^4.17.19"
 
-"@babel/types@^7.0.0", "@babel/types@^7.10.4", "@babel/types@^7.10.5", "@babel/types@^7.11.0", "@babel/types@^7.12.1", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
+"@babel/types@^7.0.0", "@babel/types@^7.10.4", "@babel/types@^7.10.5", "@babel/types@^7.11.0", "@babel/types@^7.12.1", "@babel/types@^7.3.0", "@babel/types@^7.4.4":
   version "7.12.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/types/-/types-7.12.1.tgz#e109d9ab99a8de735be287ee3d6a9947a190c4ae"
   integrity sha1-4QnZq5mo3nNb4ofuPWqZR6GQxK4=
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.10.4"
+    lodash "^4.17.19"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.12.5", "@babel/types@^7.3.3":
+  version "7.12.6"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@babel/types/-/types-7.12.6.tgz#ae0e55ef1cce1fbc881cd26f8234eb3e657edc96"
+  integrity sha1-rg5V7xzOH7yIHNJvgjTrPmV+3JY=
   dependencies:
     "@babel/helper-validator-identifier" "^7.10.4"
     lodash "^4.17.19"
@@ -962,93 +1000,93 @@
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha1-JlIL8Jq+SlZEzVQU43ElqJVCQd0=
 
-"@jest/console@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/console/-/console-26.6.1.tgz#6a19eaac4aa8687b4db9130495817c65aec3d34e"
-  integrity sha1-ahnqrEqoaHtNuRMElYF8Za7D004=
+"@jest/console@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/console/-/console-26.6.2.tgz#4e04bc464014358b03ab4937805ee36a0aeb98f2"
+  integrity sha1-TgS8RkAUNYsDq0k3gF7jagrrmPI=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
-    jest-message-util "^26.6.1"
-    jest-util "^26.6.1"
+    jest-message-util "^26.6.2"
+    jest-util "^26.6.2"
     slash "^3.0.0"
 
-"@jest/core@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/core/-/core-26.6.1.tgz#77426822f667a2cda82bf917cee11cc8ba71f9ac"
-  integrity sha1-d0JoIvZnos2oK/kXzuEcyLpx+aw=
+"@jest/core@^26.6.3":
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/core/-/core-26.6.3.tgz#7639fcb3833d748a4656ada54bde193051e45fad"
+  integrity sha1-djn8s4M9dIpGVq2lS94ZMFHkX60=
   dependencies:
-    "@jest/console" "^26.6.1"
-    "@jest/reporters" "^26.6.1"
-    "@jest/test-result" "^26.6.1"
-    "@jest/transform" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/console" "^26.6.2"
+    "@jest/reporters" "^26.6.2"
+    "@jest/test-result" "^26.6.2"
+    "@jest/transform" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     ansi-escapes "^4.2.1"
     chalk "^4.0.0"
     exit "^0.1.2"
     graceful-fs "^4.2.4"
-    jest-changed-files "^26.6.1"
-    jest-config "^26.6.1"
-    jest-haste-map "^26.6.1"
-    jest-message-util "^26.6.1"
+    jest-changed-files "^26.6.2"
+    jest-config "^26.6.3"
+    jest-haste-map "^26.6.2"
+    jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
-    jest-resolve "^26.6.1"
-    jest-resolve-dependencies "^26.6.1"
-    jest-runner "^26.6.1"
-    jest-runtime "^26.6.1"
-    jest-snapshot "^26.6.1"
-    jest-util "^26.6.1"
-    jest-validate "^26.6.1"
-    jest-watcher "^26.6.1"
+    jest-resolve "^26.6.2"
+    jest-resolve-dependencies "^26.6.3"
+    jest-runner "^26.6.3"
+    jest-runtime "^26.6.3"
+    jest-snapshot "^26.6.2"
+    jest-util "^26.6.2"
+    jest-validate "^26.6.2"
+    jest-watcher "^26.6.2"
     micromatch "^4.0.2"
     p-each-series "^2.1.0"
     rimraf "^3.0.0"
     slash "^3.0.0"
     strip-ansi "^6.0.0"
 
-"@jest/environment@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/environment/-/environment-26.6.1.tgz#38a56f1cc66f96bf53befcc5ebeaf1c2dce90e9a"
-  integrity sha1-OKVvHMZvlr9TvvzF6+rxwtzpDpo=
+"@jest/environment@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/environment/-/environment-26.6.2.tgz#ba364cc72e221e79cc8f0a99555bf5d7577cf92c"
+  integrity sha1-ujZMxy4iHnnMjwqZVVv111d8+Sw=
   dependencies:
-    "@jest/fake-timers" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/fake-timers" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
-    jest-mock "^26.6.1"
+    jest-mock "^26.6.2"
 
-"@jest/fake-timers@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/fake-timers/-/fake-timers-26.6.1.tgz#5aafba1822075b7142e702b906094bea15f51acf"
-  integrity sha1-Wq+6GCIHW3FC5wK5BglL6hX1Gs8=
+"@jest/fake-timers@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/fake-timers/-/fake-timers-26.6.2.tgz#459c329bcf70cee4af4d7e3f3e67848123535aad"
+  integrity sha1-RZwym89wzuSvTX4/PmeEgSNTWq0=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@sinonjs/fake-timers" "^6.0.1"
     "@types/node" "*"
-    jest-message-util "^26.6.1"
-    jest-mock "^26.6.1"
-    jest-util "^26.6.1"
+    jest-message-util "^26.6.2"
+    jest-mock "^26.6.2"
+    jest-util "^26.6.2"
 
-"@jest/globals@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/globals/-/globals-26.6.1.tgz#b232c7611d8a2de62b4bf9eb9a007138322916f4"
-  integrity sha1-sjLHYR2KLeYrS/nrmgBxODIpFvQ=
+"@jest/globals@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/globals/-/globals-26.6.2.tgz#5b613b78a1aa2655ae908eba638cc96a20df720a"
+  integrity sha1-W2E7eKGqJlWukI66Y4zJaiDfcgo=
   dependencies:
-    "@jest/environment" "^26.6.1"
-    "@jest/types" "^26.6.1"
-    expect "^26.6.1"
+    "@jest/environment" "^26.6.2"
+    "@jest/types" "^26.6.2"
+    expect "^26.6.2"
 
-"@jest/reporters@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/reporters/-/reporters-26.6.1.tgz#582ede05278cf5eeffe58bc519f4a35f54fbcb0d"
-  integrity sha1-WC7eBSeM9e7/5YvFGfSjX1T7yw0=
+"@jest/reporters@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/reporters/-/reporters-26.6.2.tgz#1f518b99637a5f18307bd3ecf9275f6882a667f6"
+  integrity sha1-H1GLmWN6Xxgwe9Ps+SdfaIKmZ/Y=
   dependencies:
     "@bcoe/v8-coverage" "^0.2.3"
-    "@jest/console" "^26.6.1"
-    "@jest/test-result" "^26.6.1"
-    "@jest/transform" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/console" "^26.6.2"
+    "@jest/test-result" "^26.6.2"
+    "@jest/transform" "^26.6.2"
+    "@jest/types" "^26.6.2"
     chalk "^4.0.0"
     collect-v8-coverage "^1.0.0"
     exit "^0.1.2"
@@ -1059,73 +1097,73 @@
     istanbul-lib-report "^3.0.0"
     istanbul-lib-source-maps "^4.0.0"
     istanbul-reports "^3.0.2"
-    jest-haste-map "^26.6.1"
-    jest-resolve "^26.6.1"
-    jest-util "^26.6.1"
-    jest-worker "^26.6.1"
+    jest-haste-map "^26.6.2"
+    jest-resolve "^26.6.2"
+    jest-util "^26.6.2"
+    jest-worker "^26.6.2"
     slash "^3.0.0"
     source-map "^0.6.0"
     string-length "^4.0.1"
     terminal-link "^2.0.0"
-    v8-to-istanbul "^6.0.1"
+    v8-to-istanbul "^7.0.0"
   optionalDependencies:
     node-notifier "^8.0.0"
 
-"@jest/source-map@^26.5.0":
-  version "26.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/source-map/-/source-map-26.5.0.tgz#98792457c85bdd902365cd2847b58fff05d96367"
-  integrity sha1-mHkkV8hb3ZAjZc0oR7WP/wXZY2c=
+"@jest/source-map@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/source-map/-/source-map-26.6.2.tgz#29af5e1e2e324cafccc936f218309f54ab69d535"
+  integrity sha1-Ka9eHi4yTK/MyTbyGDCfVKtp1TU=
   dependencies:
     callsites "^3.0.0"
     graceful-fs "^4.2.4"
     source-map "^0.6.0"
 
-"@jest/test-result@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/test-result/-/test-result-26.6.1.tgz#d75698d8a06aa663e8936663778c831512330cc1"
-  integrity sha1-11aY2KBqpmPok2Zjd4yDFRIzDME=
+"@jest/test-result@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/test-result/-/test-result-26.6.2.tgz#55da58b62df134576cc95476efa5f7949e3f5f18"
+  integrity sha1-VdpYti3xNFdsyVR276X3lJ4/Xxg=
   dependencies:
-    "@jest/console" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/console" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/istanbul-lib-coverage" "^2.0.0"
     collect-v8-coverage "^1.0.0"
 
-"@jest/test-sequencer@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/test-sequencer/-/test-sequencer-26.6.1.tgz#34216ac2c194b0eeebde30d25424d1134703fd2e"
-  integrity sha1-NCFqwsGUsO7r3jDSVCTRE0cD/S4=
+"@jest/test-sequencer@^26.6.3":
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/test-sequencer/-/test-sequencer-26.6.3.tgz#98e8a45100863886d074205e8ffdc5a7eb582b17"
+  integrity sha1-mOikUQCGOIbQdCBej/3Fp+tYKxc=
   dependencies:
-    "@jest/test-result" "^26.6.1"
+    "@jest/test-result" "^26.6.2"
     graceful-fs "^4.2.4"
-    jest-haste-map "^26.6.1"
-    jest-runner "^26.6.1"
-    jest-runtime "^26.6.1"
+    jest-haste-map "^26.6.2"
+    jest-runner "^26.6.3"
+    jest-runtime "^26.6.3"
 
-"@jest/transform@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/transform/-/transform-26.6.1.tgz#f70786f96e0f765947b4fb4f54ffcfb7bd783711"
-  integrity sha1-9weG+W4PdllHtPtPVP/Pt714NxE=
+"@jest/transform@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/transform/-/transform-26.6.2.tgz#5ac57c5fa1ad17b2aae83e73e45813894dcf2e4b"
+  integrity sha1-WsV8X6GtF7Kq6D5z5FgTiU3PLks=
   dependencies:
     "@babel/core" "^7.1.0"
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     babel-plugin-istanbul "^6.0.0"
     chalk "^4.0.0"
     convert-source-map "^1.4.0"
     fast-json-stable-stringify "^2.0.0"
     graceful-fs "^4.2.4"
-    jest-haste-map "^26.6.1"
+    jest-haste-map "^26.6.2"
     jest-regex-util "^26.0.0"
-    jest-util "^26.6.1"
+    jest-util "^26.6.2"
     micromatch "^4.0.2"
     pirates "^4.0.1"
     slash "^3.0.0"
     source-map "^0.6.1"
     write-file-atomic "^3.0.0"
 
-"@jest/types@^26.6.1":
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/types/-/types-26.6.1.tgz#2638890e8031c0bc8b4681e0357ed986e2f866c5"
-  integrity sha1-JjiJDoAxwLyLRoHgNX7ZhuL4ZsU=
+"@jest/types@^26.6.2":
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@jest/types/-/types-26.6.2.tgz#bef5a532030e1d88a2f5a6d933f84e97226ed48e"
+  integrity sha1-vvWlMgMOHYii9abZM/hOlyJu1I4=
   dependencies:
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/istanbul-reports" "^3.0.0"
@@ -1139,181 +1177,6 @@
   integrity sha1-YYuwc0OM/b0+vQ5kinbjO4Tzo7I=
   dependencies:
     vary "^1.1.2"
-
-"@material/animation@8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/animation/-/animation-8.0.0-canary.096a7a066.0.tgz#9c1b3d31858889e04e722ca8f1ade7ae3c54f7e6"
-  integrity sha1-nBs9MYWIieBOciyo8a3nrjxU9+Y=
-  dependencies:
-    tslib "^1.9.3"
-
-"@material/base@8.0.0-canary.096a7a066.0", "@material/base@=8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/base/-/base-8.0.0-canary.096a7a066.0.tgz#abd1051522cb61450ab6710b6bb62b6129915730"
-  integrity sha1-q9EFFSLLYUUKtnELa7YrYSmRVzA=
-  dependencies:
-    tslib "^1.9.3"
-
-"@material/dom@8.0.0-canary.096a7a066.0", "@material/dom@=8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/dom/-/dom-8.0.0-canary.096a7a066.0.tgz#5976a60cd570fea4b078e0e9f303fad3823d2938"
-  integrity sha1-WXamDNVw/qSweODp8wP604I9KTg=
-  dependencies:
-    "@material/feature-targeting" "8.0.0-canary.096a7a066.0"
-    tslib "^1.9.3"
-
-"@material/feature-targeting@8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/feature-targeting/-/feature-targeting-8.0.0-canary.096a7a066.0.tgz#fca721c287b08e0868467ee60daa5d32aad16430"
-  integrity sha1-/KchwoewjghoRn7mDapdMqrRZDA=
-
-"@material/mwc-base@^0.18.0":
-  version "0.18.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/mwc-base/-/mwc-base-0.18.0.tgz#5e6d8c2a894cd480f8e4866c616f807b63d28440"
-  integrity sha1-Xm2MKolM1ID45IZsYW+Ae2PShEA=
-  dependencies:
-    "@material/base" "=8.0.0-canary.096a7a066.0"
-    "@material/dom" "=8.0.0-canary.096a7a066.0"
-    lit-element "^2.3.0"
-    tslib "^1.10.0"
-
-"@material/mwc-button@^0.18.0":
-  version "0.18.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/mwc-button/-/mwc-button-0.18.0.tgz#1b199ecbcc064b9eaf7b6fba4b2b8a7fb13e156a"
-  integrity sha1-Gxmey8wGS56ve2+6SyuKf7E+FWo=
-  dependencies:
-    "@material/mwc-icon" "^0.18.0"
-    "@material/mwc-ripple" "^0.18.0"
-    lit-element "^2.3.0"
-    lit-html "^1.1.2"
-    tslib "^1.10.0"
-
-"@material/mwc-icon@^0.18.0":
-  version "0.18.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/mwc-icon/-/mwc-icon-0.18.0.tgz#7164aaac89616241bb924a5a9db668f8c54e04bd"
-  integrity sha1-cWSqrIlhYkG7kkpanbZo+MVOBL0=
-  dependencies:
-    lit-element "^2.3.0"
-    tslib "^1.10.0"
-
-"@material/mwc-ripple@^0.18.0":
-  version "0.18.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/mwc-ripple/-/mwc-ripple-0.18.0.tgz#3f8e5ddc5d1f1a53cc818b7159dfc7dd02926fbf"
-  integrity sha1-P45d3F0fGlPMgYtxWd/H3QKSb78=
-  dependencies:
-    "@material/dom" "=8.0.0-canary.096a7a066.0"
-    "@material/mwc-base" "^0.18.0"
-    "@material/ripple" "=8.0.0-canary.096a7a066.0"
-    lit-element "^2.3.0"
-    lit-html "^1.1.2"
-    tslib "^1.10.0"
-
-"@material/ripple@=8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/ripple/-/ripple-8.0.0-canary.096a7a066.0.tgz#c6b15d33c870eec815b67c740c89fe76315426dd"
-  integrity sha1-xrFdM8hw7sgVtnx0DIn+djFUJt0=
-  dependencies:
-    "@material/animation" "8.0.0-canary.096a7a066.0"
-    "@material/base" "8.0.0-canary.096a7a066.0"
-    "@material/dom" "8.0.0-canary.096a7a066.0"
-    "@material/feature-targeting" "8.0.0-canary.096a7a066.0"
-    "@material/theme" "8.0.0-canary.096a7a066.0"
-    tslib "^1.9.3"
-
-"@material/theme@8.0.0-canary.096a7a066.0":
-  version "8.0.0-canary.096a7a066.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@material/theme/-/theme-8.0.0-canary.096a7a066.0.tgz#f657eaa545797ee3e6a2d96e4a61f844ad3dc425"
-  integrity sha1-9lfqpUV5fuPmotluSmH4RK09xCU=
-  dependencies:
-    "@material/feature-targeting" "8.0.0-canary.096a7a066.0"
-
-"@nodelib/fs.scandir@2.1.3":
-  version "2.1.3"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@nodelib/fs.scandir/-/fs.scandir-2.1.3.tgz#3a582bdb53804c6ba6d146579c46e52130cf4a3b"
-  integrity sha1-Olgr21OATGum0UZXnEblITDPSjs=
-  dependencies:
-    "@nodelib/fs.stat" "2.0.3"
-    run-parallel "^1.1.9"
-
-"@nodelib/fs.stat@2.0.3", "@nodelib/fs.stat@^2.0.2":
-  version "2.0.3"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@nodelib/fs.stat/-/fs.stat-2.0.3.tgz#34dc5f4cabbc720f4e60f75a747e7ecd6c175bd3"
-  integrity sha1-NNxfTKu8cg9OYPdadH5+zWwXW9M=
-
-"@nodelib/fs.walk@^1.2.3":
-  version "1.2.4"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@nodelib/fs.walk/-/fs.walk-1.2.4.tgz#011b9202a70a6366e436ca5c065844528ab04976"
-  integrity sha1-ARuSAqcKY2bkNspcBlhEUoqwSXY=
-  dependencies:
-    "@nodelib/fs.scandir" "2.1.3"
-    fastq "^1.6.0"
-
-"@octokit/auth-token@^2.4.0":
-  version "2.4.2"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/auth-token/-/auth-token-2.4.2.tgz#10d0ae979b100fa6b72fa0e8e63e27e6d0dbff8a"
-  integrity sha1-ENCul5sQD6a3L6Do5j4n5tDb/4o=
-  dependencies:
-    "@octokit/types" "^5.0.0"
-
-"@octokit/core@^3.1.2":
-  version "3.2.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/core/-/core-3.2.0.tgz#7a872ad4cb8d8d2f417dd7fe1aaff3919c09dc04"
-  integrity sha1-eocq1MuNjS9Bfdf+Gq/zkZwJ3AQ=
-  dependencies:
-    "@octokit/auth-token" "^2.4.0"
-    "@octokit/graphql" "^4.3.1"
-    "@octokit/request" "^5.4.0"
-    "@octokit/types" "^5.0.0"
-    before-after-hook "^2.1.0"
-    universal-user-agent "^6.0.0"
-
-"@octokit/endpoint@^6.0.1":
-  version "6.0.8"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/endpoint/-/endpoint-6.0.8.tgz#91b07e236fdb69929c678c6439f7a560dc6058ac"
-  integrity sha1-kbB+I2/baZKcZ4xkOfelYNxgWKw=
-  dependencies:
-    "@octokit/types" "^5.0.0"
-    is-plain-object "^5.0.0"
-    universal-user-agent "^6.0.0"
-
-"@octokit/graphql@^4.3.1":
-  version "4.5.6"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/graphql/-/graphql-4.5.6.tgz#708143ba15cf7c1879ed6188266e7f270be805d4"
-  integrity sha1-cIFDuhXPfBh57WGIJm5/JwvoBdQ=
-  dependencies:
-    "@octokit/request" "^5.3.0"
-    "@octokit/types" "^5.0.0"
-    universal-user-agent "^6.0.0"
-
-"@octokit/request-error@^2.0.0":
-  version "2.0.2"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/request-error/-/request-error-2.0.2.tgz#0e76b83f5d8fdda1db99027ea5f617c2e6ba9ed0"
-  integrity sha1-Dna4P12P3aHbmQJ+pfYXwua6ntA=
-  dependencies:
-    "@octokit/types" "^5.0.1"
-    deprecation "^2.0.0"
-    once "^1.4.0"
-
-"@octokit/request@^5.3.0", "@octokit/request@^5.4.0":
-  version "5.4.9"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/request/-/request-5.4.9.tgz#0a46f11b82351b3416d3157261ad9b1558c43365"
-  integrity sha1-CkbxG4I1GzQW0xVyYa2bFVjEM2U=
-  dependencies:
-    "@octokit/endpoint" "^6.0.1"
-    "@octokit/request-error" "^2.0.0"
-    "@octokit/types" "^5.0.0"
-    deprecation "^2.0.0"
-    is-plain-object "^5.0.0"
-    node-fetch "^2.6.1"
-    once "^1.4.0"
-    universal-user-agent "^6.0.0"
-
-"@octokit/types@^5.0.0", "@octokit/types@^5.0.1":
-  version "5.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@octokit/types/-/types-5.5.0.tgz#e5f06e8db21246ca102aa28444cdb13ae17a139b"
-  integrity sha1-5fBujbISRsoQKqKERM2xOuF6E5s=
-  dependencies:
-    "@types/node" ">= 8"
 
 "@open-wc/building-utils@^2.18.3":
   version "2.18.3"
@@ -1401,7 +1264,18 @@
   dependencies:
     "@types/node" "*"
 
-"@types/babel__core@^7.0.0", "@types/babel__core@^7.1.3", "@types/babel__core@^7.1.7":
+"@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
+  version "7.1.12"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@types/babel__core/7.1.12/ff8fdce5e86e4d6c842074f8c0fcfff3cdc477f79f72489abec4f95ac4fa1e0b#4d8e9e51eb265552a7e4f1ff2219ab6133bdfb2d"
+  integrity sha1-TY6eUesmVVKn5PH/IhmrYTO9+y0=
+  dependencies:
+    "@babel/parser" "^7.1.0"
+    "@babel/types" "^7.0.0"
+    "@types/babel__generator" "*"
+    "@types/babel__template" "*"
+    "@types/babel__traverse" "*"
+
+"@types/babel__core@^7.1.3":
   version "7.1.10"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@types/babel__core/7.1.10/a3016bbc048fa07fe0174cf17598dba117eed127b80e727d99cb29ece406339b#ca58fc195dd9734e77e57c6f2df565623636ab40"
   integrity sha1-ylj8GV3Zc0535XxvLfVlYjY2q0A=
@@ -1650,11 +1524,6 @@
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@types/node/-/node-14.14.5.tgz#e92d3b8f76583efa26c1a63a21c9d3c1143daa29"
   integrity sha1-6S07j3ZYPvomwaY6IcnTwRQ9qik=
 
-"@types/node@>= 8":
-  version "14.14.6"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@types/node/14.14.6/d66c1bdf35f9c6ae897ddbce06556f26c506d9f06af2067cdf963f9948540de6#146d3da57b3c636cc0d1769396ce1cfa8991147f"
-  integrity sha1-FG09pXs8Y2zA0XaTls4c+omRFH8=
-
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@types/normalize-package-data/2.4.0/e29d0e7ca19b9b4cbf44a1aee39559375f17764cc6a2a1a50283d9d1d03cab39#6b649181ed885f9e6fe745f9a9488de7ff5bf113"
@@ -1732,66 +1601,6 @@
   integrity sha1-AEKrUi1Mm+C0t9sX0bJsP4eXua4=
   dependencies:
     "@types/node" "*"
-
-"@vonage/vvd-core@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vvd-core/0.13.0/376f66242b30011b8de5379cfdbdf66c38a0ad5c1cf59b9adbc2694794bca01e#c7e85393c53d50201e5cdd87ee19bd50180d68f6"
-  integrity sha1-x+hTk8U9UCAeXN2H7hm9UBgNaPY=
-  dependencies:
-    "@vonage/vvd-fonts" "^0.13.0"
-    "@vonage/vvd-scheme" "^0.13.0"
-    tslib "^2.0.2"
-
-"@vonage/vvd-fonts@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vvd-fonts/0.13.0/c43e8fd2b91f595df57869b037792a79832b4d9d387f64e1c5c896089657f339#6283caaa94815720ee736eecc72eb0a03a1ca286"
-  integrity sha1-YoPKqpSBVyDuc27sxy6woDocooY=
-  dependencies:
-    tslib "^2.0.2"
-
-"@vonage/vvd-foundation@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vvd-foundation/0.13.0/534cd15712b11b2632dcaf32b861406b9525bdc5c564e9b973eafeb5192e57e5#63f6b69167467eab9543bb4fa5b933970b4e3eff"
-  integrity sha1-Y/a2kWdGfquVQ7tPpbkzlwtOPv8=
-  dependencies:
-    tslib "^2.0.2"
-
-"@vonage/vvd-scheme@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vvd-scheme/0.13.0/e9edad88b4bd5b37a5e48cfe4d529ea07319c1257e0e364e0d082924d38a3b54#64998b8dc24a1f2ca1df0b0ca7dd81bc57ac1227"
-  integrity sha1-ZJmLjcJKHyyh3wsMp92BvFesEic=
-  dependencies:
-    tslib "^2.0.2"
-
-"@vonage/vvd-style-coupling@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vvd-style-coupling/0.13.0/213069fe8ad1f157e37a7b946c0ed2180e818616048536eb371d595baa1f3d02#8a23e38e9cf2c9d6eaf8df085ac36f49b874c8d3"
-  integrity sha1-iiPjjpzyydbq+N8IWsNvSbh0yNM=
-  dependencies:
-    tslib "^2.0.2"
-
-"@vonage/vwc-button@0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vwc-button/0.13.0/1ba272e6cc87d67a5c51972eba256e94596b5f29b716e2ca059a49c8faa240b6#61e5aeaa9f41b081db94597ab72bcdbdd6db7aa2"
-  integrity sha1-YeWuqp9BsIHblFl6tyvNvdbbeqI=
-  dependencies:
-    "@material/mwc-button" "^0.18.0"
-    "@vonage/vvd-core" "^0.13.0"
-    "@vonage/vvd-foundation" "^0.13.0"
-    "@vonage/vvd-style-coupling" "^0.13.0"
-    "@vonage/vwc-icon" "^0.13.0"
-    lit-element "^2.4.0"
-    tslib "^2.0.2"
-
-"@vonage/vwc-icon@0.13.0", "@vonage/vwc-icon@^0.13.0":
-  version "0.13.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/download/@vonage/vwc-icon/0.13.0/0713bb1243a95197ce54fcd3fa6733446d4e1a7112b84d00915f5b1c1f20c75d#3ff6aea965d054e9dad7f1f0edf74ff02e8f1f00"
-  integrity sha1-P/auqWXQVOna1/Hw7fdP8C6PHwA=
-  dependencies:
-    "@vonage/vvd-core" "^0.13.0"
-    kefir "^3.8.7"
-    lit-element "^2.4.0"
-    tslib "^2.0.2"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -1943,7 +1752,7 @@
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@webcomponents/shadycss/-/shadycss-1.10.2.tgz#40e03cab6dc5e12f199949ba2b79e02f183d1e7b"
   integrity sha1-QOA8q23F4S8ZmUm6K3ngLxg9Hns=
 
-"@webcomponents/webcomponentsjs@^2.4.0", "@webcomponents/webcomponentsjs@^2.5.0":
+"@webcomponents/webcomponentsjs@^2.4.0":
   version "2.5.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.5.0.tgz#61b27785a6ad5bfd68fa018201fe418b118cb38d"
   integrity sha1-YbJ3haatW/1o+gGCAf5BixGMs40=
@@ -2217,20 +2026,20 @@ aws-sign2@~0.7.0:
   integrity sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
 
 aws4@^1.8.0:
-  version "1.10.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/aws4/-/aws4-1.10.1.tgz#e1e82e4f3e999e2cfd61b161280d16a111f86428"
-  integrity sha1-4eguTz6Zniz9YbFhKA0WoRH4ZCg=
+  version "1.11.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
+  integrity sha1-1h9G2DslGSUOJ4Ta9bCUeai0HFk=
 
-babel-jest@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-jest/-/babel-jest-26.6.1.tgz#07bd7bec14de47fe0f2c9a139741329f1f41788b"
-  integrity sha1-B7177BTeR/4PLJoTl0Eynx9BeIs=
+babel-jest@^26.6.1, babel-jest@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-jest/-/babel-jest-26.6.3.tgz#d87d25cb0037577a0c89f82e5755c5d293c01056"
+  integrity sha1-2H0lywA3V3oMifguV1XF0pPAEFY=
   dependencies:
-    "@jest/transform" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/transform" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/babel__core" "^7.1.7"
     babel-plugin-istanbul "^6.0.0"
-    babel-preset-jest "^26.5.0"
+    babel-preset-jest "^26.6.2"
     chalk "^4.0.0"
     graceful-fs "^4.2.4"
     slash "^3.0.0"
@@ -2264,20 +2073,20 @@ babel-plugin-istanbul@^6.0.0:
     istanbul-lib-instrument "^4.0.0"
     test-exclude "^6.0.0"
 
-babel-plugin-jest-hoist@^26.5.0:
-  version "26.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-26.5.0.tgz#3916b3a28129c29528de91e5784a44680db46385"
-  integrity sha1-ORazooEpwpUo3pHleEpEaA20Y4U=
+babel-plugin-jest-hoist@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-26.6.2.tgz#8185bd030348d254c6d7dd974355e6a28b21e62d"
+  integrity sha1-gYW9AwNI0lTG192XQ1Xmoosh5i0=
   dependencies:
     "@babel/template" "^7.3.3"
     "@babel/types" "^7.3.3"
     "@types/babel__core" "^7.0.0"
     "@types/babel__traverse" "^7.0.6"
 
-babel-preset-current-node-syntax@^0.1.3:
-  version "0.1.4"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-preset-current-node-syntax/-/babel-preset-current-node-syntax-0.1.4.tgz#826f1f8e7245ad534714ba001f84f7e906c3b615"
-  integrity sha1-gm8fjnJFrVNHFLoAH4T36QbDthU=
+babel-preset-current-node-syntax@^1.0.0:
+  version "1.0.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-preset-current-node-syntax/-/babel-preset-current-node-syntax-1.0.0.tgz#cf5feef29551253471cfa82fc8e0f5063df07a77"
+  integrity sha1-z1/u8pVRJTRxz6gvyOD1Bj3wenc=
   dependencies:
     "@babel/plugin-syntax-async-generators" "^7.8.4"
     "@babel/plugin-syntax-bigint" "^7.8.3"
@@ -2290,14 +2099,15 @@ babel-preset-current-node-syntax@^0.1.3:
     "@babel/plugin-syntax-object-rest-spread" "^7.8.3"
     "@babel/plugin-syntax-optional-catch-binding" "^7.8.3"
     "@babel/plugin-syntax-optional-chaining" "^7.8.3"
+    "@babel/plugin-syntax-top-level-await" "^7.8.3"
 
-babel-preset-jest@^26.5.0:
-  version "26.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-preset-jest/-/babel-preset-jest-26.5.0.tgz#f1b166045cd21437d1188d29f7fba470d5bdb0e7"
-  integrity sha1-8bFmBFzSFDfRGI0p9/ukcNW9sOc=
+babel-preset-jest@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/babel-preset-jest/-/babel-preset-jest-26.6.2.tgz#747872b1171df032252426586881d62d31798fee"
+  integrity sha1-dHhysRcd8DIlJCZYaIHWLTF5j+4=
   dependencies:
-    babel-plugin-jest-hoist "^26.5.0"
-    babel-preset-current-node-syntax "^0.1.3"
+    babel-plugin-jest-hoist "^26.6.2"
+    babel-preset-current-node-syntax "^1.0.0"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -2328,11 +2138,6 @@ bcrypt-pbkdf@^1.0.0:
   integrity sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
   dependencies:
     tweetnacl "^0.14.3"
-
-before-after-hook@^2.1.0:
-  version "2.1.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/before-after-hook/-/before-after-hook-2.1.0.tgz#b6c03487f44e24200dd30ca5e6a1979c5d2fb635"
-  integrity sha1-tsA0h/ROJCAN0wyl5qGXnF0vtjU=
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -2606,9 +2411,9 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   integrity sha1-48mzFWnhBoEd8kL3FXJaH0xJQyA=
 
 camelcase@^6.0.0:
-  version "6.1.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/camelcase/-/camelcase-6.1.0.tgz#27dc176173725fb0adf8a48b647f4d7871944d78"
-  integrity sha1-J9wXYXNyX7Ct+KSLZH9NeHGUTXg=
+  version "6.2.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/camelcase/-/camelcase-6.2.0.tgz#924af881c9d525ac9d87f40d964e5cea982a1809"
+  integrity sha1-kkr4gcnVJaydh/QNlk5c6pgqGAk=
 
 caniuse-api@^3.0.0:
   version "3.0.0"
@@ -2730,10 +2535,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-cjs-module-lexer@^0.4.2:
-  version "0.4.3"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/cjs-module-lexer/-/cjs-module-lexer-0.4.3.tgz#9e31f7fe701f5fcee5793f77ab4e58fa8dcde8bc"
-  integrity sha1-njH3/nAfX87leT93q05Y+o3N6Lw=
+cjs-module-lexer@^0.6.0:
+  version "0.6.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/cjs-module-lexer/-/cjs-module-lexer-0.6.0.tgz#4186fcca0eae175970aee870b9fe2d6cf8d5655f"
+  integrity sha1-QYb8yg6uF1lwruhwuf4tbPjVZV8=
 
 class-utils@^0.3.5:
   version "0.3.6"
@@ -3201,11 +3006,6 @@ depd@~2.0.0:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/depd/-/depd-2.0.0.tgz#b696163cc757560d09cf22cc8fad1571b79e76df"
   integrity sha1-tpYWPMdXVg0JzyLMj60Vcbeedt8=
 
-deprecation@^2.0.0:
-  version "2.3.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/deprecation/-/deprecation-2.3.1.tgz#6368cbdb40abf3373b525ac87e4a260c3a700919"
-  integrity sha1-Y2jL20Cr8zc7UlrIfkomDDpwCRk=
-
 des.js@^1.0.0:
   version "1.0.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/des.js/-/des.js-1.0.1.tgz#5382142e1bdc53f85d86d53e5f4aa7deb91e0843"
@@ -3229,10 +3029,10 @@ detect-newline@^3.0.0:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha1-V29d/GOuGhkv8ZLYrTr2MImRtlE=
 
-diff-sequences@^26.5.0:
-  version "26.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/diff-sequences/-/diff-sequences-26.5.0.tgz#ef766cf09d43ed40406611f11c6d8d9dd8b2fefd"
-  integrity sha1-73Zs8J1D7UBAZhHxHG2Nndiy/v0=
+diff-sequences@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/diff-sequences/-/diff-sequences-26.6.2.tgz#48ba99157de1923412eed41db6b6d4aa9ca7c0b1"
+  integrity sha1-SLqZFX3hkjQS7tQdtrbUqpynwLE=
 
 diffie-hellman@^5.0.0:
   version "5.0.3"
@@ -3724,9 +3524,9 @@ execa@^1.0.0:
     strip-eof "^1.0.0"
 
 execa@^4.0.0:
-  version "4.0.3"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/execa/-/execa-4.0.3.tgz#0a34dabbad6d66100bd6f2c576c8669403f317f2"
-  integrity sha1-CjTau61tZhAL1vLFdshmlAPzF/I=
+  version "4.1.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/execa/-/execa-4.1.0.tgz#4e5491ad1572f2f17a77d388c6c857135b22847a"
+  integrity sha1-TlSRrRVy8vF6d9OIxshXE1sihHo=
   dependencies:
     cross-spawn "^7.0.0"
     get-stream "^5.0.0"
@@ -3763,16 +3563,16 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-expect@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/expect/-/expect-26.6.1.tgz#e1e053cdc43b21a452b36fc7cc9401e4603949c1"
-  integrity sha1-4eBTzcQ7IaRSs2/HzJQB5GA5ScE=
+expect@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/expect/-/expect-26.6.2.tgz#c6b996bf26bf3fe18b67b2d0f51fc981ba934417"
+  integrity sha1-xrmWvya/P+GLZ7LQ9R/JgbqTRBc=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     ansi-styles "^4.0.0"
     jest-get-type "^26.3.0"
-    jest-matcher-utils "^26.6.1"
-    jest-message-util "^26.6.1"
+    jest-matcher-utils "^26.6.2"
+    jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
 extend-shallow@^2.0.1:
@@ -3835,18 +3635,6 @@ fast-deep-equal@^3.1.1:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
 
-fast-glob@^3.2.2:
-  version "3.2.4"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fast-glob/-/fast-glob-3.2.4.tgz#d20aefbf99579383e7f3cc66529158c9b98554d3"
-  integrity sha1-0grvv5lXk4Pn88xmUpFYybmFVNM=
-  dependencies:
-    "@nodelib/fs.stat" "^2.0.2"
-    "@nodelib/fs.walk" "^1.2.3"
-    glob-parent "^5.1.0"
-    merge2 "^1.3.0"
-    micromatch "^4.0.2"
-    picomatch "^2.2.1"
-
 fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
@@ -3856,13 +3644,6 @@ fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fastq@^1.6.0:
-  version "1.9.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fastq/-/fastq-1.9.0.tgz#e16a72f338eaca48e91b5c23593bcc2ef66b7947"
-  integrity sha1-4Wpy8zjqykjpG1wjWTvMLvZreUc=
-  dependencies:
-    reusify "^1.0.4"
 
 fb-watchman@^2.0.0:
   version "2.0.1"
@@ -4016,7 +3797,12 @@ fsevents@^1.2.7:
     bindings "^1.5.0"
     nan "^2.12.1"
 
-fsevents@^2.1.2, fsevents@~2.1.2:
+fsevents@^2.1.2:
+  version "2.2.1"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fsevents/-/fsevents-2.2.1.tgz#1fb02ded2036a8ac288d507a65962bd87b97628d"
+  integrity sha1-H7At7SA2qKwojVB6ZZYr2HuXYo0=
+
+fsevents@~2.1.2:
   version "2.1.3"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
   integrity sha1-+3OHA66NL5/pAMM4Nt3r7ouX8j4=
@@ -4089,7 +3875,7 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob-parent@^5.1.0, glob-parent@~5.1.0:
+glob-parent@~5.1.0:
   version "5.1.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/glob-parent/-/glob-parent-5.1.1.tgz#b6c1ef417c4e5663ea498f1c45afac6916bbc229"
   integrity sha1-tsHvQXxOVmPqSY8cRa+saRa7wik=
@@ -4646,11 +4432,6 @@ is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   dependencies:
     isobject "^3.0.1"
 
-is-plain-object@^5.0.0:
-  version "5.0.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
-  integrity sha1-RCf1CrNCnpAl6n1S6QQ6nvQVk0Q=
-
 is-potential-custom-element-name@^1.0.0:
   version "1.0.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.0.tgz#0c52e54bcca391bb2c494b21e8626d7336c6e397"
@@ -4785,67 +4566,67 @@ istanbul-reports@^3.0.2:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
 
-jest-changed-files@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-changed-files/-/jest-changed-files-26.6.1.tgz#2fac3dc51297977ee883347948d8e3d37c417fba"
-  integrity sha1-L6w9xRKXl37ogzR5SNjj03xBf7o=
+jest-changed-files@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-changed-files/-/jest-changed-files-26.6.2.tgz#f6198479e1cc66f22f9ae1e22acaa0b429c042d0"
+  integrity sha1-9hmEeeHMZvIvmuHiKsqgtCnAQtA=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     execa "^4.0.0"
     throat "^5.0.0"
 
-jest-cli@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-cli/-/jest-cli-26.6.1.tgz#8952242fa812c05bd129abf7c022424045b7fd67"
-  integrity sha1-iVIkL6gSwFvRKav3wCJCQEW3/Wc=
+jest-cli@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-cli/-/jest-cli-26.6.3.tgz#43117cfef24bc4cd691a174a8796a532e135e92a"
+  integrity sha1-QxF8/vJLxM1pGhdKh5alMuE16So=
   dependencies:
-    "@jest/core" "^26.6.1"
-    "@jest/test-result" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/core" "^26.6.3"
+    "@jest/test-result" "^26.6.2"
+    "@jest/types" "^26.6.2"
     chalk "^4.0.0"
     exit "^0.1.2"
     graceful-fs "^4.2.4"
     import-local "^3.0.2"
     is-ci "^2.0.0"
-    jest-config "^26.6.1"
-    jest-util "^26.6.1"
-    jest-validate "^26.6.1"
+    jest-config "^26.6.3"
+    jest-util "^26.6.2"
+    jest-validate "^26.6.2"
     prompts "^2.0.1"
     yargs "^15.4.1"
 
-jest-config@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-config/-/jest-config-26.6.1.tgz#8c343fbdd9c24ad003e261f73583c3c020f32b42"
-  integrity sha1-jDQ/vdnCStAD4mH3NYPDwCDzK0I=
+jest-config@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-config/-/jest-config-26.6.3.tgz#64f41444eef9eb03dc51d5c53b75c8c71f645349"
+  integrity sha1-ZPQURO756wPcUdXFO3XIxx9kU0k=
   dependencies:
     "@babel/core" "^7.1.0"
-    "@jest/test-sequencer" "^26.6.1"
-    "@jest/types" "^26.6.1"
-    babel-jest "^26.6.1"
+    "@jest/test-sequencer" "^26.6.3"
+    "@jest/types" "^26.6.2"
+    babel-jest "^26.6.3"
     chalk "^4.0.0"
     deepmerge "^4.2.2"
     glob "^7.1.1"
     graceful-fs "^4.2.4"
-    jest-environment-jsdom "^26.6.1"
-    jest-environment-node "^26.6.1"
+    jest-environment-jsdom "^26.6.2"
+    jest-environment-node "^26.6.2"
     jest-get-type "^26.3.0"
-    jest-jasmine2 "^26.6.1"
+    jest-jasmine2 "^26.6.3"
     jest-regex-util "^26.0.0"
-    jest-resolve "^26.6.1"
-    jest-util "^26.6.1"
-    jest-validate "^26.6.1"
+    jest-resolve "^26.6.2"
+    jest-util "^26.6.2"
+    jest-validate "^26.6.2"
     micromatch "^4.0.2"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
 
-jest-diff@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-diff/-/jest-diff-26.6.1.tgz#38aa194979f454619bb39bdee299fb64ede5300c"
-  integrity sha1-OKoZSXn0VGGbs5ve4pn7ZO3lMAw=
+jest-diff@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-diff/-/jest-diff-26.6.2.tgz#1aa7468b52c3a68d7d5c5fdcdfcd5e49bd164394"
+  integrity sha1-GqdGi1LDpo19XF/c381eSb0WQ5Q=
   dependencies:
     chalk "^4.0.0"
-    diff-sequences "^26.5.0"
+    diff-sequences "^26.6.2"
     jest-get-type "^26.3.0"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
 
 jest-docblock@^26.0.0:
   version "26.0.0"
@@ -4854,130 +4635,131 @@ jest-docblock@^26.0.0:
   dependencies:
     detect-newline "^3.0.0"
 
-jest-each@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-each/-/jest-each-26.6.1.tgz#e968e88309a3e2ae9648634af8f89d8ee5acfddd"
-  integrity sha1-6Wjogwmj4q6WSGNK+PidjuWs/d0=
+jest-each@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-each/-/jest-each-26.6.2.tgz#02526438a77a67401c8a6382dfe5999952c167cb"
+  integrity sha1-AlJkOKd6Z0AcimOC3+WZmVLBZ8s=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     chalk "^4.0.0"
     jest-get-type "^26.3.0"
-    jest-util "^26.6.1"
-    pretty-format "^26.6.1"
+    jest-util "^26.6.2"
+    pretty-format "^26.6.2"
 
-jest-environment-jsdom@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-environment-jsdom/-/jest-environment-jsdom-26.6.1.tgz#63093bf89daee6139616568a43633b84cf7aac21"
-  integrity sha1-Ywk7+J2u5hOWFlaKQ2M7hM96rCE=
+jest-environment-jsdom@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-environment-jsdom/-/jest-environment-jsdom-26.6.2.tgz#78d09fe9cf019a357009b9b7e1f101d23bd1da3e"
+  integrity sha1-eNCf6c8BmjVwCbm34fEB0jvR2j4=
   dependencies:
-    "@jest/environment" "^26.6.1"
-    "@jest/fake-timers" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/environment" "^26.6.2"
+    "@jest/fake-timers" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
-    jest-mock "^26.6.1"
-    jest-util "^26.6.1"
+    jest-mock "^26.6.2"
+    jest-util "^26.6.2"
     jsdom "^16.4.0"
 
-jest-environment-node@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-environment-node/-/jest-environment-node-26.6.1.tgz#4d73d8b33c26989a92a0ed3ad0bfd6f7a196d9bd"
-  integrity sha1-TXPYszwmmJqSoO060L/W96GW2b0=
+jest-environment-node@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-environment-node/-/jest-environment-node-26.6.2.tgz#824e4c7fb4944646356f11ac75b229b0035f2b0c"
+  integrity sha1-gk5Mf7SURkY1bxGsdbIpsANfKww=
   dependencies:
-    "@jest/environment" "^26.6.1"
-    "@jest/fake-timers" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/environment" "^26.6.2"
+    "@jest/fake-timers" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
-    jest-mock "^26.6.1"
-    jest-util "^26.6.1"
+    jest-mock "^26.6.2"
+    jest-util "^26.6.2"
 
 jest-get-type@^26.3.0:
   version "26.3.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-get-type/-/jest-get-type-26.3.0.tgz#e97dc3c3f53c2b406ca7afaed4493b1d099199e0"
   integrity sha1-6X3Dw/U8K0Bsp6+u1Ek7HQmRmeA=
 
-jest-haste-map@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-haste-map/-/jest-haste-map-26.6.1.tgz#97e96f5fd7576d980307fbe6160b10c016b543d4"
-  integrity sha1-l+lvX9dXbZgDB/vmFgsQwBa1Q9Q=
+jest-haste-map@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-haste-map/-/jest-haste-map-26.6.2.tgz#dd7e60fe7dc0e9f911a23d79c5ff7fb5c2cafeaa"
+  integrity sha1-3X5g/n3A6fkRoj15xf9/tcLK/qo=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/graceful-fs" "^4.1.2"
     "@types/node" "*"
     anymatch "^3.0.3"
     fb-watchman "^2.0.0"
     graceful-fs "^4.2.4"
     jest-regex-util "^26.0.0"
-    jest-serializer "^26.5.0"
-    jest-util "^26.6.1"
-    jest-worker "^26.6.1"
+    jest-serializer "^26.6.2"
+    jest-util "^26.6.2"
+    jest-worker "^26.6.2"
     micromatch "^4.0.2"
     sane "^4.0.3"
     walker "^1.0.7"
   optionalDependencies:
     fsevents "^2.1.2"
 
-jest-jasmine2@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-jasmine2/-/jest-jasmine2-26.6.1.tgz#11c92603d1fa97e3c33404359e69d6cec7e57017"
-  integrity sha1-EckmA9H6l+PDNAQ1nmnWzsflcBc=
+jest-jasmine2@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-jasmine2/-/jest-jasmine2-26.6.3.tgz#adc3cf915deacb5212c93b9f3547cd12958f2edd"
+  integrity sha1-rcPPkV3qy1ISyTufNUfNEpWPLt0=
   dependencies:
     "@babel/traverse" "^7.1.0"
-    "@jest/environment" "^26.6.1"
-    "@jest/source-map" "^26.5.0"
-    "@jest/test-result" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/environment" "^26.6.2"
+    "@jest/source-map" "^26.6.2"
+    "@jest/test-result" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
     co "^4.6.0"
-    expect "^26.6.1"
+    expect "^26.6.2"
     is-generator-fn "^2.0.0"
-    jest-each "^26.6.1"
-    jest-matcher-utils "^26.6.1"
-    jest-message-util "^26.6.1"
-    jest-runtime "^26.6.1"
-    jest-snapshot "^26.6.1"
-    jest-util "^26.6.1"
-    pretty-format "^26.6.1"
+    jest-each "^26.6.2"
+    jest-matcher-utils "^26.6.2"
+    jest-message-util "^26.6.2"
+    jest-runtime "^26.6.3"
+    jest-snapshot "^26.6.2"
+    jest-util "^26.6.2"
+    pretty-format "^26.6.2"
     throat "^5.0.0"
 
-jest-leak-detector@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-leak-detector/-/jest-leak-detector-26.6.1.tgz#f63e46dc4e3aa30d29b40ae49966a15730d25bbe"
-  integrity sha1-9j5G3E46ow0ptArkmWahVzDSW74=
+jest-leak-detector@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-leak-detector/-/jest-leak-detector-26.6.2.tgz#7717cf118b92238f2eba65054c8a0c9c653a91af"
+  integrity sha1-dxfPEYuSI48uumUFTIoMnGU6ka8=
   dependencies:
     jest-get-type "^26.3.0"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
 
-jest-matcher-utils@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-matcher-utils/-/jest-matcher-utils-26.6.1.tgz#bc90822d352c91c2ec1814731327691d06598400"
-  integrity sha1-vJCCLTUskcLsGBRzEydpHQZZhAA=
+jest-matcher-utils@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-matcher-utils/-/jest-matcher-utils-26.6.2.tgz#8e6fd6e863c8b2d31ac6472eeb237bc595e53e7a"
+  integrity sha1-jm/W6GPIstMaxkcu6yN7xZXlPno=
   dependencies:
     chalk "^4.0.0"
-    jest-diff "^26.6.1"
+    jest-diff "^26.6.2"
     jest-get-type "^26.3.0"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
 
-jest-message-util@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-message-util/-/jest-message-util-26.6.1.tgz#d62c20c0fe7be10bfd6020b675abb9b5fa933ff3"
-  integrity sha1-1iwgwP574Qv9YCC2dau5tfqTP/M=
+jest-message-util@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-message-util/-/jest-message-util-26.6.2.tgz#58173744ad6fc0506b5d21150b9be56ef001ca07"
+  integrity sha1-WBc3RK1vwFBrXSEVC5vlbvABygc=
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/stack-utils" "^2.0.0"
     chalk "^4.0.0"
     graceful-fs "^4.2.4"
     micromatch "^4.0.2"
+    pretty-format "^26.6.2"
     slash "^3.0.0"
     stack-utils "^2.0.2"
 
-jest-mock@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-mock/-/jest-mock-26.6.1.tgz#6c12a92a82fc833f81a5b6de6b67d78386e276a3"
-  integrity sha1-bBKpKoL8gz+Bpbbea2fXg4bidqM=
+jest-mock@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-mock/-/jest-mock-26.6.2.tgz#d6cb712b041ed47fe0d9b6fc3474bc6543feb302"
+  integrity sha1-1stxKwQe1H/g2bb8NHS8ZUP+swI=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
 
 jest-pnp-resolver@^1.2.2:
@@ -4990,172 +4772,172 @@ jest-regex-util@^26.0.0:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-regex-util/-/jest-regex-util-26.0.0.tgz#d25e7184b36e39fd466c3bc41be0971e821fee28"
   integrity sha1-0l5xhLNuOf1GbDvEG+CXHoIf7ig=
 
-jest-resolve-dependencies@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-resolve-dependencies/-/jest-resolve-dependencies-26.6.1.tgz#e9d091a159ad198c029279737a8b4c507791d75c"
-  integrity sha1-6dCRoVmtGYwCknlzeotMUHeR11w=
+jest-resolve-dependencies@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-resolve-dependencies/-/jest-resolve-dependencies-26.6.3.tgz#6680859ee5d22ee5dcd961fe4871f59f4c784fb6"
+  integrity sha1-ZoCFnuXSLuXc2WH+SHH1n0x4T7Y=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     jest-regex-util "^26.0.0"
-    jest-snapshot "^26.6.1"
+    jest-snapshot "^26.6.2"
 
-jest-resolve@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-resolve/-/jest-resolve-26.6.1.tgz#e9a9130cc069620d5aeeb87043dd9e130b68c6a1"
-  integrity sha1-6akTDMBpYg1a7rhwQ92eEwtoxqE=
+jest-resolve@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-resolve/-/jest-resolve-26.6.2.tgz#a3ab1517217f469b504f1b56603c5bb541fbb507"
+  integrity sha1-o6sVFyF/RptQTxtWYDxbtUH7tQc=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     chalk "^4.0.0"
     graceful-fs "^4.2.4"
     jest-pnp-resolver "^1.2.2"
-    jest-util "^26.6.1"
+    jest-util "^26.6.2"
     read-pkg-up "^7.0.1"
     resolve "^1.18.1"
     slash "^3.0.0"
 
-jest-runner@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-runner/-/jest-runner-26.6.1.tgz#a945971b5a23740c1fe20e372a38de668b7c76bf"
-  integrity sha1-qUWXG1ojdAwf4g43KjjeZot8dr8=
+jest-runner@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-runner/-/jest-runner-26.6.3.tgz#2d1fed3d46e10f233fd1dbd3bfaa3fe8924be159"
+  integrity sha1-LR/tPUbhDyM/0dvTv6o/6JJL4Vk=
   dependencies:
-    "@jest/console" "^26.6.1"
-    "@jest/environment" "^26.6.1"
-    "@jest/test-result" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/console" "^26.6.2"
+    "@jest/environment" "^26.6.2"
+    "@jest/test-result" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
     emittery "^0.7.1"
     exit "^0.1.2"
     graceful-fs "^4.2.4"
-    jest-config "^26.6.1"
+    jest-config "^26.6.3"
     jest-docblock "^26.0.0"
-    jest-haste-map "^26.6.1"
-    jest-leak-detector "^26.6.1"
-    jest-message-util "^26.6.1"
-    jest-resolve "^26.6.1"
-    jest-runtime "^26.6.1"
-    jest-util "^26.6.1"
-    jest-worker "^26.6.1"
+    jest-haste-map "^26.6.2"
+    jest-leak-detector "^26.6.2"
+    jest-message-util "^26.6.2"
+    jest-resolve "^26.6.2"
+    jest-runtime "^26.6.3"
+    jest-util "^26.6.2"
+    jest-worker "^26.6.2"
     source-map-support "^0.5.6"
     throat "^5.0.0"
 
-jest-runtime@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-runtime/-/jest-runtime-26.6.1.tgz#9a131e7b4f0bc6beefd62e7443f757c1d5fa9dec"
-  integrity sha1-mhMee08Lxr7v1i50Q/dXwdX6new=
+jest-runtime@^26.6.3:
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-runtime/-/jest-runtime-26.6.3.tgz#4f64efbcfac398331b74b4b3c82d27d401b8fa2b"
+  integrity sha1-T2TvvPrDmDMbdLSzyC0n1AG4+is=
   dependencies:
-    "@jest/console" "^26.6.1"
-    "@jest/environment" "^26.6.1"
-    "@jest/fake-timers" "^26.6.1"
-    "@jest/globals" "^26.6.1"
-    "@jest/source-map" "^26.5.0"
-    "@jest/test-result" "^26.6.1"
-    "@jest/transform" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/console" "^26.6.2"
+    "@jest/environment" "^26.6.2"
+    "@jest/fake-timers" "^26.6.2"
+    "@jest/globals" "^26.6.2"
+    "@jest/source-map" "^26.6.2"
+    "@jest/test-result" "^26.6.2"
+    "@jest/transform" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
-    cjs-module-lexer "^0.4.2"
+    cjs-module-lexer "^0.6.0"
     collect-v8-coverage "^1.0.0"
     exit "^0.1.2"
     glob "^7.1.3"
     graceful-fs "^4.2.4"
-    jest-config "^26.6.1"
-    jest-haste-map "^26.6.1"
-    jest-message-util "^26.6.1"
-    jest-mock "^26.6.1"
+    jest-config "^26.6.3"
+    jest-haste-map "^26.6.2"
+    jest-message-util "^26.6.2"
+    jest-mock "^26.6.2"
     jest-regex-util "^26.0.0"
-    jest-resolve "^26.6.1"
-    jest-snapshot "^26.6.1"
-    jest-util "^26.6.1"
-    jest-validate "^26.6.1"
+    jest-resolve "^26.6.2"
+    jest-snapshot "^26.6.2"
+    jest-util "^26.6.2"
+    jest-validate "^26.6.2"
     slash "^3.0.0"
     strip-bom "^4.0.0"
     yargs "^15.4.1"
 
-jest-serializer@^26.5.0:
-  version "26.5.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-serializer/-/jest-serializer-26.5.0.tgz#f5425cc4c5f6b4b355f854b5f0f23ec6b962bc13"
-  integrity sha1-9UJcxMX2tLNV+FS18PI+xrlivBM=
+jest-serializer@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-serializer/-/jest-serializer-26.6.2.tgz#d139aafd46957d3a448f3a6cdabe2919ba0742d1"
+  integrity sha1-0Tmq/UaVfTpEjzps2r4pGboHQtE=
   dependencies:
     "@types/node" "*"
     graceful-fs "^4.2.4"
 
-jest-snapshot@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-snapshot/-/jest-snapshot-26.6.1.tgz#469e9d0b749496aea7dad0d7e5e5c88b91cdb4cc"
-  integrity sha1-Rp6dC3SUlq6n2tDX5eXIi5HNtMw=
+jest-snapshot@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-snapshot/-/jest-snapshot-26.6.2.tgz#f3b0af1acb223316850bd14e1beea9837fb39c84"
+  integrity sha1-87CvGssiMxaFC9FOG+6pg3+znIQ=
   dependencies:
     "@babel/types" "^7.0.0"
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/babel__traverse" "^7.0.4"
     "@types/prettier" "^2.0.0"
     chalk "^4.0.0"
-    expect "^26.6.1"
+    expect "^26.6.2"
     graceful-fs "^4.2.4"
-    jest-diff "^26.6.1"
+    jest-diff "^26.6.2"
     jest-get-type "^26.3.0"
-    jest-haste-map "^26.6.1"
-    jest-matcher-utils "^26.6.1"
-    jest-message-util "^26.6.1"
-    jest-resolve "^26.6.1"
+    jest-haste-map "^26.6.2"
+    jest-matcher-utils "^26.6.2"
+    jest-message-util "^26.6.2"
+    jest-resolve "^26.6.2"
     natural-compare "^1.4.0"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
     semver "^7.3.2"
 
-jest-util@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-util/-/jest-util-26.6.1.tgz#4cc0d09ec57f28d12d053887eec5dc976a352e9b"
-  integrity sha1-TMDQnsV/KNEtBTiH7sXcl2o1Lps=
+jest-util@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-util/-/jest-util-26.6.2.tgz#907535dbe4d5a6cb4c47ac9b926f6af29576cbc1"
+  integrity sha1-kHU12+TVpstMR6ybkm9q8pV2y8E=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
     graceful-fs "^4.2.4"
     is-ci "^2.0.0"
     micromatch "^4.0.2"
 
-jest-validate@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-validate/-/jest-validate-26.6.1.tgz#28730eb8570d60968d9d06f1a8c94d922167bd2a"
-  integrity sha1-KHMOuFcNYJaNnQbxqMlNkiFnvSo=
+jest-validate@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-validate/-/jest-validate-26.6.2.tgz#23d380971587150467342911c3d7b4ac57ab20ec"
+  integrity sha1-I9OAlxWHFQRnNCkRw9e0rFerIOw=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     camelcase "^6.0.0"
     chalk "^4.0.0"
     jest-get-type "^26.3.0"
     leven "^3.1.0"
-    pretty-format "^26.6.1"
+    pretty-format "^26.6.2"
 
-jest-watcher@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-watcher/-/jest-watcher-26.6.1.tgz#debfa34e9c5c3e735593403794fe53d2955bfabc"
-  integrity sha1-3r+jTpxcPnNVk0A3lP5T0pVb+rw=
+jest-watcher@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-watcher/-/jest-watcher-26.6.2.tgz#a5b683b8f9d68dbcb1d7dae32172d2cca0592975"
+  integrity sha1-pbaDuPnWjbyx19rjIXLSzKBZKXU=
   dependencies:
-    "@jest/test-result" "^26.6.1"
-    "@jest/types" "^26.6.1"
+    "@jest/test-result" "^26.6.2"
+    "@jest/types" "^26.6.2"
     "@types/node" "*"
     ansi-escapes "^4.2.1"
     chalk "^4.0.0"
-    jest-util "^26.6.1"
+    jest-util "^26.6.2"
     string-length "^4.0.1"
 
-jest-worker@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-worker/-/jest-worker-26.6.1.tgz#c2ae8cde6802cc14056043f997469ec170d9c32a"
-  integrity sha1-wq6M3mgCzBQFYEP5l0aewXDZwyo=
+jest-worker@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest-worker/-/jest-worker-26.6.2.tgz#7f72cbc4d643c365e27b9fd775f9d0eaa9c7a8ed"
+  integrity sha1-f3LLxNZDw2Xie5/XdfnQ6qnHqO0=
   dependencies:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
 jest@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest/-/jest-26.6.1.tgz#821e8280d2bdeeed40ac7bc43941dceff0f1b650"
-  integrity sha1-gh6CgNK97u1ArHvEOUHc7/DxtlA=
+  version "26.6.3"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/jest/-/jest-26.6.3.tgz#40e8fdbe48f00dfa1f0ce8121ca74b88ac9148ef"
+  integrity sha1-QOj9vkjwDfofDOgSHKdLiKyRSO8=
   dependencies:
-    "@jest/core" "^26.6.1"
+    "@jest/core" "^26.6.3"
     import-local "^3.0.2"
-    jest-cli "^26.6.1"
+    jest-cli "^26.6.3"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -5265,11 +5047,6 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.2.3"
     verror "1.10.0"
-
-kefir@^3.8.7:
-  version "3.8.7"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/kefir/-/kefir-3.8.7.tgz#8fa8ffa3620c6c3713838c33d92af4d976ccfce8"
-  integrity sha1-j6j/o2IMbDcTg4wz2Sr02XbM/Og=
 
 keygrip@~1.1.0:
   version "1.1.0"
@@ -5413,18 +5190,6 @@ lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
-
-lit-element@^2.3.0, lit-element@^2.4.0:
-  version "2.4.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/lit-element/-/lit-element-2.4.0.tgz#b22607a037a8fc08f5a80736dddf7f3f5d401452"
-  integrity sha1-siYHoDeo/Aj1qAc23d9/P11AFFI=
-  dependencies:
-    lit-html "^1.1.1"
-
-lit-html@^1.1.1, lit-html@^1.1.2:
-  version "1.3.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/lit-html/-/lit-html-1.3.0.tgz#c80f3cc5793a6dea6c07172be90a70ab20e56034"
-  integrity sha1-yA88xXk6bepsBxcr6QpwqyDlYDQ=
 
 loader-runner@^2.4.0:
   version "2.4.0"
@@ -5593,11 +5358,6 @@ merge-stream@^2.0.0:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha1-UoI2KaFN0AyXcPtq1H3GMQ8sH2A=
 
-merge2@^1.3.0:
-  version "1.4.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
-  integrity sha1-Q2iJL4hekHRVpv19xVwMnUBJkK4=
-
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
@@ -5700,11 +5460,6 @@ mixin-deep@^1.2.0:
   dependencies:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
-
-mkdirp@1.0.4:
-  version "1.0.4"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
-  integrity sha1-PrXtYmInVteaXw4qIh3+utdcL34=
 
 mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5:
   version "0.5.5"
@@ -5809,11 +5564,6 @@ no-case@^3.0.3:
   dependencies:
     lower-case "^2.0.1"
     tslib "^1.10.0"
-
-node-fetch@^2.6.1:
-  version "2.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha1-BFvTI2Mfdu0uK1VXM5RBa2OaAFI=
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -6316,12 +6066,12 @@ prelude-ls@~1.1.2:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-pretty-format@^26.6.1:
-  version "26.6.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/pretty-format/-/pretty-format-26.6.1.tgz#af9a2f63493a856acddeeb11ba6bcf61989660a8"
-  integrity sha1-r5ovY0k6hWrN3usRumvPYZiWYKg=
+pretty-format@^26.6.2:
+  version "26.6.2"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/pretty-format/-/pretty-format-26.6.2.tgz#e35c2705f14cb7fe2fe94fa078345b444120fc93"
+  integrity sha1-41wnBfFMt/4v6U+geDRbREEg/JM=
   dependencies:
-    "@jest/types" "^26.6.1"
+    "@jest/types" "^26.6.2"
     ansi-regex "^5.0.0"
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
@@ -6514,7 +6264,7 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.8.6"
     scheduler "^0.19.1"
 
-react@^16.14.0:
+react@^16.13.1:
   version "16.14.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha1-lNd23dCqo32j7aj8W2sYpMmjEU0=
@@ -6781,11 +6531,6 @@ ret@~0.1.10:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha1-uKSCXVvbH8P29Twrwz+BOIaBx7w=
 
-reusify@^1.0.4:
-  version "1.0.4"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
-  integrity sha1-kNo4Kx4SbvwCFG6QhFqI2xKSXXY=
-
 rimraf@^2.5.4, rimraf@^2.6.3:
   version "2.7.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
@@ -6827,11 +6572,6 @@ rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha1-yPFVMR0Wf2jyHhaN9x7FsIMRNzQ=
-
-run-parallel@^1.1.9:
-  version "1.1.10"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/run-parallel/-/run-parallel-1.1.10.tgz#60a51b2ae836636c81377df16cb107351bcd13ef"
-  integrity sha1-YKUbKug2Y2yBN33xbLEHNRvNE+8=
 
 run-queue@^1.0.0, run-queue@^1.0.3:
   version "1.0.3"
@@ -7532,20 +7272,10 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
-ts-simple-type@~1.0.5:
-  version "1.0.7"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/ts-simple-type/-/ts-simple-type-1.0.7.tgz#03930af557528dd40eaa121913c7035a0baaacf8"
-  integrity sha1-A5MK9VdSjdQOqhIZE8cDWguqrPg=
-
-tslib@^1.10.0, tslib@^1.11.1, tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.10.0, tslib@^1.11.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
-
-tslib@^2.0.2:
-  version "2.0.3"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
-  integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
 tsscmp@1.0.6:
   version "1.0.6"
@@ -7616,11 +7346,6 @@ typedarray@^0.0.6:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.8.3:
-  version "3.9.7"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha1-mNYApevcOPQMsndSLxLcgA6eJfo=
-
 typical@^4.0.0:
   version "4.0.0"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/typical/-/typical-4.0.0.tgz#cbeaff3b9d7ae1e2bbfaf5a4e6f11eccfde94fc4"
@@ -7677,11 +7402,6 @@ unique-slug@^2.0.0:
   integrity sha1-uqvOkQg/xk6UWw861hPiZPfNTmw=
   dependencies:
     imurmurhash "^0.1.4"
-
-universal-user-agent@^6.0.0:
-  version "6.0.0"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/universal-user-agent/-/universal-user-agent-6.0.0.tgz#3381f8503b251c0d9cd21bc1de939ec9df5480ee"
-  integrity sha1-M4H4UDslHA2c0hvB3pOeyd9UgO4=
 
 unset-value@^1.0.0:
   version "1.0.0"
@@ -7763,10 +7483,10 @@ v8-compile-cache@^2.1.1:
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz#54bc3cdd43317bca91e35dcaf305b1a7237de745"
   integrity sha1-VLw83UMxe8qR413K8wWxpyN950U=
 
-v8-to-istanbul@^6.0.1:
-  version "6.0.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/v8-to-istanbul/-/v8-to-istanbul-6.0.1.tgz#7ef0e32faa10f841fe4c1b0f8de96ed067c0be1e"
-  integrity sha1-fvDjL6oQ+EH+TBsPjelu0GfAvh4=
+v8-to-istanbul@^7.0.0:
+  version "7.0.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/v8-to-istanbul/-/v8-to-istanbul-7.0.0.tgz#b4fe00e35649ef7785a9b7fcebcea05f37c332fc"
+  integrity sha1-tP4A41ZJ73eFqbf8686gXzfDMvw=
   dependencies:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
@@ -7842,16 +7562,6 @@ watchpack@^1.7.4:
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.0"
-
-web-component-analyzer@^1.1.6:
-  version "1.1.6"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/web-component-analyzer/-/web-component-analyzer-1.1.6.tgz#d9bd904d904a711c19ba6046a45b60a7ee3ed2e9"
-  integrity sha1-2b2QTZBKcRwZumBGpFtgp+4+0uk=
-  dependencies:
-    fast-glob "^3.2.2"
-    ts-simple-type "~1.0.5"
-    typescript "^3.8.3"
-    yargs "^15.3.1"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
@@ -8030,9 +7740,9 @@ write-file-atomic@^3.0.0:
     typedarray-to-buffer "^3.1.5"
 
 ws@^7.2.3:
-  version "7.3.1"
-  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/ws/-/ws-7.3.1.tgz#d0547bf67f7ce4f12a72dfe31262c68d7dc551c8"
-  integrity sha1-0FR79n985PEqct/jEmLGjX3FUcg=
+  version "7.4.0"
+  resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/ws/-/ws-7.4.0.tgz#a5dd76a24197940d4a8bb9e0e152bb4503764da7"
+  integrity sha1-pd12okGXlA1Ki7ng4VK7RQN2Tac=
 
 xml-name-validator@^3.0.0:
   version "3.0.0"
@@ -8096,7 +7806,7 @@ yargs@^13.3.2:
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
 
-yargs@^15.3.1, yargs@^15.4.1:
+yargs@^15.4.1:
   version "15.4.1"
   resolved "https://vonagecc.jfrog.io/vonagecc/api/npm/npm/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
   integrity sha1-DYehbeAa7p2L7Cv7909nhRcw9Pg=
