@@ -9,6 +9,30 @@ import {flow, identity, isString, isUndefined, noop} from "lodash";
 * @param {Array} configuration.attributes - A List of attributes that the element supports
 * @param {Array} configuration.properties - A List of properties that the element supports
 */
+
+export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
+export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+
+export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
+    if (propExists(props, propName)) {
+        const el = currentEl.current
+        const handler = flow(transform, props[propName] || noop);
+
+        el.addEventListener(eventName, handler);
+        return () => el.removeEventListener(eventName, handler);
+    }
+}
+
+export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
+    const el = currentEl.current
+    if(propExists(props,attributeName)){
+        setter(el, attributeName, props[attributeName])
+    }
+}
+
+export const propExists = (props, name) => !isUndefined(props[name])
+export const propNameFromEvent = (event) => event.propName
+
 const wrapper = function(
     componentName,
     {
@@ -57,28 +81,6 @@ const wrapper = function(
     })
 }
 
-export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
-export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
-
-export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
-    if (propExists(props, propName)) {
-        const el = currentEl.current
-        const handler = flow(transform, props[propName] || noop);
-
-        el.addEventListener(eventName, handler);
-        return () => el.removeEventListener(eventName, handler);
-    }
-}
-
-export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
-    const el = currentEl.current
-    if(propExists(props,attributeName)){
-        setter(el, attributeName, props[attributeName])
-    }
-}
-
-export const propExists = (props, name) => !isUndefined(props[name])
-export const propNameFromEvent = (event) => event.propName
 const propNameFromAttribute = (attrib) => attrib.name || attrib
 
 const generateProps = (actualPropsPassed, events, attributes, properties) =>{
