@@ -21,24 +21,31 @@ const wrapper = function(
 
         const currentEl = useRef(null)
 
-        const eventProps = events.map((event) => {
-            const eventName = propNameFromEvent(event);
-            return props[eventName]
-        })
-        useEffect(setDOMListeners(props, events, currentEl), eventProps)
+        events.forEach((event) => {
+            const eventName = isString(event) ? event : event.name
+            const transform = isString(event)
+                ? identity
+                : (event.transform || identity)
 
-        const attributeProps = attributes.map((attribute) => {
+            const propName = propNameFromEvent(event)
+
+            useEffect(setDOMListeners(props, propName, currentEl, eventName, transform), [props[propName]])
+        })
+
+        attributes.forEach((attribute) => {
             const attributeName = isString(attribute) ? attribute : attribute.name
-            return props[attributeName];
-        })
-        useEffect(setDOMAttributes(props, attributes, currentEl), attributeProps)
+            const setter = isString(attribute)
+                ? attributeSetterToggle
+                : (attribute.setter || attributeSetterToggle)
 
-        const propertiesProps = properties.map((property) => props[property])
-        useEffect(() => {
-            properties.forEach((property) => {
+            useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
+        })
+
+        properties.forEach((property) => {
+            useEffect(() => {
                 currentEl.current[property] = props[property]
-            })
-        }, propertiesProps)
+            }, [props[property]])
+        })
 
         return React.createElement(componentName, {
             ref: (el) => {
@@ -53,33 +60,9 @@ const wrapper = function(
 export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
 export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
 
-const setDOMListeners = (props, events, currentEl) => () => {
-    const cleaningFns = events.map((event) => {
-        const eventName = isString(event) ? event : event.name
-        const transform = isString(event)
-            ? identity
-            : (event.transform || identity)
-
-        const propName = propNameFromEvent(event)
-
-        return setDOMListener(props, propName, currentEl, eventName, transform)
-    })
-    return () => cleaningFns.forEach((fn) => fn())
-}
-
-const setDOMAttributes = (props, attributes, currentEl) => () => {
-    attributes.forEach((attribute) => {
-        const attributeName = isString(attribute) ? attribute : attribute.name
-        const setter = isString(attribute)
-            ? attributeSetterToggle
-            : (attribute.setter || attributeSetterToggle)
-        setDOMAttribute(props, attributeName, currentEl, setter)
-    })
-}
-
-export const setDOMListener = (props, propName, currentEl, eventName, transform) => {
-    const el = currentEl.current
-    if (el && propExists(props, propName)) {
+export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
+    if (propExists(props, propName)) {
+        const el = currentEl.current
         const handler = flow(transform, props[propName] || noop);
 
         el.addEventListener(eventName, handler);
@@ -87,7 +70,7 @@ export const setDOMListener = (props, propName, currentEl, eventName, transform)
     }
 }
 
-export const setDOMAttribute = (props, attributeName, currentEl, setter) => {
+export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
     const el = currentEl.current
     if(propExists(props,attributeName)){
         setter(el, attributeName, props[attributeName])
@@ -107,7 +90,7 @@ const generateProps = (actualPropsPassed, events, attributes, properties) =>{
         ...properties // overrides
     ]
 
-    
+
     return propNames
             .filter((propName) => !attributesAndEvents.includes(propName))
             .reduce(toObjectOf(actualPropsPassed), {})

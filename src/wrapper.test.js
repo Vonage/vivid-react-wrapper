@@ -6,7 +6,8 @@ import prepareVividWrapper, {
   attributeSetterToggle,
   attributeSetterValue,
   propExists,
-  setDOMAttribute, setDOMListener,
+  setDOMAttributes,
+  setDOMListeners,
 } from './wrapper'
 import {identity} from "lodash";
 
@@ -186,7 +187,7 @@ describe('wrapper', () => {
       }
       const eventName = 'change'
 
-      const remove = setDOMListener(props, propName, currentEl, eventName, identity)
+      const remove = setDOMListeners(props, propName, currentEl, eventName, identity)()
 
       expect(addListenerMock).toHaveBeenCalledTimes(1)
       expect(removeListenerMock).toHaveBeenCalledTimes(0)
@@ -212,7 +213,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttribute(props, attributeName, currentEl, attributeSetterToggle)
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
 
         expect(setMock).toHaveBeenCalledTimes(1)
       })
@@ -231,7 +232,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttribute(props, attributeName, currentEl, attributeSetterToggle)
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterToggle)()
 
         expect(removeMock).toHaveBeenCalledTimes(1)
       })
@@ -249,7 +250,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttribute(props, attributeName, currentEl, attributeSetterValue)
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
 
         expect(setMock).toHaveBeenCalledTimes(1)
       })
@@ -268,7 +269,7 @@ describe('wrapper', () => {
           }
         }
 
-        setDOMAttribute(props, attributeName, currentEl, attributeSetterValue)
+        setDOMAttributes(props, attributeName, currentEl, attributeSetterValue)()
 
         expect(setMock).toHaveBeenCalledTimes(1)
         expect(removeMock).toHaveBeenCalledTimes(0)
