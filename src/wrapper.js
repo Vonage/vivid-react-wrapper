@@ -73,8 +73,12 @@ const wrapper = function(
 
         return React.createElement(componentName, {
             ref: (el) => {
-                (setRef || noop)(el)
                 currentEl.current = el
+                if (typeof setRef === 'function') {
+                    setRef(el)
+                } else if (typeof setRef === 'object') {
+                    setRef.current = el
+                }
             },
             ...generateProps(props,events,attributes, properties)
         }, [], ...children)
