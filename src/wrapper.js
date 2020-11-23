@@ -1,72 +1,106 @@
 import React, {useEffect, useRef} from "react";
-import {capitalize, flow, identity, isString, isUndefined, noop} from "lodash";
+import {flow, identity, isString, isUndefined, noop} from "lodash";
 
-const
-    attributeSetterValue = (el, name, value)=> el.setAttribute(name, value),
-    attributeSetterToggle = (el, name, value)=> el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
+export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
+
+// PRIVATE methods - exported for unit tests
+export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
+    if (propExists(props, propName)) {
+        const el = currentEl.current
+        const handler = flow(transform, props[propName] || noop);
+
+        el.addEventListener(eventName, handler);
+        return () => el.removeEventListener(eventName, handler);
+    }
+}
+export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
+    const el = currentEl.current
+    if(propExists(props,attributeName)){
+        setter(el, attributeName, props[attributeName])
+    }
+}
+export const propExists = (props, name) => !isUndefined(props[name])
+export const propNameFromEvent = (event) => event.propName || ["on", upperFirst(event.name || event)].join('')
 
 /**
 * Generates a React component that wraps around a custom element
 * @param {string} componentName - The name of the registered custom element
 * @param {Object} configuration - A configuration specification for the React wrapper
-* @param {Object} configuration.events - A List of events that the element supports
-* @param {Object} configuration.attributes - A List of attributes that the element supports
+* @param {Array} configuration.events - A List of events that the element supports
+* @param {Array} configuration.attributes - A List of attributes that the element supports
+* @param {Array} configuration.properties - A List of properties that the element supports
 */
+
 const wrapper = function(
     componentName,
     {
         events = [],
-        attributes = []
+        attributes = [],
+        properties = []
     } = {}
 ){
-    return React.forwardRef(({ children = [], ...props }, setRef)=> {
+    return React.forwardRef(({ children = [], ...props }, setRef) => {
 
-        const currentEl = useRef(null);
+        const currentEl = useRef(null)
 
-        events.forEach((event)=> {
-            const
-                { name: eventName, transform = identity } = isString(event) ? { name: event, transform: identity } : event,
-                propName = ["on", capitalize(eventName)].join('');
+        events.forEach((event) => {
+            const eventName = isString(event) ? event : event.name
+            const transform = isString(event)
+                ? identity
+                : (event.transform || identity)
 
-            useEffect(()=> {
-                if(!isUndefined(props[propName])){
-                    const
-                        el = currentEl.current,
-                        handler = flow(transform, props[propName] || noop);
+            const propName = propNameFromEvent(event)
 
-                    el.addEventListener(eventName, handler);
-                    return ()=> el.removeEventListener(eventName, handler);
-                }
+            useEffect(setDOMListeners(props, propName, currentEl, eventName, transform), [props[propName]])
+        })
 
-            }, [props[propName]]);
-        });
+        attributes.forEach((attribute) => {
+            const attributeName = isString(attribute) ? attribute : attribute.name
+            const setter = isString(attribute)
+                ? attributeSetterToggle
+                : (attribute.setter || attributeSetterToggle)
 
-        attributes.forEach((attribute)=> {
-            const { name: attributeName, setter = attributeSetterToggle } = isString(attribute) ? { name: attribute, setter: attributeSetterToggle } : attribute;
-            useEffect(()=> {
-                const el = currentEl.current;
-                if(!isUndefined(props[attributeName])){
-                    setter(el, attributeName, props[attributeName]);
-                }
-            }, [props[attributeName]]);
-        });
+            useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
+        })
+
+        properties.forEach((property) => {
+            useEffect(() => {
+                currentEl.current[property] = props[property]
+            }, [props[property]])
+        })
 
         return React.createElement(componentName, {
-            ref: (el)=> {
-                (setRef || noop)(el);
-                currentEl.current = el;
+            ref: (el) => {
+                currentEl.current = el
+                if (typeof setRef === 'function') {
+                    setRef(el)
+                } else if (typeof setRef === 'object') {
+                    setRef.current = el
+                }
             },
-            ...Object.keys(props)
-                    .filter((
-                        (fields)=> (name)=> !fields.includes(name)
-                    )([
-                        ...events.map((event)=> ["on", capitalize(event.name || event)].join('')),
-                        ...attributes.map((attrib)=> attrib.name || attrib),
-                    ]))
-                    .reduce((ac, name)=> Object.assign(ac, { [name]: props[name] }), {})
-        }, [], ...children);
-    });
-};
+            ...generateProps(props,events,attributes, properties)
+        }, [], ...children)
+    })
+}
 
-export default wrapper;
-export { attributeSetterValue, attributeSetterToggle };
+const propNameFromAttribute = (attrib) => attrib.name || attrib
+
+const generateProps = (actualPropsPassed, events, attributes, properties) =>{
+    const propNames = [...Object.keys(actualPropsPassed)]
+
+    const attributesAndEvents = [
+        ...events.map(propNameFromEvent),
+        ...attributes.map(propNameFromAttribute),
+        ...properties // overrides
+    ]
+
+
+    return propNames
+            .filter((propName) => !attributesAndEvents.includes(propName))
+            .reduce(toObjectOf(actualPropsPassed), {})
+}
+
+const toObjectOf = (props) => (ac, name) => ({...ac, [name]: props[name] })
+
+export default wrapper

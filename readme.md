@@ -1,7 +1,7 @@
 # React Custom Element Wrapper
 
 This utility library creates a React component that serves as a wrap around a custom element.
- It is used to relay custom events that are not natively supported to callback properties as well as manage attributes on a custom element.
+ It is used to relay custom events that are not natively supported to callback properties as well as manage attributes and properties on a custom element.
 
 ## **Getting Started**
 
@@ -35,7 +35,7 @@ ReactDOM.render(
 The wrapper function takes two arguments
 * The name of the custom element to wrap
 * An options object containing two fields:
-  * `events`: An array of events that the wrapper should handle. For instance, the "change" event isn't handled by React automatically, so we'd want to add "change" to the list of events. To consume these events, all you need is to assign a callback property "onChange" (notice that "on" is prefixed to the name of the native event, and that the property name is in camel-case) to the React element instance.
+  * `events`: An array of events that the wrapper should handle. For instance, the "change" event isn't handled by React automatically, so we'd want to add "onChange" to the list of events. To consume these events, all you need is to assign a callback property "onChange" to the React element instance.
   * `attributes`: An array of attributes that the wrapper should relay to the element. Some element attributes are assigned/removed instead of set value to (as in the case of the "disabled" attribute).
   
 All properties that have not been explicitly configured to be handled by the wrapper, including "ref" will be transferred to the element natively by React.
@@ -49,7 +49,7 @@ import { attributeSetterValue, attributeSetterToggle } from "./wrapper";
 
 const MwcTextarea = wrapper('mwc-textarea',  {
     events: [
-        { name: "change", transform: (e)=> e.target.value }
+        { name: "change", propName: 'onChange', transform: (e) => e.target.value }
     ],
     attributes: [
         { name: "disabled", setter: attributeSetterToggle },
