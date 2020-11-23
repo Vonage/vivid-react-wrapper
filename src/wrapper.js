@@ -1,18 +1,10 @@
 import React, {useEffect, useRef} from "react";
 import {flow, identity, isString, isUndefined, noop} from "lodash";
 
-/**
-* Generates a React component that wraps around a custom element
-* @param {string} componentName - The name of the registered custom element
-* @param {Object} configuration - A configuration specification for the React wrapper
-* @param {Array} configuration.events - A List of events that the element supports
-* @param {Array} configuration.attributes - A List of attributes that the element supports
-* @param {Array} configuration.properties - A List of properties that the element supports
-*/
-
 export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
 export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
 
+// PRIVATE methods - exported for unit tests
 export const setDOMListeners = (props, propName, currentEl, eventName, transform) => () => {
     if (propExists(props, propName)) {
         const el = currentEl.current
@@ -22,16 +14,23 @@ export const setDOMListeners = (props, propName, currentEl, eventName, transform
         return () => el.removeEventListener(eventName, handler);
     }
 }
-
 export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
     const el = currentEl.current
     if(propExists(props,attributeName)){
         setter(el, attributeName, props[attributeName])
     }
 }
-
 export const propExists = (props, name) => !isUndefined(props[name])
-export const propNameFromEvent = (event) => event.propName
+export const propNameFromEvent = (event) => event.propName || ["on", upperFirst(event.name || event)].join('')
+
+/**
+* Generates a React component that wraps around a custom element
+* @param {string} componentName - The name of the registered custom element
+* @param {Object} configuration - A configuration specification for the React wrapper
+* @param {Array} configuration.events - A List of events that the element supports
+* @param {Array} configuration.attributes - A List of attributes that the element supports
+* @param {Array} configuration.properties - A List of properties that the element supports
+*/
 
 const wrapper = function(
     componentName,
