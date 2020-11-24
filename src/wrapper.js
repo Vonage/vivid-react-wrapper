@@ -75,7 +75,7 @@ const wrapper = function(
                 currentEl.current = el
                 if (typeof setRef === 'function') {
                     setRef(el)
-                } else if (typeof setRef === 'object') {
+                } else if (!!setRef && typeof setRef === 'object') {
                     setRef.current = el
                 }
             },
