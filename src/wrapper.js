@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import {flow, identity, isString, isUndefined, noop} from "lodash";
+import { flow, identity, isString, isUndefined, noop, pickBy } from 'lodash'
 
 export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
 export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
@@ -42,6 +42,8 @@ const wrapper = function(
 ){
     return React.forwardRef(({ children = [], ...props }, setRef) => {
 
+        const truthyProps = pickBy(props, (value) => value !== false)
+
         const currentEl = useRef(null)
 
         events.forEach((event) => {
@@ -52,7 +54,7 @@ const wrapper = function(
 
             const propName = propNameFromEvent(event)
 
-            useEffect(setDOMListeners(props, propName, currentEl, eventName, transform), [props[propName]])
+            useEffect(setDOMListeners(truthyProps, propName, currentEl, eventName, transform), [truthyProps[propName]])
         })
 
         attributes.forEach((attribute) => {
@@ -61,13 +63,13 @@ const wrapper = function(
                 ? attributeSetterToggle
                 : (attribute.setter || attributeSetterToggle)
 
-            useEffect(setDOMAttributes(props, attributeName, currentEl, setter), [props[attributeName]])
+            useEffect(setDOMAttributes(truthyProps, attributeName, currentEl, setter), [truthyProps[attributeName]])
         })
 
         properties.forEach((property) => {
             useEffect(() => {
-                currentEl.current[property] = props[property]
-            }, [props[property]])
+                currentEl.current[property] = truthyProps[property]
+            }, [truthyProps[property]])
         })
 
         return React.createElement(componentName, {
@@ -79,7 +81,7 @@ const wrapper = function(
                     setRef.current = el
                 }
             },
-            ...generateProps(props,events,attributes, properties)
+            ...generateProps(truthyProps, events, attributes, properties)
         }, [], ...children)
     })
 }
