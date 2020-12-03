@@ -82,7 +82,7 @@ const wrapper = function(
                 }
             },
             ...generateProps(truthyProps, events, attributes, properties)
-        }, children)
+        }, [], ...[].concat(children))
     })
 }
 
