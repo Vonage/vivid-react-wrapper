@@ -1,12 +1,11 @@
-name: WhiteSource CI integration
+name: WhiteSource
 on:
-  push:
-    branches: [ test ]
+  pull_request:
+    branches: [ master ]
 jobs:
-  build:
+  whitesource:
+    name: Generate Security Report
     runs-on: ubuntu-latest
-    env:
-      ARTIFACTORY_AUTH_TOKEN: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
