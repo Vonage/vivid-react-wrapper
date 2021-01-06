@@ -1,4 +1,4 @@
-name: WhiteSource CI integration
+name: WhiteSource Check
 on:
   push:
     branches: [ test ]
