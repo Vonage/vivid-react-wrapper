@@ -1,4 +1,4 @@
-name: WhiteSource Check
+name: WhiteSource
 on:
   pull_request:
     branches: [ master ]
