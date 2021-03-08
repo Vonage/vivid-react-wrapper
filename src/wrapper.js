@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import { flow, identity, isString, isUndefined, noop, pickBy } from 'lodash'
+import { flow, identity, isString, isUndefined, noop, pickBy, upperFirst } from 'lodash'
 
 export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
 export const attributeSetterToggle = (el, name, value) => el[value === "true" ? "setAttribute" : "removeAttribute"](name, value);
