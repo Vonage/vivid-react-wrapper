@@ -5,8 +5,9 @@ name: Node.js Package
 
 #on: push
 on:
+  workflow_dispatch
   release:
-   types: [created]
+    types: [created]
 
 jobs:
   publish-npm:
