@@ -1,6 +1,6 @@
 {
   "name": "@vonage/vivid-react-wrapper",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A React component generation utility for wrapping custom elements",
   "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "main": "./src/wrapper.js",
@@ -39,18 +39,20 @@
     "registry": "https://npm.pkg.github.com/Vonage"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "babel-jest": "^26.6.1",
-    "babel-loader": "^8.1.0",
-    "react": "16.13.1",
-    "react-dom": "16.14.0",
-    "jest": "^26.6.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5"
+    "@babel/core": "7.17.9",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-react": "7.16.7",
+    "@babel/plugin-transform-runtime": "7.17.0",
+    "@rollup/plugin-node-resolve": "13.2.1",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "13.1.1",
+    "@testing-library/user-event": "14.1.1",
+    "babel-jest": "27.5.1",
+    "babel-loader": "8.2.5",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "jest": "27.5.1",
+    "jest-environment-jsdom": "27.5.1"
   },
   "peerDependencies": {
     "react": ">=16.13.1",
@@ -58,8 +60,6 @@
     "lodash": "^4.17.15"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>setupTest.js"
-    ]
+    "testEnvironment": "jsdom"
   }
 }

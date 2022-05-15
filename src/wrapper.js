@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from 'react'
 import { flow, identity, isString, isUndefined, noop, pickBy, upperFirst } from 'lodash'
 
 export const attributeSetterValue = (el, name, value) => el.setAttribute(name, value)
@@ -16,7 +16,7 @@ export const setDOMListeners = (props, propName, currentEl, eventName, transform
 }
 export const setDOMAttributes = (props, attributeName, currentEl, setter) => () => {
     const el = currentEl.current
-    if(propExists(props,attributeName)){
+    if (propExists(props, attributeName)) {
         setter(el, attributeName, props[attributeName])
     }
 }
@@ -32,14 +32,14 @@ export const propNameFromEvent = (event) => event.propName || ["on", upperFirst(
 * @param {Array} configuration.properties - A List of properties that the element supports
 */
 
-const wrapper = function(
+const wrapper = function (
     componentName,
     {
         events = [],
         attributes = [],
         properties = []
     } = {}
-){
+) {
     return React.forwardRef(({ children = [], ...props }, setRef) => {
 
         const truthyProps = pickBy(props, (value) => value !== false)
@@ -88,7 +88,7 @@ const wrapper = function(
 
 const propNameFromAttribute = (attrib) => attrib.name || attrib
 
-const generateProps = (actualPropsPassed, events, attributes, properties) =>{
+const generateProps = (actualPropsPassed, events, attributes, properties) => {
     const propNames = [...Object.keys(actualPropsPassed)]
 
     const attributesAndEvents = [
@@ -97,12 +97,11 @@ const generateProps = (actualPropsPassed, events, attributes, properties) =>{
         ...properties // overrides
     ]
 
-
     return propNames
-            .filter((propName) => !attributesAndEvents.includes(propName))
-            .reduce(toObjectOf(actualPropsPassed), {})
+        .filter((propName) => !attributesAndEvents.includes(propName))
+        .reduce(toObjectOf(actualPropsPassed), {})
 }
 
-const toObjectOf = (props) => (ac, name) => ({...ac, [name]: props[name] })
+const toObjectOf = (props) => (ac, name) => ({ ...ac, [name]: props[name] })
 
 export default wrapper

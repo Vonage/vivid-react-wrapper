@@ -1,7 +1,5 @@
-import './matchMediaMock'
-
-import React from 'react';
-import {mount} from 'enzyme'
+import React from 'react'
+import { fireEvent, render, createEvent } from '@testing-library/react'
 import prepareVividWrapper, {
   attributeSetterToggle,
   attributeSetterValue,
@@ -9,78 +7,86 @@ import prepareVividWrapper, {
   setDOMAttributes,
   setDOMListeners,
 } from './wrapper'
-import {identity} from "lodash";
+import { identity } from 'lodash'
 
 describe('wrapper', () => {
   describe('event handling', () => {
     it('should pass event handler to web-component', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        events: [{ name: 'change', propName:'onChange'}],
+        events: [{ name: 'change', propName: 'onChange' }],
       })
       const onChange = jest.fn()
-      const container = mount(<VividButton onChange={onChange}/>)
-
-      container.getDOMNode().dispatchEvent(new Event('change'))
+      const { container } = render(<VividButton onChange={onChange} />)
+      fireEvent.change(container.querySelector('mwc-button'))
 
       expect(onChange).toHaveBeenCalled()
     })
 
     it('should pass proper event handler to web-component after handler change', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        events: [{ name: 'change', propName:'onChange'}],
+        events: [{ name: 'change', propName: 'onChange' }],
       })
       const onChange = jest.fn()
       const newOnChange = jest.fn()
       const event = new Event('change')
-      const container = mount(<VividButton onChange={onChange}/>)
-
-      container.setProps({ onChange: newOnChange })
-      container.getDOMNode().dispatchEvent(event)
+      const { container, rerender } = render(<VividButton onChange={onChange} />)
+      rerender(<VividButton onChange={newOnChange} />)
+      fireEvent.change(container.querySelector('mwc-button'))
 
       expect(newOnChange).toHaveBeenCalledWith(event)
       expect(onChange).not.toHaveBeenCalled()
     })
 
-    it('should pass custom event handler to web-component', () =>{
-      const VividButton = prepareVividWrapper('mwc-button',{
-        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
+    it('should pass custom event handler to web-component', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
       const onCustomEvent = jest.fn()
-      const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
+      const { container } = render(<VividButton onCustomEvent={onCustomEvent} />)
 
-      container.getDOMNode().dispatchEvent(new Event('customEvent'))
+      const domElement = container.querySelector('mwc-button')
+      fireEvent(domElement, createEvent(
+        'customEvent', domElement
+      ))
 
       expect(onCustomEvent).toHaveBeenCalled()
     })
 
     it('should call custom event with event object', () => {
-      const VividButton = prepareVividWrapper('mwc-button',{
-        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
+      const VividButton = prepareVividWrapper('mwc-button', {
+        events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
       const onCustomEvent = jest.fn()
-      const container = mount(<VividButton onCustomEvent={onCustomEvent}/>)
-      const event = new Event('customEvent')
+      const { container } = render(<VividButton onCustomEvent={onCustomEvent} />)
 
-      container.getDOMNode().dispatchEvent(event)
+      const domElement = container.querySelector('mwc-button')
+      const event = createEvent(
+        'customEvent', domElement
+      )
+      fireEvent(domElement, event)
 
       expect(onCustomEvent).toHaveBeenCalledWith(event)
     })
 
     it('should call only configured events', () => {
-      const VividButton = prepareVividWrapper('mwc-button',{
-        events: [{ name: 'customEvent', propName:'onCustomEvent'}],
+      const VividButton = prepareVividWrapper('mwc-button', {
+        events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
       const onChange = jest.fn()
       const onCustomEvent = jest.fn()
-      const container = mount(<VividButton
-          onChange={onChange}
-          onCustomEvent={onCustomEvent}
+      const { container } = render(<VividButton
+        onChange={onChange}
+        onCustomEvent={onCustomEvent}
       />)
-      const event = new Event('customEvent')
-      const notConfiguredEvent = new Event('change')
-
-      container.getDOMNode().dispatchEvent(event)
-      container.getDOMNode().dispatchEvent(notConfiguredEvent)
+      const domElement = container.querySelector('mwc-button')
+      const event = createEvent(
+        'customEvent', domElement
+      )
+      const notConfiguredEvent = createEvent(
+        'change', domElement
+      )
+      fireEvent(domElement, event)
+      fireEvent(domElement, notConfiguredEvent)
 
       expect(onCustomEvent).toHaveBeenCalledWith(event)
       expect(onChange).not.toHaveBeenCalled()
@@ -90,14 +96,15 @@ describe('wrapper', () => {
       it('should pass custom transform function', () => {
         const transformMock = jest.fn()
         const VividButton = prepareVividWrapper('mwc-button', {
-          events: [{ name: 'change', propName:'onChange', transform: transformMock }],
+          events: [{ name: 'change', propName: 'onChange', transform: transformMock }],
         })
         const onChange = jest.fn()
-        const container = mount(<VividButton onChange={onChange}/>)
-
-        const event = new Event('change');
-        container.getDOMNode().dispatchEvent(event)
-
+        const { container } = render(<VividButton onChange={onChange} />)
+        const domElement = container.querySelector('mwc-button')
+        const event = createEvent(
+          'change', domElement
+        )
+        fireEvent(domElement, event)
         expect(transformMock).toHaveBeenCalledWith(event)
       })
     })
@@ -108,34 +115,30 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         attributes: ['bool'],
       })
-      const container = mount(<VividButton bool='true' />)
+      const { container } = render(<VividButton bool='true' />)
+      const domElement = container.querySelector('mwc-button')
 
-      expect(container.find('mwc-button').getDOMNode().getAttribute('bool'))
-          .toBe('true')
+      expect(domElement.getAttribute('bool')).toBe('true')
     })
 
     it('could read configured string attribute', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         attributes: [{ name: 'string', setter: attributeSetterValue }],
       })
-      const container = mount(<VividButton string='name' />)
+      const { container } = render(<VividButton string='name' />)
+      const domElement = container.querySelector('mwc-button')
 
-      expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
-          .toBe('name')
+      expect(domElement.getAttribute('string')).toBe('name')
     })
 
     it('pass updated attribute', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         attributes: [{ name: 'string', setter: attributeSetterValue }],
       })
-      const container = mount(<VividButton string='name' />)
-
-      container.setProps({
-        string: 'newName'
-      })
-
-      expect(container.find('mwc-button').getDOMNode().getAttribute('string'))
-          .toBe('newName')
+      const { container, rerender } = render(<VividButton string='name' />)
+      const domElement = container.querySelector('mwc-button')
+      rerender(<VividButton string='newName' />)
+      expect(domElement.getAttribute('string')).toBe('newName')
     })
   })
 
@@ -143,12 +146,11 @@ describe('wrapper', () => {
     it('pass function property', () => {
       const transitionMock = jest.fn()
       const VividButton = prepareVividWrapper('mwc-button', {
-        properties: [ 'transition' ],
+        properties: ['transition'],
       })
-      const container = mount(<VividButton transition={transitionMock} />)
-
-      container.find('mwc-button').getDOMNode().transition('arg')
-
+      const { container } = render(<VividButton transition={transitionMock} />)
+      const domElement = container.querySelector('mwc-button')
+      domElement.transition('arg')
       expect(transitionMock).toHaveBeenCalledWith('arg')
     })
 
@@ -156,23 +158,19 @@ describe('wrapper', () => {
       const transitionMock = jest.fn()
       const newTransitionMock = jest.fn()
       const VividButton = prepareVividWrapper('mwc-button', {
-        properties: [ 'transition' ],
+        properties: ['transition'],
       })
-      const container = mount(<VividButton transition={transitionMock} />)
-      container.setProps({
-        transition: newTransitionMock
-      })
-
-
-      container.find('mwc-button').getDOMNode().transition('arg1')
-
+      const { container, rerender } = render(<VividButton transition={transitionMock} />)
+      const domElement = container.querySelector('mwc-button')
+      rerender(<VividButton transition={newTransitionMock} />)
+      domElement.transition('arg1')
       expect(transitionMock).not.toHaveBeenCalled()
       expect(newTransitionMock).toHaveBeenCalledWith('arg1')
     })
   })
 
   describe('setDOMListeners', () => {
-    it('should add listener for given prop', () =>{
+    it('should add listener for given prop', () => {
       const props = {
         onChange: jest.fn()
       }
@@ -278,24 +276,24 @@ describe('wrapper', () => {
   })
 
   describe('propExists', () => {
-    it('should return true when prop exists', () =>{
-      const props= {
+    it('should return true when prop exists', () => {
+      const props = {
         'test': true
       }
-      const propName= 'test'
+      const propName = 'test'
 
-      const result = propExists(props,propName)
+      const result = propExists(props, propName)
 
       expect(result).toBeTruthy()
     })
 
-    it('should return false when prop does not exists', () =>{
-      const props= {
+    it('should return false when prop does not exists', () => {
+      const props = {
         'test': true
       }
-      const propName= 'invalidName'
+      const propName = 'invalidName'
 
-      const result = propExists(props,propName)
+      const result = propExists(props, propName)
 
       expect(result).toBeFalsy()
     })
