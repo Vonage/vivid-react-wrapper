@@ -37,7 +37,7 @@ The wrapper function takes two arguments
 * An options object containing two fields:
   * `events`: An array of events that the wrapper should handle. For instance, the "change" event isn't handled by React automatically, so we'd want to add "onChange" to the list of events. To consume these events, all you need is to assign a callback property "onChange" to the React element instance.
   * `attributes`: An array of attributes that the wrapper should relay to the element. Some element attributes are assigned/removed instead of set value to (as in the case of the "disabled" attribute).
-  
+
 All properties that have not been explicitly configured to be handled by the wrapper, including "ref" will be transferred to the element natively by React.
 
 ## Extended Configuration
