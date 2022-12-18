@@ -13,11 +13,14 @@ jobs:
           node-version: 12
 
       - name: publish to github.com
-        run: npm publish --access public --//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN
+        run: |
+          echo registry=https://npm.pkg.github.com/ > .npmrc
+          echo //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{github.token}}
 
       - name: publish to npmjs.com
-        run: npm publish --access public --//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
