@@ -1,6 +1,6 @@
 {
   "name": "@vonage/vivid-react-wrapper",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Wrapper for custom element as React component",
   "homepage": "https://github.com/Vonage/vivid-react-wrapper",
   "repository": "github:Vonage/vivid-react-wrapper",
@@ -15,6 +15,11 @@
       "require": "./dist/index.umd.js"
     }
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "readme.md"
+  ],
   "scripts": {
     "build": "vite build",
     "test": "jest"

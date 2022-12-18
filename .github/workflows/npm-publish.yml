@@ -21,6 +21,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{github.token}}
 
       - name: publish to npmjs.com
-        run: npm publish --access public
+        run: |
+          echo registry=https://registry.npmjs.org/ > .npmrc
+          echo //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
