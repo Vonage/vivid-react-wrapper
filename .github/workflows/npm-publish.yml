@@ -12,6 +12,15 @@ jobs:
         with:
           node-version: 12
 
+      - name: publish to npmjs.com
+        run: |
+          echo registry=https://registry.npmjs.org/ > .npmrc
+          echo always-auth=true > .npmrc
+          echo //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
       - name: publish to github.com
         run: |
           echo registry=https://npm.pkg.github.com/ > .npmrc
@@ -19,11 +28,3 @@ jobs:
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{github.token}}
-
-      - name: publish to npmjs.com
-        run: |
-          echo registry=https://registry.npmjs.org/ > .npmrc
-          echo //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

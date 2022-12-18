@@ -15,5 +15,14 @@ export default defineConfig({
             formats: ['es', 'umd', 'cjs'],
             fileName: (format) => `index.${format}.js`,
         },
+        rollupOptions: {
+            external: ['lodash', 'react'],
+            output: {
+                globals: {
+                    lodash: 'lodash',
+                    react: 'react'
+                },
+            },
+        },
     },
 })
