@@ -18,7 +18,7 @@ jobs:
           echo //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
           npm publish --access public --//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}} # token has been issued on January 4, 2023. It's valid for 1 year
 
       - name: publish to github.com
         run: |
