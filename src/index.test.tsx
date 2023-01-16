@@ -15,7 +15,7 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         events: [{ name: 'change', propName: 'onChange' }],
       })
-      const onChange = jest.fn()
+      const onChange = vi.fn()
       const { container } = render(<VividButton onChange={onChange} />)
       fireEvent.change(container.querySelector('mwc-button')!)
 
@@ -26,8 +26,8 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         events: [{ name: 'change', propName: 'onChange' }],
       })
-      const onChange = jest.fn()
-      const newOnChange = jest.fn()
+      const onChange = vi.fn()
+      const newOnChange = vi.fn()
       const event = new Event('change')
       const { container, rerender } = render(<VividButton onChange={onChange} />)
       rerender(<VividButton onChange={newOnChange} />)
@@ -41,7 +41,7 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
-      const onCustomEvent = jest.fn()
+      const onCustomEvent = vi.fn()
       const { container } = render(<VividButton onCustomEvent={onCustomEvent} />)
 
       const domElement = container.querySelector('mwc-button')!
@@ -56,7 +56,7 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
-      const onCustomEvent = jest.fn()
+      const onCustomEvent = vi.fn()
       const { container } = render(<VividButton onCustomEvent={onCustomEvent} />)
 
       const domElement = container.querySelector('mwc-button')!
@@ -72,8 +72,8 @@ describe('wrapper', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
         events: [{ name: 'customEvent', propName: 'onCustomEvent' }],
       })
-      const onChange = jest.fn()
-      const onCustomEvent = jest.fn()
+      const onChange = vi.fn()
+      const onCustomEvent = vi.fn()
       const { container } = render(<VividButton
         onChange={onChange}
         onCustomEvent={onCustomEvent}
@@ -94,11 +94,11 @@ describe('wrapper', () => {
 
     describe('transform', () => {
       it('should pass custom transform function', () => {
-        const transformMock = jest.fn()
+        const transformMock = vi.fn()
         const VividButton = prepareVividWrapper('mwc-button', {
           events: [{ name: 'change', propName: 'onChange', transform: transformMock }],
         })
-        const onChange = jest.fn()
+        const onChange = vi.fn()
         const { container } = render(<VividButton onChange={onChange} />)
         const domElement = container.querySelector('mwc-button')!
         const event = createEvent(
@@ -144,7 +144,7 @@ describe('wrapper', () => {
 
   describe('passing reactive properties', () => {
     it('pass function property', () => {
-      const transitionMock = jest.fn()
+      const transitionMock = vi.fn()
       const VividButton = prepareVividWrapper('mwc-button', {
         properties: ['transition'],
       })
@@ -155,8 +155,8 @@ describe('wrapper', () => {
     })
 
     it('changing function property', () => {
-      const transitionMock = jest.fn()
-      const newTransitionMock = jest.fn()
+      const transitionMock = vi.fn()
+      const newTransitionMock = vi.fn()
       const VividButton = prepareVividWrapper('mwc-button', {
         properties: ['transition'],
       })
@@ -172,11 +172,11 @@ describe('wrapper', () => {
   describe('setDOMListeners', () => {
     it('should add listener for given prop', () => {
       const props = {
-        onChange: jest.fn()
+        onChange: vi.fn()
       }
       const propName = 'onChange'
-      const addListenerMock = jest.fn()
-      const removeListenerMock = jest.fn()
+      const addListenerMock = vi.fn()
+      const removeListenerMock = vi.fn()
       const el = document.createElement("div")
       el.addEventListener = addListenerMock
       el.removeEventListener = removeListenerMock
@@ -203,8 +203,8 @@ describe('wrapper', () => {
           'disabled': "true"
         }
         const attributeName = 'disabled'
-        const setMock = jest.fn()
-        const removeMock = jest.fn()
+        const setMock = vi.fn()
+        const removeMock = vi.fn()
         const el = document.createElement("div")
         el.setAttribute = setMock
         el.removeAttribute = removeMock
@@ -222,8 +222,8 @@ describe('wrapper', () => {
           'disabled': false
         }
         const attributeName = 'disabled'
-        const setMock = jest.fn()
-        const removeMock = jest.fn()
+        const setMock = vi.fn()
+        const removeMock = vi.fn()
         const el = document.createElement("div")
         el.setAttribute = setMock
         el.removeAttribute = removeMock
@@ -242,7 +242,7 @@ describe('wrapper', () => {
           'string': "name"
         }
         const attributeName = 'string'
-        const setMock = jest.fn()
+        const setMock = vi.fn()
         const el = document.createElement("div")
         el.setAttribute = setMock
         const currentEl = {
@@ -259,8 +259,8 @@ describe('wrapper', () => {
           'string': false
         }
         const attributeName = 'string'
-        const setMock = jest.fn()
-        const removeMock = jest.fn()
+        const setMock = vi.fn()
+        const removeMock = vi.fn()
         const el = document.createElement("div")
         el.setAttribute = setMock
         el.removeAttribute = removeMock

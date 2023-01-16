@@ -35,6 +35,7 @@ const V = (t, e, n) => t.setAttribute(e, n), h = (t, e, n) => t[n === "true" ? "
     ...((o = e.events) == null ? void 0 : o.map(O)) || [],
     ...((s = e.attributes) == null ? void 0 : s.map(x)) || [],
     ...e.properties || []
+    // overrides
   ];
   return n.filter((c) => !p.includes(c)).reduce(B(t), {});
 }, B = (t) => (e, n) => ({ ...e, [n]: t[n] });

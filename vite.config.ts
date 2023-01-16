@@ -3,6 +3,10 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
+    test: {
+        globals: true,
+        environment: 'jsdom'
+    },
     plugins: [
         dts({
             insertTypesEntry: true,
@@ -18,6 +22,7 @@ export default defineConfig({
         rollupOptions: {
             external: ['lodash', 'react'],
             output: {
+                exports: 'named',
                 globals: {
                     lodash: 'lodash',
                     react: 'react'

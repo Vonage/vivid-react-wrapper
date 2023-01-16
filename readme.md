@@ -15,7 +15,7 @@ In order to use it in your code, just import the wrapper function into your proj
 import React from "react";
 import ReactDOM from "react-dom";
 import "@material/mwc-textarea";
-import wrapper from "./wrapper";
+import wrapper from "@vonage/vivid-react-wrapper";
 
 const MwcTextarea = wrapper('mwc-textarea',  {
     events: ["change"],
@@ -44,8 +44,7 @@ All properties that have not been explicitly configured to be handled by the wra
 
 ```javascript
 import "@material/mwc-textarea";
-import wrapper from "./wrapper";
-import { attributeSetterValue, attributeSetterToggle } from "./wrapper";
+import wrapper, { attributeSetterValue, attributeSetterToggle } from "@vonage/vivid-react-wrapper";
 
 const MwcTextarea = wrapper('mwc-textarea',  {
     events: [
