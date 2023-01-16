@@ -1,0 +1,44 @@
+name: Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18
+
+      - name: Build & Test
+        run: |
+          npm install
+          npm build
+          npm test
+
+      - name: Publish to >> npmjs.com
+        run: |
+          echo registry=https://registry.npmjs.org/ > .npmrc
+          echo //registry.npmjs.org/:_authToken=${TOKEN} >> .npmrc
+          npm publish --access public --//registry.npmjs.org/:_authToken=$TOKEN
+        env:
+          TOKEN: ${{ secrets.NPM_TOKEN }} # token has been issued on January 4, 2023. It's valid for 1 year
+
+      - name: Publish to >> github.com
+        run: |
+          echo registry=https://npm.pkg.github.com/ > .npmrc
+          echo //npm.pkg.github.com/:_authToken=${TOKEN} >> .npmrc
+          npm publish --access public
+        env:
+          TOKEN: ${{ github.token }}
+
+      - name: Fetch package version
+        run: node -p -e '`PACKAGE_VERSION=${require("./package.json").version}`' >> $GITHUB_ENV
+
+      - name: Commit release tag
+        uses: hole19/git-tag-action@master
+        env:
+          TAG: ${{ env.PACKAGE_VERSION }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

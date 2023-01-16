@@ -56,3 +56,8 @@ const MwcTextarea = wrapper('mwc-textarea',  {
     ]
 });
 ```
+
+## Releasing new version
+
+* Bump the version in `package.json` commit & push the change to the master
+* Run `Pipeline` workflow manually
