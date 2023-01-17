@@ -3,7 +3,7 @@ This utility library creates a React component that serves as a thin wrap around
  * Relay custom events that are not natively supported to callback
  * Handles properties as well as attributes on a custom element
 
-# The Why
+# Rationale
 
 At present(**early 2023**) we as a community of React users are still in between of two points in time:
 * React **18.2** (June 14, 2022)
