@@ -19,9 +19,10 @@ and **somwhere** in the *future* this might be better
 
 
 ## Alternative solutions
-Microsoft has it's own home brewed solution for the very same issue
+* Microsoft has it's own home brewed solution for the very same issue
 https://github.com/microsoft/fast/tree/master/packages/utilities/fast-react-wrapper
 as a mitigation for their [fast.design](http://fast.design) system. Why this is not a production ready solution? because it's still Alpha quality, so we cannot actually use it just now
+* https://github.com/BBKolton/reactify-wc
 
 ## Articles on topic
 
