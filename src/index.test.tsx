@@ -9,6 +9,11 @@ import prepareVividWrapper, {
 } from './index'
 import { identity } from 'lodash'
 
+class MwcButton extends HTMLElement {
+  prop = 'default value'
+}
+window.customElements.define('mwc-button', MwcButton)
+
 describe('wrapper', () => {
   describe('event handling', () => {
     it('should pass event handler to web-component', () => {
@@ -143,29 +148,65 @@ describe('wrapper', () => {
   })
 
   describe('passing reactive properties', () => {
-    it('pass function property', () => {
-      const transitionMock = vi.fn()
+    it('should not set the property if prop not passed', () => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        properties: ['transition'],
+        properties: ['prop'],
       })
-      const { container } = render(<VividButton transition={transitionMock} />)
-      const domElement = container.querySelector('mwc-button') as any
-      domElement.transition('arg')
-      expect(transitionMock).toHaveBeenCalledWith('arg')
+      const { container, rerender } = render(<VividButton />)
+      const domElement = container.querySelector('mwc-button') as MwcButton;
+      expect(domElement.prop).toBe('default value')
     })
 
-    it('changing function property', () => {
-      const transitionMock = vi.fn()
-      const newTransitionMock = vi.fn()
+    it.each([undefined, null])('should not set the property if prop is passed with nullish value %s', (value) => {
       const VividButton = prepareVividWrapper('mwc-button', {
-        properties: ['transition'],
+        properties: ['prop'],
       })
-      const { container, rerender } = render(<VividButton transition={transitionMock} />)
+      const { container, rerender } = render(<VividButton prop={value}/>)
+      const domElement = container.querySelector('mwc-button') as MwcButton;
+      expect(domElement.prop).toBe('default value')
+    })
+
+    it.each([false, '', 0, true, 'string', 1, {}, [], () => {}])('should set the property if prop is passed with non-nullish value %s', (value) => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: ['prop'],
+      })
+      const { container, rerender } = render(<VividButton prop={value}/>)
+      const domElement = container.querySelector('mwc-button') as MwcButton;
+      expect(domElement.prop).toBe(value)
+    })
+
+    it.each(['new value', null, undefined])('should update the property when prop is changed to value %s', (value) => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: ['prop'],
+      })
+      const { container, rerender } = render(<VividButton prop="initial value" />)
       const domElement = container.querySelector('mwc-button') as any
-      rerender(<VividButton transition={newTransitionMock} />)
-      domElement.transition('arg1')
-      expect(transitionMock).not.toHaveBeenCalled()
-      expect(newTransitionMock).toHaveBeenCalledWith('arg1')
+      rerender(<VividButton prop={value} />)
+      expect(domElement.prop).toBe(value)
+    })
+
+    it.each([null, undefined])('should not set the property to nullish values after prop was changed to nullish value %s', (value) => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: ['prop'],
+      })
+      const { container, rerender } = render(<VividButton prop="initial value" />)
+      const domElement = container.querySelector('mwc-button') as any
+      rerender(<VividButton prop={value} />)
+      domElement.prop = 'prop value'
+      rerender(<VividButton prop={null}/>)
+      rerender(<VividButton prop={undefined}/>)
+      rerender(<VividButton />)
+      expect(domElement.prop).toBe('prop value')
+    })
+
+    it('should set property to null when prop is removed', () => {
+      const VividButton = prepareVividWrapper('mwc-button', {
+        properties: ['prop'],
+      })
+      const { container, rerender } = render(<VividButton prop="initial value" />)
+      const domElement = container.querySelector('mwc-button') as any
+      rerender(<VividButton />)
+      expect(domElement.prop).toBe(null)
     })
   })
 
