@@ -89,12 +89,23 @@ const wrapper = (
             useEffect(setDOMAttributes(truthyProps, attributeName, elementRef, setter), [truthyProps[attributeName]])
         })
 
+        const isPropertySet = useRef<Record<string, boolean>>({})
+
         config.properties?.forEach((property) => {
             useEffect(() => {
-                if (elementRef.current) {
-                    (elementRef.current as any)[property] = truthyProps[property]
+                if (!elementRef.current) {
+                    return;
                 }
-            }, [truthyProps[property]])
+
+                // Follow React 19 logic for setting properties
+                if ((props[property] !== undefined && props[property] !== null)) {
+                    isPropertySet.current[property] = true;
+                    (elementRef.current as any)[property] = props[property]
+                } else if (isPropertySet.current[property]) {
+                    isPropertySet.current[property] = false;
+                    (elementRef.current as any)[property] = (property in props) ? props[property] : null;
+                }
+            }, [props[property]])
         })
 
         return React.createElement(elementTagName, {
