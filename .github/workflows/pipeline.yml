@@ -24,7 +24,7 @@ jobs:
           echo //registry.npmjs.org/:_authToken=${TOKEN} >> .npmrc
           npm publish --access public
         env:
-          TOKEN: ${{ secrets.NPM_TOKEN }} # token has been issued on January 4, 2023. It's valid for 1 year
+          TOKEN: ${{ secrets.NPM_TOKEN }} # token has been issued on July 30, 2024. It's valid for 1 year
 
       - name: Publish to >> github.com
         run: |
