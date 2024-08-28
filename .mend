@@ -1,0 +1,6 @@
+{
+ "settingsInheritedFrom": "vonage/whitesource-config@api-platform",
+  "remediateSettings": {
+    "timezone": "UTC"
+  }
+}
