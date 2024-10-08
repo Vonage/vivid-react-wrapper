@@ -1,5 +1,5 @@
 {
- "settingsInheritedFrom": "vonage/whitesource-config@api-platform",
+  "settingsInheritedFrom": "<GH Org>/whitesource-config@api-platform",
   "remediateSettings": {
     "timezone": "UTC"
   }
